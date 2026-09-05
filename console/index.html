@@ -254,13 +254,16 @@ main>.inner{max-width:1000px}
 .surf .sh{padding:14px 17px;border-bottom:1px solid var(--line)}
 .surf .sw{font-size:12.5px;color:var(--muted)}
 .surf .sv{font-size:14.5px;margin-top:5px;color:var(--fg)}
-.shot{position:relative;height:250px;overflow:hidden;background:#fbfbfa;
+.shot{position:relative;height:250px;overflow:hidden;background:#0b1220;
   border-bottom:1px solid var(--line)}
 .shot iframe{position:absolute;top:0;left:0;width:1180px;height:940px;border:0;
-  transform:scale(.38);transform-origin:0 0;pointer-events:none;z-index:1}
+  transform:scale(.38);transform-origin:0 0;pointer-events:none;z-index:1;
+  background:#0b1220}
 .shot .cover{position:absolute;inset:0;z-index:2}
 .shot .fb{position:absolute;inset:0;z-index:0;display:flex;align-items:center;
   justify-content:center;color:#98a4a8;font-size:12px}
+.shot.is-loaded .fb{display:none}
+.shot.is-failed .fb{color:var(--neg);z-index:1}
 .shot a.open{position:absolute;right:10px;bottom:10px;z-index:3;font-size:12px;
   background:rgba(255,255,255,.94);color:#10262d;padding:6px 12px;border-radius:999px;
   text-decoration:none;border:1px solid rgba(11,42,51,.18);font-weight:520}
@@ -1067,9 +1070,10 @@ function draw(c){
         ? 'Checkout page — where customers actually pay' : 'Homepage — the public front')}</div>
       <div class="sv">Reads as <b style="color:${matches ? 'var(--pos)' : 'var(--neg)'}">${
         esc(words(v.vertical))}</b>, ${(v.confidence * 100).toFixed(0)}% confident</div></div>
-      <div class="shot"><div class="fb">loading the page…</div>
-        <iframe title="${esc(surface)}" sandbox="" data-v="${esc(v.vertical)}"
-          data-s="${esc(surface)}"></iframe><div class="cover"></div>
+      <div class="shot"><div class="fb">Loading the page…</div>
+        <iframe title="${esc(surface)}" loading="lazy"
+          data-v="${esc(v.vertical)}" data-s="${esc(surface)}"></iframe>
+        <div class="cover"></div>
         <a class="open" href="/api/storefront/${esc(v.vertical)}/${esc(surface)}"
           target="_blank" rel="noopener">Open the real page ↗</a></div>
       <div class="find">${(v.findings || []).slice(0, 4).map(f => `
@@ -1190,9 +1194,28 @@ function draw(c){
 
   wire(c);
   document.querySelectorAll('.act [data-act]').forEach(b => b.onclick = () => rule(c, b.dataset.act));
-  document.querySelectorAll('.shot iframe').forEach(f => {
-    fetch(`/api/storefront/${f.dataset.v}/${f.dataset.s}`)
-      .then(r => r.ok ? r.text() : null).then(h => { if(h) f.srcdoc = h; }).catch(() => {});
+}
+
+function loadSurfaceShots(root){
+  // Iframes inside display:none panels often never paint. Load only when the
+  // Website step is actually shown, and clear the loading label on success.
+  (root || document).querySelectorAll('.shot iframe').forEach(f => {
+    if(f.dataset.loaded === '1' || f.dataset.loading === '1') return;
+    const box = f.closest('.shot');
+    const fb = box && box.querySelector('.fb');
+    const url = `/api/storefront/${encodeURIComponent(f.dataset.v)}/${encodeURIComponent(f.dataset.s)}`;
+    f.dataset.loading = '1';
+    f.onload = () => {
+      f.dataset.loaded = '1';
+      f.dataset.loading = '0';
+      if(box){ box.classList.add('is-loaded'); box.classList.remove('is-failed'); }
+    };
+    f.onerror = () => {
+      f.dataset.loading = '0';
+      if(box) box.classList.add('is-failed');
+      if(fb) fb.textContent = 'Could not load this page.';
+    };
+    f.src = url;
   });
 }
 
@@ -1273,6 +1296,10 @@ function wire(c){
         p.classList.toggle('ev-hidden', !show);
         if(p.dataset.ev === 'identity') p.style.display = show ? '' : 'none';
       });
+      if(id === 'website'){
+        // Defer one frame so the panel is display:block before the iframe loads.
+        requestAnimationFrame(() => loadSurfaceShots(document.querySelector('.ev-panel[data-ev="website"]')));
+      }
     };
     evnav.querySelectorAll('button[data-ev]').forEach(b => {
       b.onclick = () => { if(!b.disabled) paintEv(b); };
