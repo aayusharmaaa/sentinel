@@ -2,6 +2,8 @@
 
 > **Razorpay approves a merchant once. How does it know who they are today?**
 
+![Sentinel landing page](docs/landing.png)
+
 KYC asks *who are you*. Transaction monitoring asks *is this payment suspicious*.
 Neither asks the question in between: **are you still the business you told us
 you were?**
@@ -14,7 +16,7 @@ Razorpay AI Buildathon — **Track 02, AI Risk Manager.**
 Loss class: **merchant account misuse and transaction laundering.**
 Detection and flagging only.
 
-**[→ Open Sentinel](https://claude.ai/code/artifact/7f676c1d-115d-4558-886e-565b6736c56b)**
+**[Architecture](ARCHITECTURE.md)** · **[→ Open Sentinel](https://claude.ai/code/artifact/7f676c1d-115d-4558-886e-565b6736c56b)**
  · [the written case file](https://claude.ai/code/artifact/26f563a9-e0e6-4f9a-9c9c-3dc9b8c1e726)
 
 The first is interactive: drag a detection threshold across the 1,202 real
