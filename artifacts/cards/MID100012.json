@@ -1,0 +1,556 @@
+{
+  "merchant_id": "MID100012",
+  "declared_category": "electronics_retail",
+  "onboarded_days_ago": 750,
+  "decision": {
+    "merchant_id": "MID100012",
+    "declared_category": "electronics_retail",
+    "tier": 4,
+    "tier_name": "Restricted pending review",
+    "action": "Analyst review with settlements held pending outcome. Requires the storefront to dissent plus at least one other independent view.",
+    "settlements_held": true,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "AGREES",
+        "confidence": 0.0249,
+        "statement": "Payment behaviour is within the normal range for a electronics_retail merchant (score 0.02)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "DISSENT",
+        "confidence": 0.9511,
+        "statement": "The checkout surface presents a crypto_exchange interface at 0.95 confidence, against a declared category of electronics_retail. This vertical cannot be approved on this platform."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "DISSENT",
+        "confidence": 0.9424,
+        "statement": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.81), which independent businesses do not do."
+      },
+      {
+        "channel": "statement",
+        "verdict": "BLIND",
+        "confidence": 0.0,
+        "statement": "A verification call was placed and not answered. That counts neither for nor against the merchant."
+      }
+    ],
+    "dissenting_channels": [
+      "storefront",
+      "infrastructure"
+    ],
+    "second_channel_source": "infrastructure",
+    "justification": "Two independent views of this merchant disagree with its declaration. The storefront presents a different business, and the infrastructure channel agrees. Neither could have produced the other: a merchant cannot change its payment behaviour without changing its actual business, and cannot change its interface without changing what customers see.",
+    "notes": [
+      "The corroborating view is infrastructure rather than telemetry. This is the rented-account shape: the genuine store keeps trading, so the payment mixture stays near the category baseline and telemetry alone never crosses its threshold.",
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ],
+    "assessment": {
+      "merchant_id": "MID100012",
+      "declared": "electronics_retail",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "electronics_retail",
+          "confidence": 1.0,
+          "detail": "Onboarded as a electronics retail business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": null,
+          "confidence": 0.025,
+          "detail": "Payment behaviour scores 0.02 against the electronics_retail baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "crypto_exchange",
+          "confidence": 0.951,
+          "detail": "The checkout surface presents a crypto exchange interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": "cluster",
+          "confidence": 0.942,
+          "detail": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.81), which independent businesses do not do.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Verification call placed; the merchant did not answer.",
+          "available": false
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its website shows"
+          ],
+          "views": [
+            "declared",
+            "storefront"
+          ],
+          "severity": 1.0,
+          "statement": "Declared electronics retail; the live page is a crypto exchange interface. That vertical cannot be approved on this platform."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "Who it is connected to"
+          ],
+          "views": [
+            "declared",
+            "network"
+          ],
+          "severity": 0.6,
+          "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+        }
+      ],
+      "model_confidence": 0.951,
+      "evidence_agreement": 2,
+      "independent_channels": 3,
+      "contradiction_severity": "HIGH",
+      "action_confidence": "RESTRICT",
+      "summary": "2 contradictions across 2 independent views (what its website shows, who it is connected to).",
+      "notes": [
+        "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+      ]
+    }
+  },
+  "telemetry": {
+    "score": 0.02490979133509024,
+    "deviations": [
+      {
+        "feature": "velocity_recent",
+        "value": 2.40554,
+        "category_baseline": 1.69961,
+        "category_spread": 0.20962,
+        "z": 3.368,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_all",
+        "value": 2.21987,
+        "category_baseline": 1.71056,
+        "category_spread": 0.21119,
+        "z": 2.412,
+        "direction": "above"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.00688,
+        "category_baseline": 0.00247,
+        "category_spread": 0.00296,
+        "z": 1.492,
+        "direction": "above"
+      },
+      {
+        "feature": "ticket_entropy",
+        "value": 2.61539,
+        "category_baseline": 2.36675,
+        "category_spread": 0.17593,
+        "z": 1.413,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_rate",
+        "value": 0.00536,
+        "category_baseline": 0.00332,
+        "category_spread": 0.00211,
+        "z": 0.969,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_drift",
+        "value": 0.04086,
+        "category_baseline": -0.00285,
+        "category_spread": 0.05169,
+        "z": 0.846,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_drift",
+        "value": 0.00156,
+        "category_baseline": 3e-05,
+        "category_spread": 0.00281,
+        "z": 0.543,
+        "direction": "above"
+      },
+      {
+        "feature": "refund_rate",
+        "value": 0.05122,
+        "category_baseline": 0.05976,
+        "category_spread": 0.02507,
+        "z": -0.341,
+        "direction": "below"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 1.4917,
+        "contribution": 2.6775,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_all",
+        "label": "Repeat-payer velocity (full window) (vs category)",
+        "explains": "Transactions per unique payment instrument per day.",
+        "value": 2.4117,
+        "contribution": -0.5014,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_recent",
+        "label": "Repeat-payer velocity (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 3.3677,
+        "contribution": 0.4587,
+        "units": "log-odds"
+      },
+      {
+        "feature": "hour_kl",
+        "label": "Hour-of-day divergence from category",
+        "explains": "KL divergence of this merchant's hour-of-day histogram from the baseline for its declared category.",
+        "value": 0.0323,
+        "contribution": 0.2527,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_rate",
+        "label": "Chargeback rate (vs category)",
+        "explains": "Share of transactions charged back.",
+        "value": 0.969,
+        "contribution": -0.177,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_drift",
+        "label": "Repeat-payer velocity drift (vs category)",
+        "explains": "Change in repeat-payer velocity between windows.",
+        "value": 0.8457,
+        "contribution": 0.1594,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100012",
+      "surface": "homepage",
+      "vertical": "electronics_retail",
+      "confidence": 0.9422,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Product grid with model numbers, specs and warranty badges",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "header widget",
+          "observation": "Search, compare and cart icons",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Add to cart",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Cart -> Address -> Shipping -> Payment",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "9eb2df7db8a552f8",
+      "cached": false
+    },
+    "checkout": {
+      "merchant_id": "MID100012",
+      "surface": "checkout",
+      "vertical": "crypto_exchange",
+      "confidence": 0.9511,
+      "findings": [
+        {
+          "element": "header widget",
+          "observation": "Connect wallet button in the header",
+          "implication": "Persistent account-balance furniture is characteristic of a funded-account product, not a retail checkout. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "grid",
+          "observation": "Order book with bid and ask columns updating live",
+          "implication": "The main grid is not a product catalogue. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "primary action",
+          "observation": "Buy / Sell pair selector",
+          "implication": "Money moving in both directions is not a retail payment shape. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "primary action",
+          "observation": "Deposit INR",
+          "implication": "Money moving in both directions is not a retail payment shape. Observed on the checkout surface, where the customer transacts."
+        }
+      ],
+      "commerce_flow_present": false,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "0f5a71de34238d7e",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": true,
+    "score": 0.9424154886276135,
+    "size": 7,
+    "synchrony": 0.808,
+    "cohesion": 39.216,
+    "shared_kinds": [
+      "asn",
+      "beneficiary_id",
+      "device_fp",
+      "ip_block",
+      "payout_fingerprint",
+      "phone_fp",
+      "script_bundle"
+    ],
+    "members": [
+      "MID100009",
+      "MID100010",
+      "MID100011",
+      "MID100013",
+      "MID100014",
+      "MID100015"
+    ],
+    "statement": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.81), which independent businesses do not do."
+  },
+  "voice": {
+    "merchant_id": "MID100012",
+    "status": "no_answer",
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Hello, this is an automated verification call from your payment provider. This call is recorded. I have three short questions about your business. You can decline and speak to a person instead at any point."
+      }
+    ],
+    "claimed_business": null,
+    "claimed_payment_flow": null,
+    "changed_recently": null,
+    "consistent": null,
+    "contradiction": null,
+    "confidence": 0.0,
+    "provenance": "offline-simulator",
+    "constraints": [
+      "identified itself as automated",
+      "never requested credentials, OTP or card details",
+      "never disclosed why the account was reviewed",
+      "cannot change account status or hold funds",
+      "merchant could decline and ask for a human"
+    ]
+  },
+  "assessment": {
+    "merchant_id": "MID100012",
+    "declared": "electronics_retail",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "electronics_retail",
+        "confidence": 1.0,
+        "detail": "Onboarded as a electronics retail business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": null,
+        "confidence": 0.025,
+        "detail": "Payment behaviour scores 0.02 against the electronics_retail baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "crypto_exchange",
+        "confidence": 0.951,
+        "detail": "The checkout surface presents a crypto exchange interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": "cluster",
+        "confidence": 0.942,
+        "detail": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.81), which independent businesses do not do.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Verification call placed; the merchant did not answer.",
+        "available": false
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its website shows"
+        ],
+        "views": [
+          "declared",
+          "storefront"
+        ],
+        "severity": 1.0,
+        "statement": "Declared electronics retail; the live page is a crypto exchange interface. That vertical cannot be approved on this platform."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "Who it is connected to"
+        ],
+        "views": [
+          "declared",
+          "network"
+        ],
+        "severity": 0.6,
+        "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+      }
+    ],
+    "model_confidence": 0.951,
+    "evidence_agreement": 2,
+    "independent_channels": 3,
+    "contradiction_severity": "HIGH",
+    "action_confidence": "RESTRICT",
+    "summary": "2 contradictions across 2 independent views (what its website shows, who it is connected to).",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ]
+  },
+  "investigation": {
+    "merchant_id": "MID100012",
+    "declared_category": "electronics_retail",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the electronics_retail baseline: velocity_recent at +3.4 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as electronics_retail (confidence 0.94), which matches the declared electronics_retail.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.4382
+      },
+      {
+        "step": 3,
+        "rationale": "This merchant was raised by the relationship graph, not by anything about itself. Confirm the link before paying for anything: it costs nothing.",
+        "tool": "find_shared_infrastructure",
+        "args": {
+          "min_weight": 6.0
+        },
+        "ok": true,
+        "returned": "8 merchants share rare infrastructure (rarity-weighted total 159.8). Shared attributes: asn, ip_block, payout_fingerprint, script_bundle.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.7313
+      },
+      {
+        "step": 4,
+        "rationale": "Individually unremarkable, and its homepage is a shop like any other -- which is what a funnel member is built to look like. The checkout is the surface that has to carry the product the ring is actually selling.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "checkout classifies as crypto_exchange (confidence 0.95), which does not match the declared electronics_retail.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.9645
+      }
+    ],
+    "steps_used": 4,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9645,
+    "total_cost_inr": 4.4,
+    "evidence": [
+      "Telemetry: velocity_recent sits +3.4 sigma from the electronics_retail baseline.",
+      "Storefront (homepage): classified electronics_retail at 0.94 confidence, consistent with the declaration.",
+      "8 other merchants share rare infrastructure (rarity-weighted total 159.8).",
+      "Storefront (checkout): classified crypto_exchange at 0.95 confidence, inconsistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100012 declared electronics_retail at onboarding 750 days ago. Telemetry agrees: the largest deviations from the electronics_retail baseline are velocity_recent at +3.4 sigma (observed 2.41 against a category baseline of 1.7), velocity_all at +2.4 sigma (observed 2.22 against a category baseline of 1.71), slope_log_volume at +1.5 sigma (observed 0.00688 against a category baseline of 0.00247). The checkout surface presents a crypto_exchange interface at 0.95 confidence, against a declared category of electronics_retail. This vertical cannot be approved on this platform. Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.81), which independent businesses do not do. It is linked to 6 other merchant accounts by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle, and those accounts are moving in step (synchrony 0.81). A verification call was placed and produced no usable statement, which counts neither for nor against the merchant. In total 2 independent views of this merchant contradict its declaration. The investigation used 4 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier restricts settlements, corroborated by the infrastructure channel; the storefront alone would not have been sufficient.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "funnel_ring",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

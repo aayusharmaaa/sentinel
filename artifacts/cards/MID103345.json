@@ -1,0 +1,496 @@
+{
+  "merchant_id": "MID103345",
+  "declared_category": "home_furnishing",
+  "onboarded_days_ago": 109,
+  "decision": {
+    "merchant_id": "MID103345",
+    "declared_category": "home_furnishing",
+    "tier": 2,
+    "tier_name": "Analyst review",
+    "action": "Enters the analyst queue with a full evidence card. Settlements continue normally while the case is worked.",
+    "settlements_held": false,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "DISSENT",
+        "confidence": 0.9789,
+        "statement": "Payment behaviour is atypical for a home_furnishing merchant (score 0.98 against the category baseline)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "AGREES",
+        "confidence": 0.99,
+        "statement": "The checkout surface is consistent with the declared home_furnishing category (0.99 confidence)."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "Not linked to any other merchant by a rare shared identity."
+      },
+      {
+        "channel": "statement",
+        "verdict": "BLIND",
+        "confidence": 0.0,
+        "statement": "No verification call placed."
+      }
+    ],
+    "dissenting_channels": [
+      "telemetry"
+    ],
+    "second_channel_source": null,
+    "justification": "Payment behaviour has drifted but the storefront agrees with the declaration. Settlements continue and will not be held on this evidence. A legitimate business whose payment shape resembles an illicit one is common; one whose storefront is a different business is not.",
+    "notes": [
+      "Payment-only dissent never reaches a settlement hold. This is the rule that protects merchants whose honest behaviour looks anomalous.",
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business.",
+      "A model is 0.98 confident, but only 1 independent view dissents. Model confidence is not evidence agreement."
+    ],
+    "assessment": {
+      "merchant_id": "MID103345",
+      "declared": "home_furnishing",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "home_furnishing",
+          "confidence": 1.0,
+          "detail": "Onboarded as a home furnishing business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": "not_home_furnishing",
+          "confidence": 0.979,
+          "detail": "Payment behaviour scores 0.98 against the home_furnishing baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "home_furnishing",
+          "confidence": 0.99,
+          "detail": "The checkout surface presents a home furnishing interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Not linked to any other merchant by a rare shared identity.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "No verification call placed.",
+          "available": false
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its payments do"
+          ],
+          "views": [
+            "declared",
+            "payments"
+          ],
+          "severity": 0.45,
+          "statement": "Declared home furnishing; the payment behaviour is not typical of that category."
+        }
+      ],
+      "model_confidence": 0.979,
+      "evidence_agreement": 1,
+      "independent_channels": 3,
+      "contradiction_severity": "LOW",
+      "action_confidence": "REVIEW",
+      "summary": "1 contradiction across 1 independent view (what its payments do).",
+      "notes": [
+        "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business.",
+        "A model is 0.98 confident, but only 1 independent view dissents. Model confidence is not evidence agreement."
+      ]
+    }
+  },
+  "telemetry": {
+    "score": 0.9789444462159723,
+    "deviations": [
+      {
+        "feature": "velocity_drift",
+        "value": 0.52011,
+        "category_baseline": -0.00183,
+        "category_spread": 0.07435,
+        "z": 7.02,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_drift",
+        "value": 0.10343,
+        "category_baseline": 0.00022,
+        "category_spread": 0.02019,
+        "z": 5.111,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_recent",
+        "value": 2.28736,
+        "category_baseline": 1.65393,
+        "category_spread": 0.16988,
+        "z": 3.729,
+        "direction": "above"
+      },
+      {
+        "feature": "refund_rate",
+        "value": 0.00676,
+        "category_baseline": 0.04566,
+        "category_spread": 0.01891,
+        "z": -2.057,
+        "direction": "below"
+      },
+      {
+        "feature": "velocity_all",
+        "value": 1.97254,
+        "category_baseline": 1.65709,
+        "category_spread": 0.16695,
+        "z": 1.889,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_rate",
+        "value": 0.0,
+        "category_baseline": 0.0021,
+        "category_spread": 0.00163,
+        "z": -1.286,
+        "direction": "below"
+      },
+      {
+        "feature": "round_share_recent",
+        "value": 0.28947,
+        "category_baseline": 0.13913,
+        "category_spread": 0.11726,
+        "z": 1.282,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_all",
+        "value": 0.23311,
+        "category_baseline": 0.13836,
+        "category_spread": 0.11497,
+        "z": 0.824,
+        "direction": "above"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_velocity_drift",
+        "label": "Repeat-payer velocity drift (vs category)",
+        "explains": "Change in repeat-payer velocity between windows.",
+        "value": 7.0201,
+        "contribution": 5.0432,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_refund_rate",
+        "label": "Refund rate (vs category)",
+        "explains": "Share of transactions refunded.",
+        "value": -2.0573,
+        "contribution": 1.064,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_drift",
+        "label": "Round-value share drift (vs category)",
+        "explains": "Recent minus prior window. Separates a merchant that has always priced in round numbers from one that started last month.",
+        "value": 5.1109,
+        "contribution": 0.8966,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_recent",
+        "label": "Round-value share (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 1.2821,
+        "contribution": 0.6826,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_recent",
+        "label": "Repeat-payer velocity (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 3.7287,
+        "contribution": 0.6665,
+        "units": "log-odds"
+      },
+      {
+        "feature": "hour_kl_recent",
+        "label": "Hour-of-day divergence, last 30d",
+        "explains": "",
+        "value": 0.1795,
+        "contribution": -0.6226,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID103345",
+      "surface": "homepage",
+      "vertical": "home_furnishing",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Product grid of sofas, beds and dining sets with dimensions",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "header widget",
+          "observation": "Search, wishlist and cart icons",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Add to cart",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Cart -> Address -> Shipping -> Payment",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "d312c48a23f799a7",
+      "cached": false
+    },
+    "checkout": {
+      "merchant_id": "MID103345",
+      "surface": "checkout",
+      "vertical": "home_furnishing",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Product grid of sofas, beds and dining sets with dimensions",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "header widget",
+          "observation": "Search, wishlist and cart icons",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Add to cart",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Cart -> Address -> Shipping -> Payment",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "3f9e238d1c7662ae",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": false,
+    "score": 0.0,
+    "size": 0,
+    "synchrony": 0.0,
+    "cohesion": 0.0,
+    "shared_kinds": [],
+    "members": [],
+    "statement": "Not linked to any other merchant by a rare shared identity."
+  },
+  "voice": null,
+  "assessment": {
+    "merchant_id": "MID103345",
+    "declared": "home_furnishing",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "home_furnishing",
+        "confidence": 1.0,
+        "detail": "Onboarded as a home furnishing business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": "not_home_furnishing",
+        "confidence": 0.979,
+        "detail": "Payment behaviour scores 0.98 against the home_furnishing baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "home_furnishing",
+        "confidence": 0.99,
+        "detail": "The checkout surface presents a home furnishing interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Not linked to any other merchant by a rare shared identity.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "No verification call placed.",
+        "available": false
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its payments do"
+        ],
+        "views": [
+          "declared",
+          "payments"
+        ],
+        "severity": 0.45,
+        "statement": "Declared home furnishing; the payment behaviour is not typical of that category."
+      }
+    ],
+    "model_confidence": 0.979,
+    "evidence_agreement": 1,
+    "independent_channels": 3,
+    "contradiction_severity": "LOW",
+    "action_confidence": "REVIEW",
+    "summary": "1 contradiction across 1 independent view (what its payments do).",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business.",
+      "A model is 0.98 confident, but only 1 independent view dissents. Model confidence is not evidence agreement."
+    ]
+  },
+  "investigation": {
+    "merchant_id": "MID103345",
+    "declared_category": "home_furnishing",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the home_furnishing baseline: velocity_drift at +7.0 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as home_furnishing (confidence 0.99), which matches the declared home_furnishing.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.4382
+      },
+      {
+        "step": 3,
+        "rationale": "Homepage matches the declaration but telemetry dissents. The obvious move is to close. Escalating instead: pull the surface the customer actually pays on.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "checkout classifies as home_furnishing (confidence 0.99), which matches the declared home_furnishing.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.1613
+      },
+      {
+        "step": 4,
+        "rationale": "Check whether this account is one of several. A merchant that is unremarkable alone can be a member of a ring that is not.",
+        "tool": "find_shared_infrastructure",
+        "args": {
+          "min_weight": 6.0
+        },
+        "ok": true,
+        "returned": "4 merchants share rare infrastructure (rarity-weighted total 26.72). Shared attributes: script_bundle.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.4016
+      }
+    ],
+    "steps_used": 4,
+    "step_budget": 8,
+    "stop_reason": "evidence_exhausted",
+    "final_confidence": 0.4016,
+    "total_cost_inr": 4.4,
+    "evidence": [
+      "Telemetry: velocity_drift sits +7.0 sigma from the home_furnishing baseline.",
+      "Storefront (homepage): classified home_furnishing at 0.99 confidence, consistent with the declaration.",
+      "Storefront (checkout): classified home_furnishing at 0.99 confidence, consistent with the declaration.",
+      "4 other merchants share rare infrastructure (rarity-weighted total 26.72)."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID103345 declared home_furnishing at onboarding 109 days ago. Telemetry dissents: the largest deviations from the home_furnishing baseline are velocity_drift at +7.0 sigma (observed 0.52 against a category baseline of -0.00183), round_share_drift at +5.1 sigma (observed 0.103 against a category baseline of 0.00022), velocity_recent at +3.7 sigma (observed 2.29 against a category baseline of 1.65). The checkout surface is consistent with the declared home_furnishing category (0.99 confidence). In total 1 independent view of this merchant contradict its declaration. The investigation used 4 of a permitted 8 steps and stopped because evidence exhausted. Recommended tier is analyst review with settlements continuing, because only one view dissents. A model is 0.98 confident, but only 1 independent view dissents -- model confidence is not evidence agreement, and the action reflects the latter.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 0,
+    "archetype": "legit",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

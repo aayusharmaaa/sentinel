@@ -1,0 +1,1628 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c3f4a'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='white' stroke-width='2.6'/%3E%3Cpath d='M16 4v4M16 24v4M4 16h4M24 16h4' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');
+  try{const t=localStorage.getItem('sentinel-theme');
+    if(t) document.documentElement.setAttribute('data-theme',t);
+    else if(matchMedia('(prefers-color-scheme: dark)').matches)
+      document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<style>
+/* ---------- nav ---------- */
+nav.top{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--canvas) 80%,transparent);backdrop-filter:blur(18px)}
+nav.top .in{max-width:1180px;margin:0 auto;height:56px;padding:0 24px;
+  display:flex;align-items:center;gap:16px}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-weight:600;letter-spacing:-.02em;font-size:16px;color:var(--fg)}
+.navlinks{display:none;gap:2px;margin-left:auto}
+@media(min-width:1000px){.navlinks{display:flex}}
+.navlinks a{border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);
+  text-decoration:none;transition:background .16s,color .16s}
+.navlinks a:hover{background:color-mix(in srgb,var(--fg) 5%,transparent);color:var(--fg)}
+.navright{display:flex;align-items:center;gap:10px;margin-left:auto}
+@media(min-width:1000px){.navright{margin-left:0}}
+.tgl{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;
+  border-radius:999px;border:1px solid var(--line-strong);background:transparent;
+  color:var(--muted);cursor:pointer}
+.tgl:hover{color:var(--fg);background:color-mix(in srgb,var(--fg) 5%,transparent)}
+
+/* ---------- hero ---------- */
+.hero{position:relative}
+.wash{position:relative;overflow:hidden;border-radius:0 0 28px 28px;
+  background:linear-gradient(180deg,var(--hero-top) 0%,var(--hero-top) 7%,
+    var(--hero-mid) 29%,var(--hero-deep) 57%,var(--hero-deep) 100%);
+  background-size:100% 140%;background-position:50% 0;
+  animation:wash-drift 18s ease-in-out infinite alternate}
+@keyframes wash-drift{
+  from{background-position:50% 0}
+  to{background-position:50% 100%}
+}
+#field{position:absolute;left:0;right:0;bottom:0;height:44%;width:100%;
+  opacity:.42;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.35) 26%,#000 62%);
+  mask-image:linear-gradient(180deg,transparent 0,rgba(0,0,0,.35) 26%,#000 62%)}
+.wash .in{position:relative;z-index:2;max-width:1180px;margin:0 auto;
+  padding:clamp(56px,11vh,118px) 24px 88px;text-align:center}
+.kicker{display:inline-flex;align-items:center;gap:10px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);background:rgba(9,28,34,.42);
+  padding:4px 14px 4px 4px;backdrop-filter:blur(6px);margin-bottom:clamp(28px,4vh,40px)}
+.kicker .k1{border-radius:999px;background:rgba(255,255,255,.9);padding:2px 9px;
+  font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:#10262d}
+.kicker .k2{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.9)}
+
+/* Impact scale: headline > question > bridge > lede > tag */
+h1.hero-h{font-size:clamp(44px,7.4vw,88px);max-width:14ch;margin:0 auto;
+  color:var(--hero-fg);line-height:.98;letter-spacing:-.035em;font-weight:600}
+.hero-turn{margin:clamp(18px,2.4vh,28px) auto 0;max-width:28ch;
+  font-size:clamp(16px,1.85vw,22px);line-height:1.35;letter-spacing:-.012em;
+  font-weight:450;color:rgba(255,255,255,.62)}
+.hero-ask{margin:clamp(22px,3vh,36px) auto 0;max-width:16ch;
+  font-size:clamp(30px,5.2vw,58px);font-weight:600;letter-spacing:-.032em;
+  line-height:1.05;color:var(--hero-fg)}
+.hero-lede{margin:clamp(18px,2.4vh,26px) auto 0;max-width:42ch;
+  font-size:clamp(14.5px,1.55vw,17px);line-height:1.65;font-weight:400;
+  color:rgba(255,255,255,.58)}
+.hero-tag{margin-top:14px;font-family:var(--font-mono);font-size:10px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.hero-cta{margin-top:clamp(26px,3.6vh,38px);display:flex;flex-wrap:wrap;gap:12px;
+  justify-content:center}
+.hero .serif-accent{position:relative;display:inline-block}
+.hero .serif-accent::after{content:"";position:absolute;left:0;right:0;bottom:.08em;
+  height:2px;border-radius:2px;background:currentColor;opacity:.35;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .7s cubic-bezier(.16,1,.3,1) var(--accent-delay, 700ms)}
+.hero.hero-play .serif-accent::after{transform:scaleX(1)}
+
+/* Staged hero entrance */
+.js .hero-stage{opacity:0;transform:translate3d(0,18px,0);
+  transition:opacity .7s cubic-bezier(.16,1,.3,1) var(--hero-delay,0ms),
+    transform .85s cubic-bezier(.16,1,.3,1) var(--hero-delay,0ms)}
+.js .hero.hero-play .hero-stage{opacity:1;transform:none}
+.js .hero .vy-lines .vy-line{
+  transition:transform 1.05s cubic-bezier(.16,1,.3,1) var(--vy-line-delay,0ms),
+    opacity .7s cubic-bezier(.16,1,.3,1) var(--vy-line-delay,0ms)}
+.scrollhint{margin-top:28px;display:flex;justify-content:center}
+.scrollhint span{display:block;width:1px;height:38px;overflow:hidden;position:relative;
+  background:rgba(255,255,255,.2)}
+.scrollhint i{position:absolute;left:0;width:1px;height:12px;background:#fff;
+  animation:tick 2.1s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes tick{0%{transform:translateY(-100%)}60%,100%{transform:translateY(300%)}}
+@media(prefers-reduced-motion:reduce){
+  .wash{animation:none}
+  .js .hero-stage,.js .hero .vy-lines .vy-line{opacity:1;transform:none;transition:none}
+  .hero .serif-accent::after{transform:scaleX(1);transition:none}
+}
+
+/* the console card overlapping the wash */
+.overlap{max-width:1180px;margin:0 auto;padding:0 24px}
+.overlap .card{margin-top:-56px;position:relative;z-index:5;overflow:hidden}
+
+/* proof strip */
+.evline{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;
+  margin-top:24px;font-size:13px;color:var(--muted)}
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  margin-top:26px;border-top:1px solid var(--line)}
+.proof .p{padding:20px 22px;border-right:1px solid var(--line)}
+.proof .p:last-child{border-right:0}
+.proof .v{font-size:clamp(26px,3.2vw,36px);font-weight:600;letter-spacing:-.03em;
+  line-height:1;color:var(--fg)}
+.proof .v.pos{color:var(--pos)} .proof .v.neg{color:var(--neg)}
+.proof .k{margin-top:9px} .proof .d{margin-top:7px;font-size:12.5px;color:var(--muted)}
+
+/* ---------- sections ---------- */
+section{padding:clamp(64px,9vw,110px) 0}
+section+section{border-top:1px solid var(--line)}
+h2{font-size:clamp(27px,3.9vw,44px);font-weight:600;letter-spacing:-.028em;
+  line-height:1.08;max-width:20ch}
+.sub{margin-top:16px;max-width:62ch;color:var(--muted);font-size:clamp(15px,1.6vw,17px);
+  line-height:1.62}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px;
+  margin-top:40px}
+.c3{padding:22px;position:relative;overflow:hidden}
+.c3::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--neg)}
+.c3 b{display:block;font-size:16px;font-weight:600;color:var(--fg);margin-bottom:8px}
+.c3 p{margin:0;color:var(--muted);font-size:14px}
+.pull{margin:44px 0 0;padding-left:22px;border-left:2px solid var(--neg);
+  font-size:clamp(21px,2.9vw,30px);font-weight:600;letter-spacing:-.02em;
+  line-height:1.26;max-width:24ch;color:var(--fg)}
+
+/* ---------- section rail ----------------------------------------------
+   Where you are in the page, as a count rather than a proportion: a reader
+   wants "section 3 of 7", not "41% down a document of unknown length".
+--------------------------------------------------------------------- */
+/* Parked just outside the 1180px content column, never over it: the offset is
+   derived from the gutter rather than guessed, and the rail only appears once
+   that gutter is wide enough to hold it. */
+.rail{position:fixed;right:clamp(14px,calc((100vw - 1180px) / 2 - 30px),40px);
+  top:50%;transform:translateY(-50%);
+  z-index:40;display:none;flex-direction:column;align-items:center;gap:15px;
+  pointer-events:none;opacity:0;transition:opacity .45s ease}
+@media(min-width:1240px){.rail{display:flex}}
+.rail.lit{opacity:1}
+.rail .rn{font-family:var(--font-mono);font-size:11px;font-variant-numeric:tabular-nums;
+  letter-spacing:.06em;color:var(--muted2);transition:color .25s ease}
+.rail .rn.cur{color:var(--fg)}
+.rail .rtrack{position:relative;width:1px;height:min(44vh,320px);
+  background:color-mix(in srgb,var(--fg) 15%,transparent)}
+.rail .rtrack i{position:absolute;left:-1px;top:0;width:3px;height:36px;border-radius:2px;
+  background:var(--fg);transition:transform .18s cubic-bezier(.2,0,0,1)}
+@media(prefers-reduced-motion:reduce){.rail .rtrack i{transition:none}}
+
+/* ---------- lab ---------- */
+.lab{margin-top:38px;overflow:hidden}
+.lab>header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 20px;
+  border-bottom:1px solid var(--line);background:var(--panel)}
+.lab .pad{padding:20px}
+.ctrl{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 20px;
+  border-bottom:1px solid var(--line);background:var(--panel)}
+.ctrl input[type=range]{flex:1;min-width:190px}
+.tval{font-family:var(--font-mono);font-size:20px;font-weight:600;min-width:76px;
+  text-align:right;color:var(--fg)}
+#plot{width:100%;height:220px;display:block}
+.axis{display:flex;justify-content:space-between;font-family:var(--font-mono);
+  font-size:10px;color:var(--faint);letter-spacing:.06em;margin-top:6px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+  border-top:1px solid var(--line)}
+@media(max-width:760px){.vs{grid-template-columns:1fr}}
+.vsc{background:var(--surface);padding:20px}
+.vsc.win{background:color-mix(in srgb,var(--pos) 7%,var(--surface))}
+.vsc .vh{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.vsc .vh .pip{width:7px;height:7px;border-radius:50%;background:var(--warn)}
+.vsc.b .vh .pip{background:var(--pos)}
+.kpis{display:flex;gap:26px;flex-wrap:wrap}
+.kpi .n{font-size:32px;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--fg)}
+.kpi .n.bad{color:var(--neg)} .kpi .n.ok{color:var(--pos)}
+.kpi .l{margin-top:8px}
+.vsnote{font-size:13px;color:var(--muted);margin:15px 0 0;min-height:3.2em}
+
+/* population grid */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:14px 20px;
+  border-bottom:1px solid var(--line);background:var(--panel)}
+.tab{font-size:12.5px;padding:7px 14px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line-strong);background:transparent;color:var(--muted);
+  font-family:var(--font-sans);transition:all .14s}
+.tab:hover{color:var(--fg)}
+.tab[aria-pressed=true]{background:var(--brand);border-color:var(--brand);
+  color:var(--brand-fg);font-weight:540}
+.popgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(8px,1fr));gap:2px;
+  padding:20px;background:var(--panel)}
+.cell{aspect-ratio:1;border-radius:2px;background:color-mix(in srgb,var(--fg) 9%,transparent);
+  transition:background .35s ease}
+.cell.correct{background:var(--pos)}
+.cell.wrong{background:var(--neg);box-shadow:0 0 0 2px color-mix(in srgb,var(--neg) 28%,transparent)}
+.cell.missed{background:color-mix(in srgb,var(--warn) 55%,transparent)}
+.legend{display:flex;gap:20px;flex-wrap:wrap;padding:14px 20px;
+  border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:3px;display:block}
+
+/* surfaces / case */
+.surfaces{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  gap:1px;background:var(--line)}
+.pane{background:var(--surface);display:flex;flex-direction:column}
+.pane .cap{padding:14px 17px;border-bottom:1px solid var(--line)}
+.pane .who{font-size:12px;color:var(--faint)}
+.pane .what{font-size:15px;margin-top:4px;font-weight:540;color:var(--fg)}
+.pane .vl{margin-top:9px}
+.frame{position:relative;height:300px;overflow:hidden;background:#fbfbfa;
+  border-bottom:1px solid var(--line)}
+.frame iframe{position:absolute;top:0;left:0;width:1240px;height:1000px;border:0;
+  transform:scale(.42);transform-origin:0 0;pointer-events:none;z-index:1}
+.frame .glass{position:absolute;inset:0;z-index:2}
+.frame .fb{position:absolute;inset:0;z-index:0;display:flex;align-items:center;
+  justify-content:center;color:#98a4a8;font-size:12px}
+.findings{padding:14px 17px;flex:1}
+.findings div{padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.findings div:last-child{border-bottom:0}
+.findings .el{display:block;margin-bottom:3px}
+.findings .imp{display:block;margin-top:3px;color:var(--muted);font-size:12.5px}
+
+/* ---------- the solution: four steps, then the divergence bloom ---------- */
+.scenter{text-align:center}
+.scenter h2,.scenter .sub{margin-left:auto;margin-right:auto}
+.sh2{max-width:22ch}
+.ssub{max-width:62ch}
+.sgrid{position:relative;margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line)}
+/* the accent rule draws itself across the strip as the section arrives */
+.sgrid::before{content:'';position:absolute;left:0;right:0;top:-1px;height:2px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.vy-reveal.is-in .sgrid::before{transform:none}
+.scell{position:relative;padding:22px 22px 24px;border-right:1px solid var(--line);
+  text-align:left;background:none;font:inherit;color:inherit;cursor:pointer;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1) var(--d,0ms),
+             transform .7s cubic-bezier(.16,1,.3,1) var(--d,0ms),
+             background .25s ease}
+.vy-reveal.is-in .scell{opacity:1;transform:none}
+.scell:last-child{border-right:0}
+.scell:hover{background:color-mix(in srgb,var(--fg) 4%,transparent)}
+.scell[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.scell .sn{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--accent)}
+.scell b{display:block;margin-top:13px;font-size:15.5px;letter-spacing:-.01em}
+.scell p{margin-top:7px;font-size:13px;line-height:1.5;color:var(--muted)}
+.scell .sfig{margin-top:13px;font-family:var(--font-mono);font-size:11.5px;color:var(--fg)}
+@media(max-width:900px){.sgrid{grid-template-columns:repeat(2,1fr)}
+  .scell:nth-child(2n){border-right:0}
+  .scell:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(max-width:600px){.sgrid{grid-template-columns:1fr}
+  .scell{border-right:0;border-bottom:1px solid var(--line)}
+  .scell:last-child{border-bottom:0}}
+
+.stage{position:relative;margin-top:30px;border:1px solid var(--line);border-radius:16px;
+  background:var(--panel);overflow:hidden}
+.stage canvas{display:block;width:100%;height:clamp(400px,52vh,540px)}
+.stagecap{position:absolute;left:24px;top:22px;max-width:32ch;pointer-events:none}
+.stagecap .sk{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent)}
+.stagecap h3{margin-top:9px;font-size:clamp(18px,2.2vw,23px);font-weight:600;
+  letter-spacing:-.022em;line-height:1.14}
+.stagecap p{margin-top:9px;font-size:13px;line-height:1.55;color:var(--muted)}
+.beatcard{position:absolute;right:24px;bottom:24px;width:min(330px,46%);
+  border:1px solid var(--line);border-radius:12px;background:var(--canvas);
+  padding:15px 17px;box-shadow:0 10px 34px rgba(0,0,0,.14)}
+.beatcard .bt{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted)}
+.beatcard .bf{margin-top:10px;font-size:12.5px;line-height:1.5}
+.beatcard .bf div{padding:6px 0;border-bottom:1px solid var(--line)}
+.beatcard .bf div:last-child{border-bottom:0}
+.beatcard .bans{margin-top:11px;font-size:12.5px;line-height:1.5;color:var(--fg)}
+.beatcard .bans i{display:inline-block;width:7px;height:13px;vertical-align:-2px;
+  background:var(--accent);animation:tick2 1s steps(2) infinite}
+@keyframes tick2{0%,49%{opacity:1}50%,100%{opacity:0}}
+.stagetip{position:absolute;pointer-events:none;transform:translate(-50%,-140%);
+  background:var(--canvas);border:1px solid var(--line);border-radius:6px;
+  padding:4px 8px;font-family:var(--font-mono);font-size:11px;white-space:nowrap;z-index:3}
+.beatnav{position:absolute;left:24px;bottom:22px;display:flex;gap:6px}
+.beatnav button{width:26px;height:3px;border-radius:2px;border:0;padding:0;cursor:pointer;
+  background:color-mix(in srgb,var(--fg) 18%,transparent);transition:background .25s ease}
+.beatnav button[aria-pressed="true"]{background:var(--accent)}
+.snote{margin-top:22px;font-size:14px}
+@media(max-width:760px){.stagecap{max-width:none;right:24px}
+  .beatcard{position:static;width:auto;margin:0 24px 24px}}
+
+/* trace */
+.steps{padding:4px 20px 18px}
+.st{display:grid;grid-template-columns:32px 1fr;gap:16px;padding:16px 0;
+  border-bottom:1px solid var(--line)}
+.st:last-child{border-bottom:0}
+.st .n2{width:28px;height:28px;border-radius:50%;border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);
+  font-size:12px;color:var(--muted)}
+.st.key .n2{border-color:var(--neg);color:var(--neg);font-weight:600;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--neg) 12%,transparent)}
+.st .did{font-size:14.5px;font-weight:540;color:var(--fg)}
+.st .why{color:var(--muted);font-size:13.5px;margin:5px 0 0;font-style:italic}
+.st .ret{font-size:14px;margin:6px 0 0}
+.st .tool{font-family:var(--font-mono);font-size:11px;color:var(--faint);margin-top:6px}
+.keyn{margin-top:10px;padding:11px 14px;border-radius:0 8px 8px 0;font-size:13.5px;
+  background:color-mix(in srgb,var(--neg) 8%,transparent);border-left:2px solid var(--neg)}
+.stopbar{padding:12px 20px;background:var(--panel);border-top:1px solid var(--line);
+  font-size:13px;color:var(--muted)}
+.stopbar b{color:var(--fg)}
+.chanrow{display:grid;grid-template-columns:130px max-content 1fr;gap:9px 14px;
+  padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.chanrow:last-child{border-bottom:0}
+@media(max-width:860px){.chanrow{grid-template-columns:120px 1fr}
+  .chanrow .cst{grid-column:1/-1}}
+.chanrow .cnm{font-size:13.5px;color:var(--muted)}
+.chanrow .cst{font-size:13.5px}
+.verdictbox{margin-top:22px;border-radius:14px;padding:20px;
+  border:1px solid color-mix(in srgb,var(--neg) 30%,transparent);
+  background:color-mix(in srgb,var(--neg) 8%,transparent)}
+.verdictbox .vt{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:6px 0 10px;
+  color:var(--fg)}
+.verdictbox p{font-size:14px;color:var(--fg2);margin:0}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:32px}
+@media(max-width:880px){.grid2{grid-template-columns:1fr}}
+.honest{padding:clamp(22px,4vw,34px);margin-top:32px}
+.honest h3{font-size:19px;font-weight:600;margin-bottom:14px}
+.honest ul{margin:0;padding-left:20px}
+.honest li{color:var(--muted);font-size:14.5px;margin-bottom:12px}
+.honest li b{color:var(--fg);font-weight:600}
+.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right;
+  white-space:nowrap}
+tr.win td{background:color-mix(in srgb,var(--pos) 9%,transparent)}
+td.bad{color:var(--neg);font-weight:600} td.ok{color:var(--pos);font-weight:600}
+footer{padding:44px 0 64px;border-top:1px solid var(--line)}
+.loading{padding:80px 24px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="top"><div class="in">
+  <a class="brand" href="/">
+    <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <rect width="32" height="32" rx="8" fill="var(--c-accent)" opacity=".16"/>
+      <rect x=".5" y=".5" width="31" height="31" rx="7.5" stroke="var(--c-accent)" stroke-opacity=".45"/>
+      <circle cx="16" cy="16" r="5.6" stroke="var(--c-accent)" stroke-width="2.4"/>
+      <path d="M16 5.4v3.2M16 23.4v3.2M5.4 16h3.2M23.4 16h3.2" stroke="var(--c-accent)"
+        stroke-width="2.4" stroke-linecap="round"/>
+    </svg>Sentinel</a>
+  <div class="navlinks">
+    <a href="#solution">The solution</a>
+    <a href="#collision">The collision</a>
+    <a href="#identity">Five views</a>
+    <a href="#modality">Each channel</a>
+    <a href="#gate">The gate</a>
+    <a href="#results">Results</a>
+  </div>
+  <div class="navright">
+    <button class="tgl" id="tgl" aria-label="Toggle theme" title="Toggle theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/>
+        <path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+    </button>
+    <a class="btn btn-ghost btn-sm" href="#collision">See why it's hard</a>
+    <a class="btn btn-primary btn-sm" href="/console">Open console
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+</div></nav>
+
+<div class="rail" id="rail" aria-hidden="true">
+  <span class="rn cur" id="railcur">1</span>
+  <div class="rtrack" id="railtrack"><i id="railthumb"></i></div>
+  <span class="rn" id="railtot">1</span>
+</div>
+
+<header class="hero" id="hero">
+  <div class="wash pinstripe">
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="in on-wash">
+      <div class="kicker hero-stage" style="--hero-delay:40ms">
+        <span class="k1">AI Risk Manager</span>
+        <span class="k2">Track 02</span>
+      </div>
+      <h1 class="display hero-h vy-lines" id="heroh">
+        <span class="vy-line-frame"><span class="vy-line">Razorpay approves</span></span>
+        <span class="vy-line-frame"><span class="vy-line">a merchant
+          <span class="serif-accent">once</span>.</span></span>
+      </h1>
+      <p class="hero-turn vy-lines"><span class="vy-line-frame"><span class="vy-line">But the
+        business behind that account can <span class="serif-accent">change</span>.</span></span></p>
+      <p class="hero-ask vy-lines"><span class="vy-line-frame"><span class="vy-line">So who are
+        you actually processing for today?</span></span></p>
+      <p class="hero-lede hero-stage" style="--hero-delay:980ms">Sentinel continuously verifies the
+        business behind every merchant account.</p>
+      <div class="hero-tag hero-stage" style="--hero-delay:1120ms">Continuous merchant risk intelligence</div>
+      <div class="hero-cta hero-stage" style="--hero-delay:1260ms">
+        <a class="btn btn-primary" href="/console">Review open cases
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn-ghost" href="#collision">
+          <span class="pulse-dot" style="display:inline-block;width:6px;height:6px;
+            border-radius:50%;background:#fff"></span>See why it's hard</a>
+      </div>
+      <div class="scrollhint hero-stage" style="--hero-delay:1460ms"><span><i></i></span></div>
+    </div>
+  </div>
+
+  <div class="overlap">
+    <div class="surface-raised card" id="herocard"></div>
+    <p class="evline" id="evline"></p>
+    <div class="proof" id="proof"></div>
+    <div style="height:18px"></div>
+  </div>
+</header>
+
+<main id="app"><div class="loading">Loading the held-out population…</div></main>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const words = s => String(s ?? '').replace(/_/g, ' ');
+const inr = n => '₹' + Math.round(n).toLocaleString('en-IN');
+const compactInr = n => n >= 1e7 ? '₹' + (n / 1e7).toFixed(2) + ' Cr'
+  : n >= 1e5 ? '₹' + (n / 1e5).toFixed(1) + ' L' : inr(n);
+const pct = n => (n * 100).toFixed(1) + '%';
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cssv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- theme ---------- */
+$('tgl').onclick = () => {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try{ localStorage.setItem('sentinel-theme', next); }catch(e){}
+  document.dispatchEvent(new CustomEvent('themechange'));
+};
+
+/* ---------- reveal ---------- */
+/*
+  Reveal on scroll, swept rather than observed.
+
+  An IntersectionObserver only queues a callback when `isIntersecting` actually
+  changes. A section that goes from below the fold to above it in a single jump
+  -- a deep link to #results, a restored scroll position, an instant scrollTo --
+  never changes state, so no entry is ever generated and it stays at opacity 0
+  for the life of the page. A sweep has no such edge case: anything at or above
+  the fold is visible, whatever route the reader took to get there.
+*/
+function revealSweep(){
+  const limit = innerHeight * 0.88;
+  document.querySelectorAll('.vy-reveal:not(.is-in), .vy-lines:not(.is-in)')
+    .forEach(el => {
+      if(el.getBoundingClientRect().top < limit) el.classList.add('is-in');
+    });
+}
+let sweepQueued = false;
+function queueSweep(){
+  if(sweepQueued) return;
+  sweepQueued = true;
+  requestAnimationFrame(() => { revealSweep(); sweepQueued = false; });
+}
+addEventListener('scroll', queueSweep, {passive:true});
+addEventListener('resize', queueSweep);
+addEventListener('hashchange', queueSweep);
+
+function stagger(root){
+  root.querySelectorAll('.vy-lines').forEach(g => {
+    [...g.querySelectorAll('.vy-line')].forEach((l, i) =>
+      l.style.setProperty('--vy-line-delay', (i * 110) + 'ms'));
+  });
+}
+
+function playHero(){
+  const hero = document.getElementById('hero');
+  if(!hero) return;
+  // Global beat: kicker already staged; type lines cascade after it.
+  const blocks = [
+    {sel:'.hero-h .vy-line', base:160, step:140},
+    {sel:'.hero-turn .vy-line', base:480, step:120},
+    {sel:'.hero-ask .vy-line', base:640, step:130},
+  ];
+  blocks.forEach(({sel, base, step}) => {
+    [...hero.querySelectorAll(sel)].forEach((l, i) => {
+      l.style.setProperty('--vy-line-delay', (base + i * step) + 'ms');
+    });
+  });
+  const accents = [...hero.querySelectorAll('.serif-accent')];
+  accents.forEach((el, i) => el.style.setProperty('--accent-delay', (780 + i * 220) + 'ms'));
+  hero.querySelectorAll('.vy-lines').forEach(g => g.classList.add('is-in'));
+  requestAnimationFrame(() => {
+    hero.classList.add('hero-play');
+  });
+}
+
+/* ---------- hero: a field of merchant telemetry, most calm, some diverging ---------- */
+function heroField(){
+  const cv = $('field'), ctx = cv.getContext('2d');
+  let w = 0, h = 0, rows = [], t = 0;
+  function build(){
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    w = cv.clientWidth; h = cv.clientHeight;
+    if(!w || !h) return;
+    cv.width = w * dpr; cv.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.max(10, Math.floor(h / 30));
+    rows = Array.from({length:n}, (_, i) => ({
+      y:(i + .5) * (h / n), depth:(i + .5) / n, amp:3 + Math.random() * 5,
+      f1:.004 + Math.random() * .01, f2:.011 + Math.random() * .02,
+      ph:Math.random() * 1000, sp:.28 + Math.random() * .5, div:0, state:0,
+    }));
+  }
+  function flip(){
+    const calm = rows.filter(r => r.state === 0);
+    if(!calm.length) return;
+    // Weighted towards the foot of the field, so divergence reads as something you
+    // scroll down into rather than something already shouting behind the headline.
+    const wts = calm.map(c => c.depth * c.depth + .05);
+    let pick = Math.random() * wts.reduce((a, b) => a + b, 0), j = 0;
+    while(j < wts.length - 1 && (pick -= wts[j]) > 0) j++;
+    const r = calm[j];
+    r.state = 1;
+    setTimeout(() => { r.state = 2; }, 5200 + Math.random() * 3200);
+  }
+  function draw(){
+    if(!w || !h){ raf = requestAnimationFrame(draw); return; }
+    ctx.clearRect(0, 0, w, h);
+    for(const r of rows){
+      if(r.state === 1) r.div = Math.min(1, r.div + .012);
+      else if(r.state === 2){ r.div = Math.max(0, r.div - .009); if(!r.div) r.state = 0; }
+      const k = r.div, lift = (.34 + .66 * r.depth) * (1 + .5 * scrollK);
+      const amp = r.amp * lift * (1 + k * 2.6);
+      ctx.beginPath();
+      for(let x = 0; x <= w; x += 3){
+        const p = x + t * r.sp + r.ph;
+        const y = r.y + Math.sin(p * r.f1) * amp + Math.sin(p * r.f2) * amp * .55
+          + (k ? Math.sin(p * .06) * amp * .5 * k : 0);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      // Calm rows are the wash's own light; a diverging row turns to the alert hue.
+      ctx.strokeStyle = k > .04
+        ? `color-mix(in srgb, ${cssv('--c-neg')} ${Math.round(k * 100)}%, rgba(255,255,255,.55))`
+        : 'rgba(255,255,255,.4)';
+      ctx.lineWidth = 1 + k * 1.4;
+      ctx.globalAlpha = (.24 + .5 * r.depth + k * .45) * (.72 + .28 * scrollK);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+    t += 1.15;
+    if(!REDUCED) raf = requestAnimationFrame(draw);
+  }
+  let scrollK = 0;
+  const onScroll = () => {
+    const hero = cv.closest('.hero') || cv.parentElement;
+    scrollK = Math.max(0, Math.min(1, scrollY / Math.max(1, hero.offsetHeight)));
+  };
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  let raf = null;
+  build(); draw();
+  if(!REDUCED){ setInterval(flip, 2600); for(let i = 0; i < 3; i++) setTimeout(flip, i * 700); }
+  else { rows.slice(0, 3).forEach(r => r.div = 1); draw(); }
+  addEventListener('resize', () => { build(); if(REDUCED) draw(); });
+}
+
+
+/* ---------- the divergence bloom ----------------------------------------
+   Four beats over one canvas, and every node on it is a real held-out
+   merchant. Beat 3 is the argument: a business that changed cannot keep all
+   five of its stories straight, so its polygon deforms while an honest one
+   stays a regular pentagon. Nothing here is drawn from a made-up number --
+   if the evaluation moves, the picture moves with it.
+------------------------------------------------------------------------- */
+function solutionStage(D){
+  const P = D.population, T = D.throughput, N = P.mid.length;
+  const cv = $('bloom'); if(!cv) return;
+  const ctx = cv.getContext('2d');
+
+  const VIEWS = ['Payments', 'Storefront', 'Scripts', 'Infrastructure', 'Network'];
+  const NETCUT = 0.55;
+  const dissentOf = i => [P.tel[i], P.vis[i], P.scr[i], P.inf[i],
+                          (P.net && P.net[i] >= NETCUT) ? 1 : 0];
+
+  /* Rank by the merchant's own telemetry score: the calm book packs the middle,
+     the loud tail sits at the rim. */
+  const order = [...Array(N).keys()].sort((a, b) => P.score[a] - P.score[b]);
+  const rank = new Array(N);
+  order.forEach((idx, r) => { rank[idx] = r; });
+
+  const nodes = [...Array(N).keys()].map(i => {
+    const d = dissentOf(i);
+    return {
+      i, d, nd: d.reduce((a, b) => a + b, 0),
+      seen: P.seen[i] === 1, held: P.tier[i] >= 3, div: P.label[i] === 1,
+      j: ((i * 2654435761) % 1000) / 1000,          // stable per-node jitter
+      x:0, y:0, tx:0, ty:0, r:1.6, tr:1.6, a:0, ta:0, m:0, tm:0,
+    };
+  });
+  const H = D.headline;
+  const seen = nodes.filter(n => n.seen);
+  const rejected = seen.filter(n => n.nd < 2);
+  const passed = seen.filter(n => n.nd >= 2);
+  const nSeen = seen.length, nHeld = nodes.filter(n => n.held).length;
+  /* The population's tier is the one-rotation tier -- the 90-day number, not
+     today's. Anything derived from it has to say so. */
+  const nAnalyst = (H.action_rot && H.action_rot.flagged) || nHeld;
+  const nHeldFp = nodes.filter(n => n.held && !n.div).length;
+
+  /* ---- the four steps, which are also the stage's controls ---- */
+  const STEPS = [
+    {n:'01', t:'Score everyone', p:'Cheap payment telemetry on the whole book every cycle. No external call.',
+     f:N.toLocaleString('en-IN') + ' scored'},
+    {n:'02', t:'Investigate a few', p:'Storefront, scripts and network only where the payments already disagree.',
+     f:nSeen.toLocaleString('en-IN') + ' investigated'},
+    {n:'03', t:'Fuse with a gate', p:'Two independent views must contradict the declaration before money stops.',
+     f:nHeld + ' held · ' + nHeldFp + ' in error'},
+    {n:'04', t:'Human review', p:'A grounded case file for a human. Sentinel never decides alone.',
+     f:nAnalyst + ' reach an analyst'},
+  ];
+  $('sgrid').innerHTML = STEPS.map((x, i) =>
+    `<button class="scell" data-b="${i}" aria-pressed="${i === 0}" style="--d:${120 + i * 90}ms">
+       <span class="sn">${x.n}</span><b>${esc(x.t)}</b><p>${esc(x.p)}</p>
+       <div class="sfig">${esc(x.f)}</div></button>`).join('');
+  $('beatnav').innerHTML = STEPS.map((x, i) =>
+    `<button data-b="${i}" aria-pressed="${i === 0}" aria-label="Step ${x.n}"></button>`).join('');
+
+  const CAP = [
+    {k:'01 · Score everyone', h:'The whole book, every cycle.',
+     p:`All ${N.toLocaleString('en-IN')} held-out merchants. Distance from the centre is that
+        merchant's own drift against its category baseline — not against the population.`},
+    {k:'02 · Investigate a few', h:'Only what the payments already doubt.',
+     p:`${nSeen} of ${N.toLocaleString('en-IN')} earn the expensive channel. The rest are never
+        screenshotted, never classified, and cost nothing.`},
+    {k:'03 · Fuse with a gate', h:'Five readings. Two must disagree.',
+     p:`Each shape is one merchant's five views. Agreement relaxes into a regular pentagon;
+        a business that changed cannot keep all five stories straight, and spikes where they
+        contradict. Only ${passed.length} carry two or more — and across one rotation of the
+        whole book, ${nHeldFp} of them is a legitimate merchant.`},
+    {k:'04 · Human review', h:'A person decides. Always.',
+     p:`${nAnalyst} merchants reach an analyst within one rotation. The gate produces a case
+        file, not a verdict: the contradicting views, the surfaces they came from, and a
+        summary written only from structured features.`},
+  ];
+
+  let beat = 0, auto = true, t = 0, morph = 0, ring = 0, raf = null, touched = false;
+  let w = 0, h = 0, cx = 0, cy = 0, R = 0, started = false, hold = 0;
+
+  function build(){
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    w = cv.clientWidth; h = cv.clientHeight;
+    if(!w || !h) return;
+    cv.width = w * dpr; cv.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = w * .5; cy = h * .5;
+    R = Math.min(w * .30, h * .40 - 22);   // the beat-2 ring must still clear the edge
+    layout(true);
+  }
+
+  /* Where every node wants to be, for the current beat. */
+  /* Pack `count` shapes into a box, sized to the box rather than to a fixed
+     cell: the counts move with the evaluation, and the stage does not. */
+  function fit(k, count, x0, x1, y0, y1, f){
+    const bw = x1 - x0, bh = y1 - y0;
+    const cols = Math.max(1, Math.round(Math.sqrt(Math.max(1, count) * bw / bh)));
+    const rows = Math.ceil(count / cols);
+    const cw = bw / cols, ch = bh / rows;
+    return {
+      x: x0 + cw * ((k % cols) + .5),
+      y: y0 + ch * (Math.floor(k / cols) + .5),
+      r: Math.max(7, Math.min(cw, ch) * (f || .34)),
+    };
+  }
+
+  function layout(snap){
+    nodes.forEach(n => {
+      const th = rank[n.i] * 2.399963229728653;
+      const rr = R * Math.sqrt(rank[n.i] / N);
+      if(beat === 0){
+        n.tx = cx + Math.cos(th) * rr; n.ty = cy + Math.sin(th) * rr;
+        n.tr = 1.5 + (rank[n.i] / N) * 1.4; n.ta = .30 + (rank[n.i] / N) * .55; n.tm = 0;
+      }else if(beat === 1){
+        if(n.seen){
+          const b = R * (.96 + n.j * .12);
+          n.tx = cx + Math.cos(th) * b; n.ty = cy + Math.sin(th) * b;
+          n.tr = 2.9; n.ta = 1; n.tm = 0;
+        }else{
+          n.tx = cx + Math.cos(th) * rr * .52; n.ty = cy + Math.sin(th) * rr * .52;
+          n.tr = 1.2; n.ta = .10; n.tm = 0;
+        }
+      }else if(beat === 2){
+        if(!n.seen){ n.ta = 0; n.tr = 1; n.tm = 0; return; }
+        const spot = n.nd >= 2
+          ? fit(passed.indexOf(n), passed.length, w * .70, w * .98, 30, h - 30, .26)
+          : fit(rejected.indexOf(n), rejected.length, w * .04, w * .56, 34, h - 34, .34);
+        n.tx = spot.x; n.ty = spot.y; n.tr = spot.r;
+        n.ta = n.nd >= 2 ? 1 : .55; n.tm = 1;
+      }else{
+        n.ta = 0; n.tm = 1;
+        if(n === focusNode){ n.tx = cx; n.ty = cy; n.tr = Math.min(R * .62, 130); n.ta = 1; }
+      }
+      if(snap){ n.x = n.tx; n.y = n.ty; n.r = n.tr; n.a = n.ta; n.m = n.tm; }
+    });
+  }
+
+  /* Beat 4 zooms one real case: the showcase merchant if it is in the held-out
+     population, otherwise the most contradicted merchant that was held. */
+  const focusNode =
+    (D.case && passed.find(n => P.mid[n.i] === D.case.merchant_id))
+    || passed.slice().sort((a, b) => b.nd - a.nd)[0]
+    || seen[0] || nodes[0];
+
+  function pentagon(g, ox, oy, base, d, k){
+    g.beginPath();
+    for(let v = 0; v < 5; v++){
+      const a = -Math.PI / 2 + v * (Math.PI * 2 / 5);
+      const rr = base * (1 + (d[v] ? .58 : -.13) * k);
+      const x = ox + Math.cos(a) * rr, y = oy + Math.sin(a) * rr;
+      v === 0 ? g.moveTo(x, y) : g.lineTo(x, y);
+    }
+    g.closePath();
+  }
+
+  function draw(){
+    if(!w || !h){ raf = requestAnimationFrame(draw); return; }
+    const NEG = cssv('--c-neg') || '#b3243e';
+    const ACC = cssv('--c-accent') || '#0d7490';
+    const FG  = cssv('--fg') || '#0b1a1f';   // --c-* has no fg slot; --fg is the text colour
+    const ease = REDUCED ? 1 : .09;
+
+    ctx.clearRect(0, 0, w, h);
+
+    if(beat === 2 || beat === 3){
+      morph = Math.min(1, morph + (REDUCED ? 1 : .035));
+    }else{
+      morph = Math.max(0, morph - .06);
+    }
+    ring = beat >= 1 ? Math.min(1, ring + .03) : Math.max(0, ring - .05);
+
+    /* the threshold ring that separates "everyone" from "worth paying for" */
+    if(ring > .01 && beat <= 1){
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * (.62 + .38 * ring), 0, Math.PI * 2);
+      ctx.strokeStyle = ACC; ctx.globalAlpha = .30 * ring;
+      ctx.setLineDash([3, 5]); ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.setLineDash([]); ctx.globalAlpha = 1;
+    }
+
+    /* the gate aperture */
+    if(beat === 2){
+      const gx = w * .635, gap = 84;
+      ctx.strokeStyle = FG; ctx.globalAlpha = .22 * morph; ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(gx, 24); ctx.lineTo(gx, cy - gap / 2);
+      ctx.moveTo(gx, cy + gap / 2); ctx.lineTo(gx, h - 24);
+      ctx.stroke();
+      ctx.globalAlpha = .5 * morph;
+      ctx.font = '600 10px ' + (cssv('--font-mono') || 'monospace');
+      ctx.fillStyle = FG; ctx.textAlign = 'center';
+      ctx.save(); ctx.translate(gx - 12, cy); ctx.rotate(-Math.PI / 2);
+      ctx.fillText('TWO-CHANNEL GATE', 0, 0); ctx.restore();
+      ctx.globalAlpha = 1; ctx.textAlign = 'left';
+    }
+
+    for(const n of nodes){
+      n.x += (n.tx - n.x) * ease; n.y += (n.ty - n.y) * ease;
+      n.r += (n.tr - n.r) * ease; n.a += (n.ta - n.a) * ease;
+      n.m += (n.tm - n.m) * ease;
+      if(n.a < .012) continue;
+
+      if(n.m > .05){
+        /* a shape, not a dot: the five views of one merchant */
+        const k = n.m * morph, spike = n.nd >= 2;
+        pentagon(ctx, n.x, n.y, n.r, n.d, k);
+        ctx.globalAlpha = n.a * (spike ? .20 : .10);
+        ctx.fillStyle = spike ? NEG : ACC; ctx.fill();
+        ctx.globalAlpha = n.a * .92;
+        ctx.strokeStyle = spike ? NEG : ACC;
+        ctx.lineWidth = spike ? 1.5 : 1;
+        ctx.stroke();
+        /* each contradicting view blooms its own wedge */
+        if(k > .1){
+          for(let v = 0; v < 5; v++){
+            if(!n.d[v]) continue;
+            const a0 = -Math.PI / 2 + v * (Math.PI * 2 / 5);
+            const rr = n.r * (1 + .58 * k);
+            ctx.beginPath(); ctx.moveTo(n.x, n.y);
+            ctx.lineTo(n.x + Math.cos(a0 - .34) * rr * .72, n.y + Math.sin(a0 - .34) * rr * .72);
+            ctx.lineTo(n.x + Math.cos(a0) * rr, n.y + Math.sin(a0) * rr);
+            ctx.lineTo(n.x + Math.cos(a0 + .34) * rr * .72, n.y + Math.sin(a0 + .34) * rr * .72);
+            ctx.closePath();
+            ctx.globalAlpha = n.a * .30 * k; ctx.fillStyle = NEG; ctx.fill();
+          }
+        }
+        if(n === focusNode && beat === 3){
+          ctx.globalAlpha = 1;
+          ctx.font = '600 11px ' + (cssv('--font-mono') || 'monospace');
+          ctx.textAlign = 'center';
+          for(let v = 0; v < 5; v++){
+            const a0 = -Math.PI / 2 + v * (Math.PI * 2 / 5);
+            const rr = n.r * (1 + (n.d[v] ? .58 : -.13) * k) + 20;
+            ctx.fillStyle = n.d[v] ? NEG : FG;
+            ctx.globalAlpha = n.d[v] ? .95 : .42;
+            ctx.fillText(VIEWS[v].toUpperCase(), n.x + Math.cos(a0) * rr,
+                         n.y + Math.sin(a0) * rr + 4);
+          }
+          ctx.textAlign = 'left';
+        }
+      }else{
+        const breathe = REDUCED ? 0 : Math.sin(t * .02 + n.j * 6.28) * .35;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, Math.max(.6, n.r + breathe), 0, Math.PI * 2);
+        ctx.globalAlpha = n.a;
+        ctx.fillStyle = (beat === 1 && n.seen) ? ACC : FG;
+        ctx.fill();
+        if(beat === 1 && n.seen){
+          ctx.globalAlpha = n.a * .16;
+          ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 3.1, 0, Math.PI * 2);
+          ctx.fillStyle = ACC; ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    t += 1;
+    if(!started && cv.getBoundingClientRect().top < innerHeight * .72) started = true;
+    if(started && auto && !REDUCED){
+      hold++;
+      if(hold > 210 && beat < 3){ hold = 0; go(beat + 1); }
+    }
+    if(!REDUCED) raf = requestAnimationFrame(draw);
+  }
+
+  function paintCap(){
+    const c = CAP[beat];
+    $('stagecap').innerHTML =
+      `<div class="sk">${esc(c.k)}</div><h3>${esc(c.h)}</h3><p>${esc(c.p)}</p>`;
+    [...$('sgrid').children].forEach((el, i) =>
+      el.setAttribute('aria-pressed', String(i === beat)));
+    [...$('beatnav').children].forEach((el, i) =>
+      el.setAttribute('aria-pressed', String(i === beat)));
+
+    const card = $('beatcard');
+    if(beat === 3 && focusNode){
+      const mid = P.mid[focusNode.i];
+      const dis = VIEWS.filter((_, v) => focusNode.d[v]);
+      /* The findings are only shown when the merchant on screen is the one the
+         card belongs to. Borrowing another merchant's evidence would be a lie
+         that happens to look good. */
+      const own = D.case && D.case.merchant_id === mid ? D.case : null;
+      const lines = own
+        ? Object.values(own.vision || {})
+            .flatMap(v => (v.findings || []).map(x => x.observation)).slice(0, 3)
+        : dis.map(v => v + ' contradicts the declared category');
+      card.hidden = false;
+      card.innerHTML = `<div class="bt">Evidence card · ${esc(mid)}</div>
+        <div class="bf">${lines.map(x => `<div>${esc(x)}</div>`).join('')}</div>
+        <div class="bans">${dis.length} of 5 views disagree. Summary written from
+          structured features only — never from the merchant's own page copy.<i></i></div>`;
+    }else{
+      card.hidden = true;
+    }
+  }
+
+  function go(b){
+    beat = Math.max(0, Math.min(3, b));
+    hold = 0;
+    layout(false);
+    paintCap();
+    if(REDUCED) draw();
+  }
+
+  function stop(){ auto = false; touched = true; }
+
+  $('sgrid').addEventListener('click', e => {
+    const b = e.target.closest('.scell'); if(!b) return;
+    stop(); go(+b.dataset.b);
+  });
+  $('beatnav').addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    stop(); go(+b.dataset.b);
+  });
+
+  /* hovering a dot names the merchant, with the same id the console uses */
+  cv.addEventListener('mousemove', e => {
+    if(beat > 1){ $('stagetip').hidden = true; return; }
+    const r = cv.getBoundingClientRect();
+    const mx = e.clientX - r.left, my = e.clientY - r.top;
+    let best = -1, bd = 64;
+    for(const n of nodes){
+      if(n.a < .1) continue;
+      const dx = n.x - mx, dy = n.y - my, d2 = dx * dx + dy * dy;
+      if(d2 < bd){ bd = d2; best = n.i; }
+    }
+    const tip = $('stagetip');
+    if(best < 0){ tip.hidden = true; return; }
+    const n = nodes[best];
+    tip.hidden = false;
+    tip.style.left = n.x + 'px'; tip.style.top = n.y + 'px';
+    tip.textContent = P.mid[best] + ' · ' + P.score[best].toFixed(3);
+  });
+  cv.addEventListener('mouseleave', () => { $('stagetip').hidden = true; });
+
+  $('snote').innerHTML = `<b style="color:var(--fg)">Held and reviewed counts are
+    measured across one rotation of the whole book</b> — 90 days, by which point the
+    storefront channel has reached every merchant at least once. Today's single-cycle
+    numbers are the ones in the card at the top of the page.<br><br>Triage fires on five triggers — telemetry drift
+    (${T.triage_by_trigger.telemetry_drift}), an external signal
+    (${T.triage_by_trigger.external_signal}), a slow rotation across the whole book
+    (${T.triage_by_trigger.high_volume_rotation}), a change in volume shape
+    (${T.triage_by_trigger.volume_shape_change}) and a shared-infrastructure cluster
+    (${T.triage_by_trigger.network_cluster || 0}). The rotation deliberately spends money on
+    merchants nothing is wrong with: it is the only trigger that reaches a merchant whose
+    telemetry will never move. Whole-run cost, ${inr(T.vision_spend_inr)} of storefront
+    classification across ${T.merchants_scored_cheap_channel.toLocaleString('en-IN')}
+    merchants scored.`;
+
+  build();
+  if(REDUCED){
+    // No autoplay and no easing: land straight on the beat that carries the
+    // argument, and let the caption agree with what is drawn.
+    beat = 2; morph = 1; layout(true); paintCap(); draw();
+  }else{
+    paintCap();
+    raf = requestAnimationFrame(draw);
+  }
+  // Repaint unconditionally on resize and on a theme change: the palette is read
+  // per frame from CSS variables, and waiting for the next animation frame is not
+  // safe -- a backgrounded or throttled tab may not get one for a long time.
+  // draw() re-arms its own frame, so a listener must retire the outstanding one
+  // first or every resize would leave a second loop running alongside the first.
+  const repaint = () => { if(raf) cancelAnimationFrame(raf); raf = null; draw(); };
+  addEventListener('resize', () => { build(); repaint(); });
+  document.addEventListener('themechange', repaint);
+}
+
+/* ---------- the section rail ---------- */
+function scrollRail(){
+  const rail = $('rail'), track = $('railtrack'), thumb = $('railthumb');
+  if(!rail || !track || !thumb) return;
+  /* The hero counts as the first stop: it is a screen the reader passes
+     through, and a rail that starts at the second one lies about where
+     they are. */
+  const marks = [document.querySelector('header.hero'),
+                 ...document.querySelectorAll('#app section')].filter(Boolean);
+  if(marks.length < 2){ rail.style.display = 'none'; return; }
+  $('railtot').textContent = marks.length;
+  let cur = -1, tops = [], span = 0, limit = 1;
+
+  /* Measured here, not in the scroll handler: reading layout on every scroll
+     event is what makes a page feel heavy, and these numbers only move when
+     the document itself resizes. */
+  function measure(){
+    tops = marks.map(m => m.getBoundingClientRect().top + scrollY);
+    span = Math.max(0, track.clientHeight - thumb.offsetHeight);
+    limit = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    paint();
+  }
+
+  function paint(){
+    const p = Math.min(1, Math.max(0, scrollY / limit));
+    thumb.style.transform = 'translateY(' + (p * span) + 'px)';
+
+    /* Whichever stop the reader has most recently crossed, measured a little
+       above the middle of the screen so the number turns over when the new
+       section actually takes the view. */
+    const line = scrollY + innerHeight * .38;
+    let i = 0;
+    for(let k = 0; k < tops.length; k++){ if(tops[k] <= line) i = k; }
+    if(i !== cur){ cur = i; $('railcur').textContent = i + 1; }
+    rail.classList.toggle('lit', scrollY > 60);
+  }
+
+  addEventListener('scroll', paint, {passive:true});
+  addEventListener('resize', measure);
+  if(window.ResizeObserver) new ResizeObserver(measure).observe(document.body);
+  measure();
+}
+
+function countUp(node, to, fmt, ms = 950){
+  if(REDUCED){ node.textContent = fmt(to); return; }
+  const t0 = performance.now();
+  (function step(now){
+    const p = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - p, 3);
+    node.textContent = fmt(to * e);
+    if(p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+
+/* Same arithmetic as the Python evaluation, so the rupee figures agree. */
+function makeCost(E, DAYS){
+  return (tier, diverged, gmv) => {
+    const analyst = tier >= 2 ? E.analyst_review_cost_inr : 0;
+    let falseHold = 0;
+    if(tier >= 3 && !diverged){
+      const frozen = gmv * E.hold_days;
+      const ltv = gmv * E.take_rate * E.merchant_remaining_lifetime_days;
+      falseHold = frozen * E.hold_harm_rate + E.hold_fixed_cost_inr
+        + E.churn_probability_after_hold * ltv;
+    }
+    let missed = 0;
+    if(diverged && tier < 2){
+      const exp = gmv * DAYS;
+      missed = E.network_fine_inr + exp * E.chargeback_liability_rate
+        + exp * E.enforcement_freeze_rate;
+    }
+    return analyst + falseHold + missed;
+  };
+}
+
+async function boot(){
+  let D;
+  try{ D = window.__SENTINEL__ || await (await fetch('/api/landing')).json(); }
+  catch(e){
+    $('app').innerHTML = `<div class="loading">Could not load the evaluation. Run
+      <span class="mono">python -m sentinel.pipeline</span> then
+      <span class="mono">python -m sentinel.eval.harness</span>.</div>`;
+    return;
+  }
+  render(D);
+}
+
+function render(D){
+  const P = D.population, H = D.headline, N = P.score.length, cost = makeCost(D.economics, D.days);
+
+  /* ---- hero card: the collision, stated once ---- */
+  const C = D.collision;
+  $('herocard').innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 20px;
+      border-bottom:1px solid var(--line);background:var(--panel)">
+      <span class="label">Live from the held-out set</span>
+      <span class="badge badge-risk"><span class="pulse-dot" style="width:6px;height:6px;
+        border-radius:50%;background:var(--neg);display:inline-block"></span>
+        the merchant that looks worst has done nothing wrong</span></div>
+    <div class="scroll-x"><table class="data-table" id="collide"></table></div>`;
+  $('collide').innerHTML = `
+    <thead><tr><th>measure</th><th style="text-align:right">licensed skill gaming</th>
+      <th style="text-align:right">betting front</th>
+      <th style="text-align:right">home furnishing</th><th></th></tr></thead>
+    <tbody>${C.labels.map((lab, i) => {
+      const worse = C.skill_gaming[i] > C.betting[i];
+      const f = v => v < .01 ? v.toFixed(4) : v.toFixed(v < 1 ? 3 : 2);
+      return `<tr><td>${esc(lab)}</td>
+        <td class="num tnum ${worse ? 'bad' : ''}">${f(C.skill_gaming[i])}</td>
+        <td class="num tnum">${f(C.betting[i])}</td>
+        <td class="num tnum" style="color:var(--faint)">${f(C.furnishing[i])}</td>
+        <td style="font-size:12.5px;color:var(--muted)">${worse
+          ? 'the legitimate merchant looks worse' : ''}</td></tr>`;
+    }).join('')}</tbody>`;
+
+  /* ---- what the badge used to carry: the measurement, stated once ---- */
+  $('evline').innerHTML = `<span class="label">Measured on a held-out set</span>
+    ${H.test_n.toLocaleString('en-IN')} merchants tested ·
+    ${H.test_pos} business identities diverged`;
+
+  /* ---- proof strip ---- */
+  $('proof').innerHTML = [
+    {id:'s1', cls:'pos', k:'Tier 3 precision', d:'Every merchant frozen had in fact diverged.'},
+    {id:'s2', cls:'neg', k:'Legitimate merchants frozen', d:`Across all ${H.test_n.toLocaleString('en-IN')} held out.`},
+    {id:'s3', cls:'', k:'Caught within one rotation', d:`${H.action_rot.tp} of ${H.test_pos}, at ${H.action_rot.precision.toFixed(3)} precision.`},
+    {id:'s4', cls:'', k:'Per merchant, per cycle', d:`${compactInr(D.cache.projected_at_one_million_merchants_inr)} to sweep a million.`},
+  ].map(s => `<div class="p"><div class="v tnum ${s.cls}" id="${s.id}">0</div>
+    <div class="label k">${esc(s.k)}</div><div class="d">${esc(s.d)}</div></div>`).join('');
+  countUp($('s1'), H.hold.precision, v => v.toFixed(3));
+  countUp($('s2'), H.hold.fp, v => Math.round(v));
+  countUp($('s3'), H.action_rot.recall * 100, v => v.toFixed(1) + '%');
+  countUp($('s4'), D.throughput.spend_per_merchant_inr, v => '₹' + v.toFixed(2));
+
+  /* ---- body ---- */
+  $('app').innerHTML = `
+  <section><div class="wrap vy-reveal">
+    <div class="eyebrow">The problem</div>
+    <h2 style="margin-top:14px">KYC tells you who a merchant <span class="serif-accent">was</span>.</h2>
+    <p class="sub">Onboarding works — the merchants in the 2022 enforcement cases all passed
+      it. KYC asks <em>who are you</em>. Transaction monitoring asks <em>is this payment
+      suspicious</em>. Neither asks the question in between: <b style="color:var(--fg)">are
+      you still the business you told us you were?</b> Account misuse takes three shapes,
+      and the aggregator carries every one — card networks fine the acquiring side, not the
+      merchant.</p>
+    <div class="cards3">
+      <div class="surface c3"><b>Self-pivot</b><p>The merchant moves into a prohibited
+        vertical on the account it onboarded honestly. Same KYC, different business.</p></div>
+      <div class="surface c3"><b>Credential rental</b><p>A real storefront keeps trading
+        while the same merchant ID processes for a business that could never pass
+        onboarding. The front is genuine — that is what makes it work.</p></div>
+      <div class="surface c3"><b>Funnel structures</b><p>Several small accounts, each
+        unremarkable alone, routing to one beneficiary. Invisible to any per-merchant
+        threshold.</p></div>
+    </div>
+    <p class="pull">The signals are not hidden. Every one of them just has a perfectly
+      innocent explanation.</p>
+    <p class="sub" style="margin-top:26px">Which is why Sentinel does not compute a fraud
+      score. It builds five independent readings of the same merchant and looks for the
+      places they <b style="color:var(--fg)">disagree</b>.</p>
+  </div></section>
+
+
+  <section id="solution"><div class="wrap vy-reveal">
+    <div class="scenter">
+      <div class="eyebrow">The solution</div>
+      <h2 class="sh2">Sentinel asks who they are <span class="serif-accent">today</span>.</h2>
+      <p class="sub ssub">Not a fraud score. Five independent readings of the same business —
+        and a gate that will not freeze money on one channel alone.</p>
+    </div>
+    <div class="sgrid" id="sgrid"></div>
+    <div class="stage" id="stage">
+      <canvas id="bloom"></canvas>
+      <div class="stagecap" id="stagecap"></div>
+      <div class="beatcard" id="beatcard" hidden></div>
+      <div class="stagetip" id="stagetip" hidden></div>
+      <div class="beatnav" id="beatnav"></div>
+    </div>
+    <p class="sub snote" id="snote"></p>
+  </div></section>
+
+  <section id="collision"><div class="wrap vy-reveal">
+    <div class="eyebrow">Exhibit A · drag it yourself</div>
+    <h2 style="margin-top:14px">The most suspicious merchant on the book has done
+      <span class="serif-accent">nothing</span> wrong.</h2>
+    <p class="sub">Set a threshold and watch what it costs. Every dot is a real merchant
+      from the held-out set, at its real score. <b style="color:var(--fg)">Drag the
+      line.</b></p>
+    <div class="surface-raised lab">
+      <header><span class="label" style="color:var(--accent)">A.1</span>
+        <span style="font-size:14px;color:var(--muted)">live ·
+          ${N.toLocaleString('en-IN')} held-out merchants</span></header>
+      <div class="ctrl"><label class="label" for="thr">Telemetry threshold</label>
+        <input class="vy-range" type="range" id="thr" min="0" max="1000" value="620">
+        <span class="tval tnum" id="thrv">0.620</span></div>
+      <div class="pad" style="padding-bottom:10px">
+        <canvas id="plot"></canvas>
+        <div class="axis"><span>0.0</span><span>0.1</span><span>0.25</span>
+          <span>0.50</span><span>0.75</span><span>1.0</span></div></div>
+      <div class="vs">
+        <div class="vsc a"><div class="vh"><span class="pip"></span>
+          <span class="label">Freeze on telemetry alone</span></div>
+          <div class="kpis">
+            <div class="kpi"><div class="n tnum" id="a-tp">0</div><div class="label l">diverged caught</div></div>
+            <div class="kpi"><div class="n tnum bad" id="a-fp">0</div><div class="label l">legitimate frozen</div></div>
+            <div class="kpi"><div class="n tnum" id="a-cost">₹0</div><div class="label l">total cost</div></div>
+          </div><p class="vsnote" id="a-note"></p></div>
+        <div class="vsc b win"><div class="vh"><span class="pip"></span>
+          <span class="label">Freeze only if the storefront agrees</span></div>
+          <div class="kpis">
+            <div class="kpi"><div class="n tnum" id="b-tp">0</div><div class="label l">diverged caught</div></div>
+            <div class="kpi"><div class="n tnum ok" id="b-fp">0</div><div class="label l">legitimate frozen</div></div>
+            <div class="kpi"><div class="n tnum" id="b-cost">₹0</div><div class="label l">total cost</div></div>
+          </div><p class="vsnote" id="b-note"></p></div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:24px;font-size:15px">The question is never
+      <em>is this merchant unusual</em>. It is <em>is this merchant unusual for what it
+      claims to be</em> — and then, independently: what is this interface actually for?</p>
+  </div></section>
+
+  <section id="identity"><div class="wrap vy-reveal">
+    <div class="eyebrow">The contradiction engine</div>
+    <h2 style="margin-top:14px">A merchant that changed cannot keep all five stories
+      <span class="serif-accent">straight</span>.</h2>
+    <p class="sub">Every merchant has one declared identity and four observed ones, each
+      gathered a different way. It can repaint the homepage, but the checkout still has to
+      take money the new way. It can restate its category on a phone call, but its payout
+      account is still shared with the operator's other shells.</p>
+    <div class="cards3" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="surface c3" style="--x:0"><b>Declared</b><p>What it told Razorpay at
+        onboarding.</p></div>
+      <div class="surface c3"><b>Payments</b><p>What its money actually does, against the
+        baseline for its own category.</p></div>
+      <div class="surface c3"><b>Storefront</b><p>What customers actually see — homepage
+        and checkout, read by a vision model.</p></div>
+      <div class="surface c3"><b>Network</b><p>Who it is connected to by rare shared
+        beneficiaries, payout accounts and devices.</p></div>
+      <div class="surface c3"><b>Statement</b><p>What it says when an automated
+        verification call asks it directly.</p></div>
+    </div>
+    <div class="lab surface-raised" id="contralab"></div>
+    <p class="sub" style="margin-top:26px;font-size:15px">And the three confidences are kept
+      apart, because they are three different questions: <b style="color:var(--fg)">how sure
+      is the model</b>, <b style="color:var(--fg)">how many independent views agree</b>, and
+      <b style="color:var(--fg)">is that enough to justify doing something</b>. A single
+      model at 0.99 is not evidence agreement, and neither is enough on its own to stop a
+      business's money.</p>
+  </div></section>
+
+  <section id="modality"><div class="wrap vy-reveal">
+    <div class="eyebrow">What each channel is worth</div>
+    <h2 style="margin-top:14px">Four runs of the whole system, each adding one
+      <span class="serif-accent">modality</span>.</h2>
+    <p class="sub">If a channel does not move detection — or moves it only by also freezing
+      legitimate merchants — it has not earned the complexity it costs. This is the
+      measurement that decides whether multimodal was worth building.</p>
+    <div class="surface-raised lab">
+      <header><span class="label" style="color:var(--accent)">M.1</span>
+        <span style="font-size:14px;color:var(--muted)">held-out set · same population, one
+          channel added per row</span></header>
+      <div class="pad scroll-x"><table class="data-table" id="modtable"></table></div>
+    </div>
+    <p class="sub" style="font-size:15px" id="modfinding"></p>
+    <p class="sub" style="font-size:15px;color:var(--muted)" id="voicenote"></p>
+  </div></section>
+
+  <section id="gate"><div class="wrap vy-reveal">
+    <div class="eyebrow">Exhibit B · the rule under test</div>
+    <h2 style="margin-top:14px">No single channel can <span class="serif-accent">freeze</span>
+      a merchant.</h2>
+    <p class="sub">A settlement hold needs the storefront to dissent <em>and</em> one
+      independent channel to agree. Every policy sees identical channel outputs on the same
+      merchants — only the rule changes. Each square is one held-out merchant.</p>
+    <div class="surface-raised lab">
+      <header><span class="label" style="color:var(--accent)">B.1</span>
+        <span style="font-size:14px;color:var(--muted)">switch the policy</span></header>
+      <div class="tabs" id="ptabs"></div>
+      <div class="popgrid" id="popgrid"></div>
+      <div class="legend">
+        <span><i style="background:var(--pos)"></i>correctly held</span>
+        <span><i style="background:var(--neg)"></i>legitimate merchant frozen</span>
+        <span><i style="background:color-mix(in srgb,var(--warn) 55%,transparent)"></i>diverged, missed</span>
+        <span><i style="background:color-mix(in srgb,var(--fg) 9%,transparent)"></i>untouched</span>
+      </div>
+      <div style="border-top:1px solid var(--line);padding:20px">
+        <div class="kpis" id="pkpi"></div><p class="vsnote" id="pnote"></p></div>
+    </div>
+    <p class="pull">The gate catches fewer merchants than the naive union, and freezes none
+      of the wrong ones.</p>
+    <p class="sub" style="margin-top:24px;font-size:15px">Sentinel does not ask whether a
+      merchant was trustworthy when they joined. It asks whether they are still the same
+      merchant today.</p>
+  </div></section>
+
+  <section id="case"><div class="wrap vy-reveal">
+    <div class="eyebrow">Exhibit C · one investigation, in full</div>
+    <div id="casewrap"></div>
+  </div></section>
+
+  <section id="results"><div class="wrap vy-reveal">
+    <div class="eyebrow">Measured</div>
+    <h2 style="margin-top:14px">Held out, grouped by ring, at a
+      ${(H.prevalence * 100).toFixed(1)}% base rate.</h2>
+    <p class="sub">Rings are kept wholly inside one side of the split so a ring's siblings
+      cannot leak. Category baselines are fitted on training legitimate merchants only.</p>
+    <div class="grid2">
+      <div class="surface" style="overflow:hidden">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--line);background:var(--panel)">
+          <span class="label">Recall by archetype, one rotation</span></div>
+        <div class="scroll-x"><table class="data-table" id="arch"></table></div></div>
+      <div class="surface" style="overflow:hidden">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--line);background:var(--panel)">
+          <span class="label">As the vision channel degrades</span></div>
+        <div class="scroll-x"><table class="data-table" id="sens"></table></div></div>
+    </div>
+    <p class="sub" style="margin-top:22px;font-size:15px" id="blindnote"></p>
+  </div></section>
+
+  <section><div class="wrap vy-reveal">
+    <div class="eyebrow">What this is, and what it isn't</div>
+    <h2 style="margin-top:14px">The evaluation is the honest part. The numbers are the
+      <span class="serif-accent">weak</span> part.</h2>
+    <div class="surface honest">
+      <h3>Read these before you read the metrics</h3>
+      <ul>
+        <li><b>I wrote the generator and the detector.</b> A merchant's storefront fixture is
+          set from its true label, so the storefront channel is a noisy readout of ground
+          truth. Any rule requiring storefront dissent gets high precision partly by
+          construction.</li>
+        <li><b>No vision model has run in these numbers.</b> The offline channel is a
+          simulator whose confusion structure comes from how much interface vocabulary two
+          verticals share. The live path is real code against a real model — and it has never
+          been executed.</li>
+        <li><b>${H.test_pos} positives.</b> Tier 3 precision of ${H.hold.precision.toFixed(3)}
+          rests on ${H.hold.tp} predictions; per-archetype recall on 7–17 merchants each.
+          Those confidence intervals are wide.</li>
+        <li><b>One design claim failed its own test and stayed in.</b> Per-category baselines
+          beat a threshold rule decisively, but lose to the same model on raw features —
+          ${D.rule.metrics.fp} false positives against 4 at matched recall.</li>
+      </ul>
+    </div>
+    <div class="grid2">
+      <div><h3 style="font-size:18px;font-weight:600">Where a model earns its place</h3>
+        <p class="sub" style="margin-top:10px;font-size:14.5px">Vision is irreplaceable for
+          <em>what kind of business is this interface for</em> — there is no
+          feature-engineering path to it, and keyword classifiers fail the moment copy is
+          laundered. Telemetry is deliberately <em>not</em> a model: it must rerun identically
+          when a hold is challenged, and it must decompose its own score onto the evidence
+          card. The <b>case copilot</b> in the console is the third place: it shortens
+          analyst time on dense cards by answering grounded questions and drafting decision
+          notes — still from structured findings only, never from page copy.</p></div>
+      <div><h3 style="font-size:18px;font-weight:600">Where it doesn't</h3>
+        <p class="sub" style="margin-top:10px;font-size:14.5px">The agent's planner is
+          deterministic by default. Picking one of four tools is a policy that fits on a
+          screen and never has to be re-explained to a regulator. An LLM planner ships
+          alongside it for live mode — it decides what to look at next, never what the
+          outcome is.</p></div>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap">
+    <div class="rowflex" style="justify-content:space-between;align-items:flex-start">
+      <div style="max-width:62ch">
+        <div class="label">Sentinel · detection and flagging only</div>
+        <p style="margin-top:10px;color:var(--muted);font-size:13.5px">No evasion-testing
+          mode, no generated evasion strategies. The diverged merchants are built from
+          publicly documented typologies. The most aggressive action available is a
+          settlement hold pending human review, and it cannot be taken on one channel's
+          word.</p></div>
+      <a class="btn btn-primary" href="/console">Review open cases
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </div>
+  </div></footer>`;
+
+  /* ---- A.2 threshold explorer ---- */
+  const plot = $('plot'), pctx = plot.getContext('2d');
+  const sx = s => Math.pow(s, .5);
+  const jitter = P.score.map(() => Math.random());
+  let thr = .62;
+  function drawPlot(){
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const w = plot.clientWidth, h = 220;
+    if(!w) return;
+    plot.width = w * dpr; plot.height = h * dpr;
+    pctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pctx.clearRect(0, 0, w, h);
+    const pad = 10, iw = w - pad * 2, ih = h - pad * 2;
+    const grid = cssv('--c-grid'), neg = cssv('--c-neg'),
+      acc = cssv('--c-accent'), warn = cssv('--c-warn'), fg = cssv('--fg');
+    for(const tk of [0, .1, .25, .5, .75, 1]){
+      pctx.strokeStyle = grid; pctx.lineWidth = 1;
+      pctx.beginPath(); pctx.moveTo(pad + sx(tk) * iw, pad);
+      pctx.lineTo(pad + sx(tk) * iw, h - pad); pctx.stroke();
+    }
+    for(let i = 0; i < N; i++){
+      const x = pad + sx(P.score[i]) * iw, y = pad + jitter[i] * ih;
+      const div = P.label[i] === 1, frozen = P.score[i] >= thr;
+      pctx.globalAlpha = div ? (frozen ? .95 : .55) : (frozen ? .9 : .32);
+      pctx.fillStyle = frozen ? neg : (div ? warn : acc);
+      pctx.beginPath(); pctx.arc(x, y, div ? 3.2 : 2.1, 0, 6.3); pctx.fill();
+      if(!div && frozen){
+        pctx.globalAlpha = .55; pctx.strokeStyle = neg; pctx.lineWidth = 1.4;
+        pctx.beginPath(); pctx.arc(x, y, 6, 0, 6.3); pctx.stroke();
+      }
+    }
+    pctx.globalAlpha = 1;
+    const tx = pad + sx(thr) * iw;
+    pctx.strokeStyle = fg; pctx.lineWidth = 1.6;
+    pctx.beginPath(); pctx.moveTo(tx, 2); pctx.lineTo(tx, h - 2); pctx.stroke();
+    pctx.fillStyle = fg;
+    pctx.beginPath(); pctx.moveTo(tx, 2); pctx.lineTo(tx - 5, 9);
+    pctx.lineTo(tx + 5, 9); pctx.closePath(); pctx.fill();
+  }
+  function updateThreshold(){
+    let aTp = 0, aFp = 0, bTp = 0, bFp = 0, aCost = 0, bCost = 0;
+    for(let i = 0; i < N; i++){
+      const div = P.label[i] === 1, gmv = P.gmv[i];
+      const a = P.score[i] >= thr;
+      const b = a && P.seen[i] === 1 && P.vis[i] === 1;
+      if(a){ div ? aTp++ : aFp++; }
+      if(b){ div ? bTp++ : bFp++; }
+      aCost += cost(a ? 3 : 0, div, gmv);
+      bCost += cost(b ? 3 : (a ? 2 : 0), div, gmv);
+    }
+    $('a-tp').textContent = aTp; $('a-fp').textContent = aFp;
+    $('b-tp').textContent = bTp; $('b-fp').textContent = bFp;
+    $('a-cost').textContent = compactInr(aCost);
+    $('b-cost').textContent = compactInr(bCost);
+    $('a-note').innerHTML = aFp === 0
+      ? `No legitimate merchant frozen — but only ${aTp} of ${H.test_pos} diverged merchants
+         caught. Push the threshold down and watch what arrives.`
+      : `<b style="color:var(--neg)">${aFp} legitimate ${aFp === 1 ? 'business has' : 'businesses have'}
+         had settlements frozen</b> to catch ${aTp}. Each is a real merchant whose payouts
+         stopped.`;
+    $('b-note').innerHTML = bFp === 0
+      ? `Zero legitimate merchants frozen at every threshold on this slider. A hold needs the
+         storefront to disagree too, and an honest merchant's storefront agrees with its
+         declaration.`
+      : `${bFp} frozen in error — the storefront channel misread ${bFp}
+         ${bFp === 1 ? 'merchant' : 'merchants'} at this operating point.`;
+    $('thrv').textContent = thr.toFixed(3);
+    drawPlot();
+  }
+  $('thr').addEventListener('input', e => { thr = +e.target.value / 1000; updateThreshold(); });
+  addEventListener('resize', drawPlot);
+  document.addEventListener('themechange', drawPlot);
+  updateThreshold();
+
+  /* ---- B.1 policy grid ---- */
+  const POLICIES = [
+    {k:'telemetry_only', n:'Telemetry alone', f:i => P.tel[i] === 1,
+     d:'One loud channel, no corroboration.'},
+    {k:'storefront_only', n:'Storefront alone', f:i => P.vis[i] === 1,
+     d:'Freeze whenever the rendered site disagrees with the declaration.'},
+    {k:'gate_removed', n:'Gate deleted',
+     f:i => P.vis[i] === 1 || P.tel[i] === 1 || P.scr[i] === 1 || P.inf[i] === 1,
+     d:'Sentinel’s triage and ladder, with only the two-channel requirement removed.'},
+    {k:'two_channel_gate', n:'Sentinel — two-channel gate', f:i => P.tier[i] >= 3,
+     d:'A hold needs the storefront plus one independent channel.'},
+  ];
+  let pol = POLICIES.length - 1;
+  $('ptabs').innerHTML = POLICIES.map((p, i) =>
+    `<button class="tab" data-i="${i}" aria-pressed="${i === pol}">${esc(p.n)}</button>`).join('');
+  const frag = document.createDocumentFragment();
+  for(let i = 0; i < N; i++){
+    const dv = document.createElement('div');
+    dv.className = 'cell'; dv.title = P.mid[i]; frag.appendChild(dv);
+  }
+  $('popgrid').appendChild(frag);
+  const cellEls = [...$('popgrid').children];
+  function applyPolicy(){
+    const p = POLICIES[pol];
+    let tp = 0, fp = 0, missed = 0, total = 0;
+    for(let i = 0; i < N; i++){
+      const held = !!p.f(i), div = P.label[i] === 1;
+      cellEls[i].className = 'cell' + (held ? (div ? ' correct' : ' wrong') : (div ? ' missed' : ''));
+      if(held && div) tp++; if(held && !div) fp++; if(!held && div) missed++;
+      total += cost(held ? 3 : 0, div, P.gmv[i]);
+    }
+    $('pkpi').innerHTML = `
+      <div class="kpi"><div class="n tnum ok">${tp}</div><div class="label l">correctly held</div></div>
+      <div class="kpi"><div class="n tnum ${fp ? 'bad' : 'ok'}">${fp}</div><div class="label l">legitimate frozen</div></div>
+      <div class="kpi"><div class="n tnum">${missed}</div><div class="label l">diverged, missed</div></div>
+      <div class="kpi"><div class="n tnum">${compactInr(total)}</div><div class="label l">total cost</div></div>`;
+    $('pnote').innerHTML = esc(p.d) + (fp
+      ? ` <b style="color:var(--neg)">${fp} legitimate ${fp === 1 ? 'merchant' : 'merchants'}
+          had settlements frozen under this rule.</b>`
+      : ` <b style="color:var(--pos)">No legitimate merchant was frozen.</b>`);
+  }
+  $('ptabs').onclick = e => {
+    const b = e.target.closest('.tab'); if(!b) return;
+    pol = +b.dataset.i;
+    [...$('ptabs').children].forEach((x, i) => x.setAttribute('aria-pressed', i === pol));
+    applyPolicy();
+  };
+  applyPolicy();
+
+  /* ---- contradiction quality + modality ---- */
+  const CQ = D.contradiction_quality || {};
+  if(CQ.mean_contradictions_diverged !== undefined){
+    $('contralab').innerHTML = `
+      <header><span class="label" style="color:var(--accent)">C.0</span>
+        <span style="font-size:14px;color:var(--muted)">contradictions found, held-out set</span></header>
+      <div class="vs">
+        <div class="vsc"><div class="vh"><span class="pip" style="background:var(--pos)"></span>
+          <span class="label">Legitimate merchants</span></div>
+          <div class="kpis">
+            <div class="kpi"><div class="n tnum ok">${CQ.mean_contradictions_legitimate.toFixed(2)}</div>
+              <div class="label l">contradictions on average</div></div>
+            <div class="kpi"><div class="n tnum ${CQ.legitimate_with_two_or_more ? '' : 'ok'}">${CQ.legitimate_with_two_or_more}</div>
+              <div class="label l">reach two or more</div></div>
+          </div>
+          <p class="vsnote">Two independent views contradicting the declaration is the bar for
+            restricting settlements. This is the number that has to stay near zero.</p></div>
+        <div class="vsc"><div class="vh"><span class="pip" style="background:var(--neg)"></span>
+          <span class="label">Diverged merchants</span></div>
+          <div class="kpis">
+            <div class="kpi"><div class="n tnum bad">${CQ.mean_contradictions_diverged.toFixed(2)}</div>
+              <div class="label l">contradictions on average</div></div>
+            <div class="kpi"><div class="n tnum">${CQ.diverged_with_two_or_more}</div>
+              <div class="label l">reach two or more</div></div>
+          </div>
+          <p class="vsnote">A merchant running a business it never declared leaves a trail in
+            more than one place, because the four observed views are gathered four different
+            ways.</p></div>
+      </div>`;
+  }
+
+  const MD = D.modality;
+  if(MD && MD.steps){
+    $('modtable').innerHTML = `
+      <thead><tr><th>channels</th><th style="text-align:right">reaches analyst</th>
+        <th style="text-align:right">restrict precision</th>
+        <th style="text-align:right">wrong holds</th>
+        <th style="text-align:right">ring recall</th>
+        <th style="text-align:right">corroborated</th></tr></thead>
+      <tbody>${MD.steps.map((m, i) => {
+        const a = m.any_action, h = m.restrict;
+        return `<tr class="${i === MD.steps.length - 1 ? 'win' : ''}">
+          <td>${esc(m.config)}</td>
+          <td class="num tnum">${a.recall.toFixed(3)}</td>
+          <td class="num tnum">${h.precision == null ? '—' : h.precision.toFixed(3)}</td>
+          <td class="num tnum ${h.fp ? 'bad' : 'ok'}">${h.fp}</td>
+          <td class="num tnum">${(m.ring_recall ?? 0).toFixed(2)}</td>
+          <td class="num tnum">${m.corroborated ?? 0}</td></tr>`;
+      }).join('')}</tbody>`;
+    $('modfinding').textContent = MD.finding || '';
+    $('voicenote').textContent = MD.voice_note || '';
+  }
+
+  const T = D.throughput;
+
+  /* ---- C. the case ---- */
+  const K = D.case;
+  if(K){
+    const surfaces = Object.entries(K.vision);
+    const clean = surfaces.find(([, v]) => v.vertical === K.declared) || surfaces[0];
+    const dirty = surfaces.find(([, v]) => v.vertical !== K.declared) || surfaces[surfaces.length - 1];
+    $('casewrap').innerHTML = `
+      <h2 style="margin-top:14px">The homepage is honest. The checkout is a
+        <span class="serif-accent">lending</span> product.</h2>
+      <p class="sub">Merchant <span class="mono">${esc(K.merchant_id)}</span>, declared
+        <b style="color:var(--fg)">${esc(words(K.declared))}</b>, onboarded ${K.onboarded}
+        days ago. Looking only at the homepage closes this case on the wrong answer.</p>
+      <div class="surface-raised lab">
+        <header><span class="label" style="color:var(--accent)">C.1</span>
+          <span style="font-size:14px;color:var(--muted)">both surfaces, as the classifier saw them</span></header>
+        <div class="surfaces" id="surfs"></div></div>
+      <div class="surface-raised lab">
+        <header><span class="label" style="color:var(--accent)">C.2</span>
+          <span style="font-size:14px;color:var(--muted)">investigation trace · the audit record</span></header>
+        <div class="steps" id="steps"></div>
+        <div class="stopbar">Stopped because <b>${esc(K.stop.replace(/_/g, ' '))}</b> —
+          ${K.steps.length} of ${K.budget} permitted steps, ₹${K.cost.toFixed(2)} spent.</div></div>
+      <div class="grid2">
+        <div><h3 style="font-size:18px;font-weight:600">Channel ledger</h3>
+          <div style="margin-top:14px">${K.channels.map(ch => {
+            const cls = ch.verdict === 'DISSENT' ? 'badge-risk'
+              : ch.verdict === 'BLIND' ? 'badge-mute' : 'badge-money';
+            return `<div class="chanrow"><span class="cnm">${esc(words(ch.channel))}</span>
+              <span><span class="badge ${cls}">${esc(ch.verdict)}</span></span>
+              <span class="cst">${esc(words(ch.statement))}</span></div>`;
+          }).join('')}</div></div>
+        <div><h3 style="font-size:18px;font-weight:600">Against the
+          ${esc(words(K.declared))} baseline</h3>
+          <div class="surface scroll-x" style="margin-top:14px;overflow:hidden">
+            <table class="data-table" id="devs"></table></div></div>
+      </div>
+      <div class="verdictbox">
+        <span class="label" style="color:var(--neg)">Recommendation</span>
+        <div class="vt">Tier ${K.tier} — ${esc(K.tier_name)}</div>
+        <p>${esc(words(K.justification))}</p>
+        ${K.second ? `<p style="margin-top:10px"><b>Second corroborating channel:</b>
+          ${esc(K.second)}. The storefront alone would not have been sufficient.</p>` : ''}
+      </div>`;
+
+    const mk = spec => {
+      const d = document.createElement('div');
+      d.className = 'pane';
+      d.innerHTML = `<div class="cap"><div class="who">${esc(spec.w)}</div>
+        <div class="what">${esc(spec.n)}</div>
+        <div class="vl"><span class="badge ${spec.k}">${esc(spec.b)}</span></div></div>
+        <div class="frame"><div class="fb">rendered storefront</div>
+          <iframe title="${esc(spec.n)}" sandbox=""></iframe><div class="glass"></div></div>
+        <div class="findings">${(spec.f || []).slice(0, 3).map(f =>
+          `<div><span class="label el">${esc(f.element)}</span>${esc(f.observation)}
+            <span class="imp">${esc(f.implication)}</span></div>`).join('')}</div>`;
+      $('surfs').appendChild(d);
+      const key = `${spec.v}__${spec.s}`, inlined = (window.__FIXTURES__ || {})[key];
+      if(inlined) d.querySelector('iframe').srcdoc = inlined;
+      else fetch(`/api/storefront/${spec.v}/${spec.s}`).then(r => r.ok ? r.text() : null)
+        .then(h => { if(h) d.querySelector('iframe').srcdoc = h; }).catch(() => {});
+    };
+    mk({w:'surface 1 · homepage', n:'The declared business', k:'badge-money',
+      b:`agrees · ${(clean[1].confidence * 100).toFixed(0)}%`,
+      v:clean[1].vertical, s:clean[0], f:clean[1].findings});
+    mk({w:'surface 2 · checkout', n:'Where the customer actually pays', k:'badge-risk',
+      b:`dissents · ${words(dirty[1].vertical)} · ${(dirty[1].confidence * 100).toFixed(0)}%`,
+      v:dirty[1].vertical, s:dirty[0], f:dirty[1].findings});
+
+    $('steps').innerHTML = K.steps.map((s, i) => {
+      const key = /Escalating instead/i.test(s.rationale), cf = s.confidence_after;
+      return `<div class="st${key ? ' key' : ''}"><div class="n2">${i + 1}</div><div>
+        <div><span class="did">${esc(words(s.tool))}</span>
+          <span class="label" style="margin-left:8px">${s.cost_inr ? '₹' + s.cost_inr.toFixed(2) : 'free'}</span></div>
+        <p class="why">${esc(words(s.rationale))}</p>
+        <p class="ret">${esc(words(s.returned))}</p>
+        ${key ? `<div class="keyn"><b>This is the step the system exists for.</b> A clean
+          homepage would normally close the case. Telemetry dissents, so the agent pays for a
+          second surface instead of closing.</div>` : ''}
+        <p class="tool">belief ${(cf * 100).toFixed(1)}% after this step</p></div></div>`;
+    }).join('');
+
+    $('devs').innerHTML = `
+      <thead><tr><th>feature</th><th style="text-align:right">merchant</th>
+        <th style="text-align:right">category</th><th style="text-align:right">σ</th></tr></thead>
+      <tbody>${K.deviations.map(d => `<tr><td>${esc(words(d.feature))}</td>
+        <td class="num tnum">${Number(d.value).toFixed(3)}</td>
+        <td class="num tnum" style="color:var(--faint)">${Number(d.category_baseline).toFixed(3)}</td>
+        <td class="num tnum ${Math.abs(d.z) >= 3 ? 'bad' : ''}">${d.z > 0 ? '+' : ''}${d.z.toFixed(1)}</td>
+      </tr>`).join('')}</tbody>`;
+  }
+
+  /* ---- results ---- */
+  const AR = D.archetype_recall;
+  $('arch').innerHTML = `
+    <thead><tr><th>archetype</th><th style="text-align:right">n</th>
+      <th style="text-align:right">to analyst</th><th style="text-align:right">held</th><th></th></tr></thead>
+    <tbody>${Object.entries(AR).filter(([k]) => !k.startsWith('_')).map(([k, v]) => `
+      <tr><td>${esc(words(k))}</td><td class="num tnum" style="color:var(--faint)">${v.n}</td>
+        <td class="num tnum">${v.recall_any_action.toFixed(2)}</td>
+        <td class="num tnum">${v.recall_hold.toFixed(2)}</td>
+        <td>${v.telemetry_can_see ? '' : '<span class="badge badge-mute">telemetry blind</span>'}</td></tr>`).join('')}
+    </tbody>`;
+  $('sens').innerHTML = `
+    <thead><tr><th style="text-align:right">vision accuracy</th>
+      <th style="text-align:right">hold precision</th><th style="text-align:right">recall</th>
+      <th style="text-align:right">frozen in error</th></tr></thead>
+    <tbody>${D.sensitivity.map(s => {
+      const p = s.settlement_hold.precision;
+      return `<tr><td class="num tnum">${s.vision_channel_accuracy.toFixed(3)}</td>
+        <td class="num tnum">${p == null ? 'nothing held' : p.toFixed(3)}</td>
+        <td class="num tnum">${s.settlement_hold.recall.toFixed(3)}</td>
+        <td class="num tnum ok">${s.settlement_hold.fp}</td></tr>`;
+    }).join('')}</tbody>`;
+  const B = AR._telemetry_blind_cases;
+  $('blindnote').innerHTML = `<b style="color:var(--fg)">${B.n} of ${H.test_pos} diverged
+    merchants are structurally invisible to payment telemetry</b> — an unregistered pharmacy
+    sells the same basket at the same prices at the same hours as a licensed one.
+    ${B.reached_analyst} of them still reach an analyst, carried entirely by the storefront
+    channel and the rotation trigger. As the vision channel degrades, precision holds and
+    recall collapses: the gate converts model error into missed detections rather than frozen
+    merchants.`;
+  solutionStage(D);
+  scrollRail();
+  stagger(document);
+  revealSweep();
+}
+
+stagger(document);
+revealSweep();
+playHero();
+heroField();
+boot();
+</script>
+</body>
+</html>

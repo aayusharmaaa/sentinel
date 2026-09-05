@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Large regenerated datasets — not required for the live demo console.
+artifacts/features_raw.csv
+artifacts/merchants.csv
+artifacts/scripts.json
+artifacts/transactions_demo.csv.gz
+artifacts/vision_cache.json
+artifacts/baselines.json
+artifacts/population_summary.json
+artifacts/analyst_decisions.json
+artifacts/sentinel.merged.html
+
+.vercel
+.DS_Store
+Thumbs.db
+*.log

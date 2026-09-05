@@ -1,0 +1,583 @@
+{
+  "merchant_id": "MID100066",
+  "declared_category": "travel_agency",
+  "onboarded_days_ago": 700,
+  "decision": {
+    "merchant_id": "MID100066",
+    "declared_category": "travel_agency",
+    "tier": 4,
+    "tier_name": "Restricted pending review",
+    "action": "Analyst review with settlements held pending outcome. Requires the storefront to dissent plus at least one other independent view.",
+    "settlements_held": true,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "DISSENT",
+        "confidence": 0.9867,
+        "statement": "Payment behaviour is atypical for a travel_agency merchant (score 0.99 against the category baseline)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "DISSENT",
+        "confidence": 0.9704,
+        "statement": "The checkout surface presents a unlicensed_lending interface at 0.97 confidence, against a declared category of travel_agency. This vertical cannot be approved on this platform."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "DISSENT",
+        "confidence": 0.9,
+        "statement": "Third-party scripts belonging to another vertical are loaded: collections-dialer@2.0 is specific to unlicensed_lending; kyc-lite@0.9 is specific to unlicensed_lending."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "Not linked to any other merchant by a rare shared identity."
+      },
+      {
+        "channel": "statement",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "The merchant restated its declared business, which is what an honest merchant and a dishonest one both do."
+      }
+    ],
+    "dissenting_channels": [
+      "telemetry",
+      "storefront",
+      "scripts"
+    ],
+    "second_channel_source": "telemetry",
+    "justification": "Two independent views of this merchant disagree with its declaration. The storefront presents a different business, and the telemetry channel agrees. Neither could have produced the other: a merchant cannot change its payment behaviour without changing its actual business, and cannot change its interface without changing what customers see.",
+    "notes": [],
+    "assessment": {
+      "merchant_id": "MID100066",
+      "declared": "travel_agency",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "travel_agency",
+          "confidence": 1.0,
+          "detail": "Onboarded as a travel agency business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": "not_travel_agency",
+          "confidence": 0.987,
+          "detail": "Payment behaviour scores 0.99 against the travel_agency baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "unlicensed_lending",
+          "confidence": 0.97,
+          "detail": "The checkout surface presents a unlicensed lending interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Not linked to any other merchant by a rare shared identity.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": "travel_agency",
+          "confidence": 0.82,
+          "detail": "Merchant describes itself as travel agency, consistent with its declaration.",
+          "available": true
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its website shows"
+          ],
+          "views": [
+            "declared",
+            "storefront"
+          ],
+          "severity": 1.0,
+          "statement": "Declared travel agency; the live page is a unlicensed lending interface. That vertical cannot be approved on this platform."
+        },
+        {
+          "between": [
+            "What its website shows",
+            "What the merchant says"
+          ],
+          "views": [
+            "storefront",
+            "statement"
+          ],
+          "severity": 0.7,
+          "statement": "The merchant restated its declared travel agency business on the call, while its live page presents unlicensed lending."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its payments do"
+          ],
+          "views": [
+            "declared",
+            "payments"
+          ],
+          "severity": 0.45,
+          "statement": "Declared travel agency; the payment behaviour is not typical of that category."
+        }
+      ],
+      "model_confidence": 0.987,
+      "evidence_agreement": 3,
+      "independent_channels": 4,
+      "contradiction_severity": "HIGH",
+      "action_confidence": "RESTRICT",
+      "summary": "3 contradictions across 3 independent views (what its payments do, what its website shows, what the merchant says).",
+      "notes": []
+    }
+  },
+  "telemetry": {
+    "score": 0.9867253478097074,
+    "deviations": [
+      {
+        "feature": "velocity_recent",
+        "value": 2.07365,
+        "category_baseline": 1.61552,
+        "category_spread": 0.14447,
+        "z": 3.171,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_recent",
+        "value": 0.44718,
+        "category_baseline": 0.10435,
+        "category_spread": 0.11737,
+        "z": 2.921,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_drift",
+        "value": -0.01352,
+        "category_baseline": 0.0,
+        "category_spread": 0.00485,
+        "z": -2.79,
+        "direction": "below"
+      },
+      {
+        "feature": "round_share_all",
+        "value": 0.42005,
+        "category_baseline": 0.11089,
+        "category_spread": 0.11664,
+        "z": 2.651,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_all",
+        "value": 1.99603,
+        "category_baseline": 1.60649,
+        "category_spread": 0.14855,
+        "z": 2.622,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_rate",
+        "value": 0.01491,
+        "category_baseline": 0.00484,
+        "category_spread": 0.00388,
+        "z": 2.598,
+        "direction": "above"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.0156,
+        "category_baseline": 0.0021,
+        "category_spread": 0.00877,
+        "z": 1.539,
+        "direction": "above"
+      },
+      {
+        "feature": "refund_rate",
+        "value": 0.05841,
+        "category_baseline": 0.12625,
+        "category_spread": 0.06664,
+        "z": -1.018,
+        "direction": "below"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_round_share_recent",
+        "label": "Round-value share (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 2.9209,
+        "contribution": 4.5319,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 1.5392,
+        "contribution": 3.6253,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_rate",
+        "label": "Chargeback rate (vs category)",
+        "explains": "Share of transactions charged back.",
+        "value": 2.5976,
+        "contribution": 2.6725,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_recent",
+        "label": "Repeat-payer velocity (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 3.171,
+        "contribution": 0.9285,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_refund_rate",
+        "label": "Refund rate (vs category)",
+        "explains": "Share of transactions refunded.",
+        "value": -1.0181,
+        "contribution": 0.8828,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_all",
+        "label": "Repeat-payer velocity (full window) (vs category)",
+        "explains": "Transactions per unique payment instrument per day.",
+        "value": 2.6223,
+        "contribution": -0.4287,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100066",
+      "surface": "homepage",
+      "vertical": "travel_agency",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Package cards with itinerary, nights and inclusions",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Select dates -> Traveller details -> Payment",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "disclosure",
+          "observation": "Cancellation and refund schedule by notice period",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "disclosure",
+          "observation": "IATA registration displayed in footer",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "dd538e1e18375cf8",
+      "cached": false
+    },
+    "checkout": {
+      "merchant_id": "MID100066",
+      "surface": "checkout",
+      "vertical": "unlicensed_lending",
+      "confidence": 0.9704,
+      "findings": [
+        {
+          "element": "primary action",
+          "observation": "Get loan now",
+          "implication": "Money moving in both directions is not a retail payment shape. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "header widget",
+          "observation": "Loan amount slider from Rs 3,000 to Rs 60,000",
+          "implication": "Persistent account-balance furniture is characteristic of a funded-account product, not a retail checkout. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "grid",
+          "observation": "Tenure selector: 7 / 14 / 30 days",
+          "implication": "The main grid is not a product catalogue. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "copy",
+          "observation": "No paperwork. No credit score. Instant approval.",
+          "implication": "Copy describes a product class that is not the declared one. Observed on the checkout surface, where the customer transacts."
+        }
+      ],
+      "commerce_flow_present": false,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "9901ea486c5fe437",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": false,
+    "score": 0.0,
+    "size": 0,
+    "synchrony": 0.0,
+    "cohesion": 0.0,
+    "shared_kinds": [],
+    "members": [],
+    "statement": "Not linked to any other merchant by a rare shared identity."
+  },
+  "voice": {
+    "merchant_id": "MID100066",
+    "status": "answered",
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Hello, this is an automated verification call from your payment provider. This call is recorded. I have three short questions about your business. You can decline and speak to a person instead at any point."
+      },
+      {
+        "speaker": "agent",
+        "text": "What products or services does your business sell today?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "holiday packages and tickets"
+      },
+      {
+        "speaker": "agent",
+        "text": "How do your customers usually pay you?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "part payment on booking, balance before travel"
+      },
+      {
+        "speaker": "agent",
+        "text": "Has what you sell changed in the last three months?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "no, same as always"
+      }
+    ],
+    "claimed_business": "travel_agency",
+    "claimed_payment_flow": "part payment on booking, balance before travel",
+    "changed_recently": false,
+    "consistent": true,
+    "contradiction": null,
+    "confidence": 0.82,
+    "provenance": "offline-simulator",
+    "constraints": [
+      "identified itself as automated",
+      "never requested credentials, OTP or card details",
+      "never disclosed why the account was reviewed",
+      "cannot change account status or hold funds",
+      "merchant could decline and ask for a human"
+    ]
+  },
+  "assessment": {
+    "merchant_id": "MID100066",
+    "declared": "travel_agency",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "travel_agency",
+        "confidence": 1.0,
+        "detail": "Onboarded as a travel agency business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": "not_travel_agency",
+        "confidence": 0.987,
+        "detail": "Payment behaviour scores 0.99 against the travel_agency baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "unlicensed_lending",
+        "confidence": 0.97,
+        "detail": "The checkout surface presents a unlicensed lending interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Not linked to any other merchant by a rare shared identity.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": "travel_agency",
+        "confidence": 0.82,
+        "detail": "Merchant describes itself as travel agency, consistent with its declaration.",
+        "available": true
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its website shows"
+        ],
+        "views": [
+          "declared",
+          "storefront"
+        ],
+        "severity": 1.0,
+        "statement": "Declared travel agency; the live page is a unlicensed lending interface. That vertical cannot be approved on this platform."
+      },
+      {
+        "between": [
+          "What its website shows",
+          "What the merchant says"
+        ],
+        "views": [
+          "storefront",
+          "statement"
+        ],
+        "severity": 0.7,
+        "statement": "The merchant restated its declared travel agency business on the call, while its live page presents unlicensed lending."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its payments do"
+        ],
+        "views": [
+          "declared",
+          "payments"
+        ],
+        "severity": 0.45,
+        "statement": "Declared travel agency; the payment behaviour is not typical of that category."
+      }
+    ],
+    "model_confidence": 0.987,
+    "evidence_agreement": 3,
+    "independent_channels": 4,
+    "contradiction_severity": "HIGH",
+    "action_confidence": "RESTRICT",
+    "summary": "3 contradictions across 3 independent views (what its payments do, what its website shows, what the merchant says).",
+    "notes": []
+  },
+  "investigation": {
+    "merchant_id": "MID100066",
+    "declared_category": "travel_agency",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the travel_agency baseline: velocity_recent at +3.2 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as travel_agency (confidence 0.99), which matches the declared travel_agency.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.4382
+      },
+      {
+        "step": 3,
+        "rationale": "Homepage matches the declaration but telemetry dissents. The obvious move is to close. Escalating instead: pull the surface the customer actually pays on.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "checkout classifies as unlicensed_lending (confidence 0.97), which does not match the declared travel_agency.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.8861
+      },
+      {
+        "step": 4,
+        "rationale": "The checkout surface disagrees with the declaration. Corroborate with something the merchant does not control the appearance of, before paying for another classification.",
+        "tool": "list_third_party_scripts",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "4 scripts on checkout. Vertical-specific: collections-dialer@2.0 implies unlicensed_lending, kyc-lite@0.9 implies unlicensed_lending",
+        "cost_inr": 0.0,
+        "confidence_after": 0.9707
+      }
+    ],
+    "steps_used": 4,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9707,
+    "total_cost_inr": 4.4,
+    "evidence": [
+      "Telemetry: velocity_recent sits +3.2 sigma from the travel_agency baseline.",
+      "Storefront (homepage): classified travel_agency at 0.99 confidence, consistent with the declaration.",
+      "Storefront (checkout): classified unlicensed_lending at 0.97 confidence, inconsistent with the declaration.",
+      "Scripts on checkout: collections-dialer@2.0 belongs to unlicensed_lending, kyc-lite@0.9 belongs to unlicensed_lending."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100066 declared travel_agency at onboarding 700 days ago. Telemetry dissents: the largest deviations from the travel_agency baseline are velocity_recent at +3.2 sigma (observed 2.07 against a category baseline of 1.62), round_share_recent at +2.9 sigma (observed 0.447 against a category baseline of 0.104), chargeback_drift at -2.8 sigma (observed -0.0135 against a category baseline of 0). The checkout surface presents a unlicensed_lending interface at 0.97 confidence, against a declared category of travel_agency. This vertical cannot be approved on this platform. Asked directly, the merchant restated its declared business. In total 3 independent views of this merchant contradict its declaration. The investigation used 4 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier restricts settlements, corroborated by the telemetry channel; the storefront alone would not have been sufficient.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "rented_account",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

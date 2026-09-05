@@ -1,0 +1,35 @@
+{
+  "merchants_scored_cheap_channel": 4000,
+  "cleared_triage": 363,
+  "triage_rate": 0.0907,
+  "triage_by_trigger": {
+    "telemetry_drift": 118,
+    "volume_shape_change": 15,
+    "high_volume_rotation": 130,
+    "external_signal": 116,
+    "network_cluster": 37,
+    "union": 363
+  },
+  "full_investigations": 363,
+  "investigation_rate": 0.0907,
+  "vision_calls_made": 429,
+  "vision_cache": {
+    "hits": 0,
+    "misses": 429,
+    "writes": 429,
+    "hit_rate": 0.0
+  },
+  "vision_spend_inr": 943.8,
+  "voice_calls": 112,
+  "voice_spend_inr": 1568.0,
+  "graph": {
+    "merchants_with_edges": 2087,
+    "clusters": 18,
+    "clustered_merchants": 152,
+    "largest_cluster": 16,
+    "median_cluster": 8,
+    "mean_synchrony": 0.368
+  },
+  "spend_per_merchant_inr": 0.628,
+  "wall_clock_seconds": 14.23
+}

@@ -1,0 +1,518 @@
+{
+  "merchant_id": "MID100057",
+  "declared_category": "home_furnishing",
+  "onboarded_days_ago": 744,
+  "decision": {
+    "merchant_id": "MID100057",
+    "declared_category": "home_furnishing",
+    "tier": 3,
+    "tier_name": "Merchant verification",
+    "action": "An automated verification call asks the merchant to describe its own business. Settlements continue. The merchant may decline and speak to a person instead.",
+    "settlements_held": false,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "AGREES",
+        "confidence": 0.4428,
+        "statement": "Payment behaviour is within the normal range for a home_furnishing merchant (score 0.44)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "DISSENT",
+        "confidence": 0.99,
+        "statement": "The checkout surface presents a unlicensed_lending interface at 0.99 confidence, against a declared category of home_furnishing. This vertical cannot be approved on this platform."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "Not linked to any other merchant by a rare shared identity."
+      },
+      {
+        "channel": "statement",
+        "verdict": "BLIND",
+        "confidence": 0.0,
+        "statement": "A verification call was placed and not answered. That counts neither for nor against the merchant."
+      }
+    ],
+    "dissenting_channels": [
+      "storefront"
+    ],
+    "second_channel_source": null,
+    "justification": "The storefront disagrees with the declaration and nothing else does. That is enough to ask the merchant directly, and not enough to touch their money. It is also the correct outcome for a licensing or disclosure violation, which the storefront can see and telemetry structurally cannot: an unregistered pharmacy has the same payment shape as a registered one.",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business.",
+      "A model is 0.99 confident, but only 1 independent view dissents. Model confidence is not evidence agreement."
+    ],
+    "assessment": {
+      "merchant_id": "MID100057",
+      "declared": "home_furnishing",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "home_furnishing",
+          "confidence": 1.0,
+          "detail": "Onboarded as a home furnishing business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": null,
+          "confidence": 0.443,
+          "detail": "Payment behaviour scores 0.44 against the home_furnishing baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "unlicensed_lending",
+          "confidence": 0.99,
+          "detail": "The checkout surface presents a unlicensed lending interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Not linked to any other merchant by a rare shared identity.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Verification call placed; the merchant did not answer.",
+          "available": false
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its website shows"
+          ],
+          "views": [
+            "declared",
+            "storefront"
+          ],
+          "severity": 1.0,
+          "statement": "Declared home furnishing; the live page is a unlicensed lending interface. That vertical cannot be approved on this platform."
+        }
+      ],
+      "model_confidence": 0.99,
+      "evidence_agreement": 1,
+      "independent_channels": 3,
+      "contradiction_severity": "MEDIUM",
+      "action_confidence": "VERIFY",
+      "summary": "1 contradiction across 1 independent view (what its website shows).",
+      "notes": [
+        "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business.",
+        "A model is 0.99 confident, but only 1 independent view dissents. Model confidence is not evidence agreement."
+      ]
+    }
+  },
+  "telemetry": {
+    "score": 0.4428387953904078,
+    "deviations": [
+      {
+        "feature": "round_share_recent",
+        "value": 0.53846,
+        "category_baseline": 0.13913,
+        "category_spread": 0.11726,
+        "z": 3.406,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_all",
+        "value": 0.5131,
+        "category_baseline": 0.13836,
+        "category_spread": 0.11497,
+        "z": 3.259,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_drift",
+        "value": -0.00764,
+        "category_baseline": 0.0,
+        "category_spread": 0.00256,
+        "z": -2.982,
+        "direction": "below"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.00765,
+        "category_baseline": 0.00176,
+        "category_spread": 0.00229,
+        "z": 2.569,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_rate",
+        "value": 0.00476,
+        "category_baseline": 0.0021,
+        "category_spread": 0.00163,
+        "z": 1.635,
+        "direction": "above"
+      },
+      {
+        "feature": "post_peak_persistence",
+        "value": 1.3037,
+        "category_baseline": 1.07609,
+        "category_spread": 0.23193,
+        "z": 0.981,
+        "direction": "above"
+      },
+      {
+        "feature": "ticket_entropy",
+        "value": 2.30544,
+        "category_baseline": 2.1986,
+        "category_spread": 0.20078,
+        "z": 0.532,
+        "direction": "above"
+      },
+      {
+        "feature": "night_share",
+        "value": 0.03333,
+        "category_baseline": 0.05698,
+        "category_spread": 0.05254,
+        "z": -0.45,
+        "direction": "below"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_round_share_recent",
+        "label": "Round-value share (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 3.4055,
+        "contribution": 4.4134,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 2.5693,
+        "contribution": 2.5025,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_all",
+        "label": "Round-value share (full window) (vs category)",
+        "explains": "Proportion of payments at an exact multiple of Rs 100.",
+        "value": 3.2592,
+        "contribution": -0.9464,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_drift",
+        "label": "Chargeback rate drift (vs category)",
+        "explains": "Change in chargeback rate between windows.",
+        "value": -2.9825,
+        "contribution": 0.4025,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_post_peak_persistence",
+        "label": "Post-peak persistence (vs category)",
+        "explains": "Volume after the peak divided by volume before it. Near 1.0 means a spike that decayed -- a sale. Well above 1.0 means a step change that held.",
+        "value": 0.9814,
+        "contribution": -0.3342,
+        "units": "log-odds"
+      },
+      {
+        "feature": "hour_kl",
+        "label": "Hour-of-day divergence from category",
+        "explains": "KL divergence of this merchant's hour-of-day histogram from the baseline for its declared category.",
+        "value": 0.0357,
+        "contribution": 0.2732,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100057",
+      "surface": "homepage",
+      "vertical": "home_furnishing",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Product grid of sofas, beds and dining sets with dimensions",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "header widget",
+          "observation": "Search, wishlist and cart icons",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Add to cart",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Cart -> Address -> Shipping -> Payment",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "87f4228740fdc417",
+      "cached": false
+    },
+    "checkout": {
+      "merchant_id": "MID100057",
+      "surface": "checkout",
+      "vertical": "unlicensed_lending",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "primary action",
+          "observation": "Get loan now",
+          "implication": "Money moving in both directions is not a retail payment shape. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "header widget",
+          "observation": "Loan amount slider from Rs 3,000 to Rs 60,000",
+          "implication": "Persistent account-balance furniture is characteristic of a funded-account product, not a retail checkout. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "grid",
+          "observation": "Tenure selector: 7 / 14 / 30 days",
+          "implication": "The main grid is not a product catalogue. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "copy",
+          "observation": "No paperwork. No credit score. Instant approval.",
+          "implication": "Copy describes a product class that is not the declared one. Observed on the checkout surface, where the customer transacts."
+        }
+      ],
+      "commerce_flow_present": false,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "c3f6e9ff3c74935f",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": false,
+    "score": 0.0,
+    "size": 0,
+    "synchrony": 0.0,
+    "cohesion": 0.0,
+    "shared_kinds": [],
+    "members": [],
+    "statement": "Not linked to any other merchant by a rare shared identity."
+  },
+  "voice": {
+    "merchant_id": "MID100057",
+    "status": "no_answer",
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Hello, this is an automated verification call from your payment provider. This call is recorded. I have three short questions about your business. You can decline and speak to a person instead at any point."
+      }
+    ],
+    "claimed_business": null,
+    "claimed_payment_flow": null,
+    "changed_recently": null,
+    "consistent": null,
+    "contradiction": null,
+    "confidence": 0.0,
+    "provenance": "offline-simulator",
+    "constraints": [
+      "identified itself as automated",
+      "never requested credentials, OTP or card details",
+      "never disclosed why the account was reviewed",
+      "cannot change account status or hold funds",
+      "merchant could decline and ask for a human"
+    ]
+  },
+  "assessment": {
+    "merchant_id": "MID100057",
+    "declared": "home_furnishing",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "home_furnishing",
+        "confidence": 1.0,
+        "detail": "Onboarded as a home furnishing business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": null,
+        "confidence": 0.443,
+        "detail": "Payment behaviour scores 0.44 against the home_furnishing baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "unlicensed_lending",
+        "confidence": 0.99,
+        "detail": "The checkout surface presents a unlicensed lending interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Not linked to any other merchant by a rare shared identity.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Verification call placed; the merchant did not answer.",
+        "available": false
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its website shows"
+        ],
+        "views": [
+          "declared",
+          "storefront"
+        ],
+        "severity": 1.0,
+        "statement": "Declared home furnishing; the live page is a unlicensed lending interface. That vertical cannot be approved on this platform."
+      }
+    ],
+    "model_confidence": 0.99,
+    "evidence_agreement": 1,
+    "independent_channels": 3,
+    "contradiction_severity": "MEDIUM",
+    "action_confidence": "VERIFY",
+    "summary": "1 contradiction across 1 independent view (what its website shows).",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business.",
+      "A model is 0.99 confident, but only 1 independent view dissents. Model confidence is not evidence agreement."
+    ]
+  },
+  "investigation": {
+    "merchant_id": "MID100057",
+    "declared_category": "home_furnishing",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the home_furnishing baseline: round_share_recent at +3.4 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as home_furnishing (confidence 0.99), which matches the declared home_furnishing.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.4382
+      },
+      {
+        "step": 3,
+        "rationale": "Check whether this account is one of several. A merchant that is unremarkable alone can be a member of a ring that is not.",
+        "tool": "find_shared_infrastructure",
+        "args": {
+          "min_weight": 6.0
+        },
+        "ok": true,
+        "returned": "9 merchants share rare infrastructure (rarity-weighted total 57.87). Shared attributes: asn, script_bundle.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.7313
+      },
+      {
+        "step": 4,
+        "rationale": "Individually unremarkable, but sharing rare infrastructure with other accounts. That is enough to justify the expensive call on the surface that would show a common product.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "checkout classifies as unlicensed_lending (confidence 0.99), which does not match the declared home_furnishing.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.9645
+      }
+    ],
+    "steps_used": 4,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9645,
+    "total_cost_inr": 4.4,
+    "evidence": [
+      "Telemetry: round_share_recent sits +3.4 sigma from the home_furnishing baseline.",
+      "Storefront (homepage): classified home_furnishing at 0.99 confidence, consistent with the declaration.",
+      "9 other merchants share rare infrastructure (rarity-weighted total 57.87).",
+      "Storefront (checkout): classified unlicensed_lending at 0.99 confidence, inconsistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100057 declared home_furnishing at onboarding 744 days ago. Telemetry agrees: the largest deviations from the home_furnishing baseline are round_share_recent at +3.4 sigma (observed 0.538 against a category baseline of 0.139), round_share_all at +3.3 sigma (observed 0.513 against a category baseline of 0.138), chargeback_drift at -3.0 sigma (observed -0.00764 against a category baseline of 0). The checkout surface presents a unlicensed_lending interface at 0.99 confidence, against a declared category of home_furnishing. This vertical cannot be approved on this platform. A verification call was placed and produced no usable statement, which counts neither for nor against the merchant. In total 1 independent view of this merchant contradict its declaration. The investigation used 4 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier is a merchant verification call. Settlements continue: one dissenting view is enough to ask, not to hold. A model is 0.99 confident, but only 1 independent view dissents -- model confidence is not evidence agreement, and the action reflects the latter.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "rented_account",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

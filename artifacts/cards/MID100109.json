@@ -1,0 +1,510 @@
+{
+  "merchant_id": "MID100109",
+  "declared_category": "home_furnishing",
+  "onboarded_days_ago": 891,
+  "decision": {
+    "merchant_id": "MID100109",
+    "declared_category": "home_furnishing",
+    "tier": 4,
+    "tier_name": "Restricted pending review",
+    "action": "Analyst review with settlements held pending outcome. Requires the storefront to dissent plus at least one other independent view.",
+    "settlements_held": true,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "DISSENT",
+        "confidence": 0.9818,
+        "statement": "Payment behaviour is atypical for a home_furnishing merchant (score 0.98 against the category baseline)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "DISSENT",
+        "confidence": 0.8732,
+        "statement": "The homepage surface presents a sports_betting interface at 0.87 confidence, against a declared category of home_furnishing. This vertical cannot be approved on this platform."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "AGREES",
+        "confidence": 0.482,
+        "statement": "Linked to 6 other merchants by rare shared phone fp. Their payment behaviour is not moving in step, so the link alone is not evidence of common operation."
+      },
+      {
+        "channel": "statement",
+        "verdict": "BLIND",
+        "confidence": 0.0,
+        "statement": "A verification call was placed and not answered. That counts neither for nor against the merchant."
+      }
+    ],
+    "dissenting_channels": [
+      "telemetry",
+      "storefront"
+    ],
+    "second_channel_source": "telemetry",
+    "justification": "Two independent views of this merchant disagree with its declaration. The storefront presents a different business, and the telemetry channel agrees. Neither could have produced the other: a merchant cannot change its payment behaviour without changing its actual business, and cannot change its interface without changing what customers see.",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ],
+    "assessment": {
+      "merchant_id": "MID100109",
+      "declared": "home_furnishing",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "home_furnishing",
+          "confidence": 1.0,
+          "detail": "Onboarded as a home furnishing business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": "not_home_furnishing",
+          "confidence": 0.982,
+          "detail": "Payment behaviour scores 0.98 against the home_furnishing baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "sports_betting",
+          "confidence": 0.873,
+          "detail": "The homepage surface presents a sports betting interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": "cluster",
+          "confidence": 0.482,
+          "detail": "Linked to 6 other merchants by rare shared phone fp. Their payment behaviour is not moving in step, so the link alone is not evidence of common operation.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Verification call placed; the merchant did not answer.",
+          "available": false
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its website shows"
+          ],
+          "views": [
+            "declared",
+            "storefront"
+          ],
+          "severity": 1.0,
+          "statement": "Declared home furnishing; the live page is a sports betting interface. That vertical cannot be approved on this platform."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "Who it is connected to"
+          ],
+          "views": [
+            "declared",
+            "network"
+          ],
+          "severity": 0.6,
+          "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its payments do"
+          ],
+          "views": [
+            "declared",
+            "payments"
+          ],
+          "severity": 0.45,
+          "statement": "Declared home furnishing; the payment behaviour is not typical of that category."
+        }
+      ],
+      "model_confidence": 0.982,
+      "evidence_agreement": 3,
+      "independent_channels": 3,
+      "contradiction_severity": "HIGH",
+      "action_confidence": "RESTRICT",
+      "summary": "3 contradictions across 3 independent views (what its payments do, what its website shows, who it is connected to).",
+      "notes": [
+        "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+      ]
+    }
+  },
+  "telemetry": {
+    "score": 0.981835119009408,
+    "deviations": [
+      {
+        "feature": "round_share_drift",
+        "value": 0.22116,
+        "category_baseline": 0.00022,
+        "category_spread": 0.02019,
+        "z": 10.941,
+        "direction": "above"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.01224,
+        "category_baseline": 0.00176,
+        "category_spread": 0.00229,
+        "z": 4.571,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_rate",
+        "value": 0.0083,
+        "category_baseline": 0.0021,
+        "category_spread": 0.00163,
+        "z": 3.806,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_drift",
+        "value": 0.00778,
+        "category_baseline": 0.0,
+        "category_spread": 0.00256,
+        "z": 3.036,
+        "direction": "above"
+      },
+      {
+        "feature": "peak_ratio",
+        "value": 2.54167,
+        "category_baseline": 1.90476,
+        "category_spread": 0.53839,
+        "z": 1.183,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_recent",
+        "value": 1.84858,
+        "category_baseline": 1.65393,
+        "category_spread": 0.16988,
+        "z": 1.146,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_recent",
+        "value": 0.24066,
+        "category_baseline": 0.13913,
+        "category_spread": 0.11726,
+        "z": 0.866,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_all",
+        "value": 1.79235,
+        "category_baseline": 1.65709,
+        "category_spread": 0.16695,
+        "z": 0.81,
+        "direction": "above"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 4.5706,
+        "contribution": 5.0367,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_drift",
+        "label": "Round-value share drift (vs category)",
+        "explains": "Recent minus prior window. Separates a merchant that has always priced in round numbers from one that started last month.",
+        "value": 10.9411,
+        "contribution": 4.966,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_drift",
+        "label": "Chargeback rate drift (vs category)",
+        "explains": "Change in chargeback rate between windows.",
+        "value": 3.0362,
+        "contribution": 1.4124,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_recent",
+        "label": "Repeat-payer velocity (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 1.1458,
+        "contribution": 0.9873,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_peak_ratio",
+        "label": "Peak-to-median volume ratio (vs category)",
+        "explains": "Largest single day relative to the median day.",
+        "value": 1.183,
+        "contribution": -0.8666,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_rate",
+        "label": "Chargeback rate (vs category)",
+        "explains": "Share of transactions charged back.",
+        "value": 3.8056,
+        "contribution": 0.8311,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100109",
+      "surface": "homepage",
+      "vertical": "sports_betting",
+      "confidence": 0.8732,
+      "findings": [
+        {
+          "element": "header widget",
+          "observation": "Wallet balance pinned to the header",
+          "implication": "Persistent account-balance furniture is characteristic of a funded-account product, not a retail checkout."
+        },
+        {
+          "element": "primary action",
+          "observation": "Deposit",
+          "implication": "Money moving in both directions is not a retail payment shape."
+        },
+        {
+          "element": "primary action",
+          "observation": "Withdraw",
+          "implication": "Money moving in both directions is not a retail payment shape."
+        },
+        {
+          "element": "grid",
+          "observation": "Grid of numeric tiles keyed to live fixture names and updating in place",
+          "implication": "The main grid is not a product catalogue."
+        }
+      ],
+      "commerce_flow_present": false,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "f7f661147e525166",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": true,
+    "score": 0.4820284816618768,
+    "size": 7,
+    "synchrony": 0.331,
+    "cohesion": 7.618,
+    "shared_kinds": [
+      "phone_fp"
+    ],
+    "members": [
+      "MID101214",
+      "MID101933",
+      "MID101938",
+      "MID102097",
+      "MID103277",
+      "MID103278"
+    ],
+    "statement": "Linked to 6 other merchants by rare shared phone fp. Their payment behaviour is not moving in step, so the link alone is not evidence of common operation."
+  },
+  "voice": {
+    "merchant_id": "MID100109",
+    "status": "no_answer",
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Hello, this is an automated verification call from your payment provider. This call is recorded. I have three short questions about your business. You can decline and speak to a person instead at any point."
+      }
+    ],
+    "claimed_business": null,
+    "claimed_payment_flow": null,
+    "changed_recently": null,
+    "consistent": null,
+    "contradiction": null,
+    "confidence": 0.0,
+    "provenance": "offline-simulator",
+    "constraints": [
+      "identified itself as automated",
+      "never requested credentials, OTP or card details",
+      "never disclosed why the account was reviewed",
+      "cannot change account status or hold funds",
+      "merchant could decline and ask for a human"
+    ]
+  },
+  "assessment": {
+    "merchant_id": "MID100109",
+    "declared": "home_furnishing",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "home_furnishing",
+        "confidence": 1.0,
+        "detail": "Onboarded as a home furnishing business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": "not_home_furnishing",
+        "confidence": 0.982,
+        "detail": "Payment behaviour scores 0.98 against the home_furnishing baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "sports_betting",
+        "confidence": 0.873,
+        "detail": "The homepage surface presents a sports betting interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": "cluster",
+        "confidence": 0.482,
+        "detail": "Linked to 6 other merchants by rare shared phone fp. Their payment behaviour is not moving in step, so the link alone is not evidence of common operation.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Verification call placed; the merchant did not answer.",
+        "available": false
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its website shows"
+        ],
+        "views": [
+          "declared",
+          "storefront"
+        ],
+        "severity": 1.0,
+        "statement": "Declared home furnishing; the live page is a sports betting interface. That vertical cannot be approved on this platform."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "Who it is connected to"
+        ],
+        "views": [
+          "declared",
+          "network"
+        ],
+        "severity": 0.6,
+        "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its payments do"
+        ],
+        "views": [
+          "declared",
+          "payments"
+        ],
+        "severity": 0.45,
+        "statement": "Declared home furnishing; the payment behaviour is not typical of that category."
+      }
+    ],
+    "model_confidence": 0.982,
+    "evidence_agreement": 3,
+    "independent_channels": 3,
+    "contradiction_severity": "HIGH",
+    "action_confidence": "RESTRICT",
+    "summary": "3 contradictions across 3 independent views (what its payments do, what its website shows, who it is connected to).",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ]
+  },
+  "investigation": {
+    "merchant_id": "MID100109",
+    "declared_category": "home_furnishing",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the home_furnishing baseline: round_share_drift at +10.9 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as sports_betting (confidence 0.87), which does not match the declared home_furnishing.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.9048
+      }
+    ],
+    "steps_used": 2,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9048,
+    "total_cost_inr": 2.2,
+    "evidence": [
+      "Telemetry: round_share_drift sits +10.9 sigma from the home_furnishing baseline.",
+      "Storefront (homepage): classified sports_betting at 0.87 confidence, inconsistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100109 declared home_furnishing at onboarding 891 days ago. Telemetry dissents: the largest deviations from the home_furnishing baseline are round_share_drift at +10.9 sigma (observed 0.221 against a category baseline of 0.00022), slope_log_volume at +4.6 sigma (observed 0.0122 against a category baseline of 0.00176), chargeback_rate at +3.8 sigma (observed 0.0083 against a category baseline of 0.0021). The homepage surface presents a sports_betting interface at 0.87 confidence, against a declared category of home_furnishing. This vertical cannot be approved on this platform. It is linked to 6 other merchant accounts by rare shared phone fp, though they are not moving in step. A verification call was placed and produced no usable statement, which counts neither for nor against the merchant. In total 3 independent views of this merchant contradict its declaration. The investigation used 2 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier restricts settlements, corroborated by the telemetry channel; the storefront alone would not have been sufficient.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "pivot_prohibited",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

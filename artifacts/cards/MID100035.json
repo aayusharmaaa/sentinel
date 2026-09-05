@@ -1,0 +1,600 @@
+{
+  "merchant_id": "MID100035",
+  "declared_category": "apparel",
+  "onboarded_days_ago": 201,
+  "decision": {
+    "merchant_id": "MID100035",
+    "declared_category": "apparel",
+    "tier": 4,
+    "tier_name": "Restricted pending review",
+    "action": "Analyst review with settlements held pending outcome. Requires the storefront to dissent plus at least one other independent view.",
+    "settlements_held": true,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "AGREES",
+        "confidence": 0.0249,
+        "statement": "Payment behaviour is within the normal range for a apparel merchant (score 0.02)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "DISSENT",
+        "confidence": 0.9317,
+        "statement": "The checkout surface presents a crypto_exchange interface at 0.93 confidence, against a declared category of apparel. This vertical cannot be approved on this platform."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "DISSENT",
+        "confidence": 0.8566,
+        "statement": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do."
+      },
+      {
+        "channel": "statement",
+        "verdict": "DISSENT",
+        "confidence": 0.88,
+        "statement": "Merchant describes its business as crypto exchange, against a declared category of apparel."
+      }
+    ],
+    "dissenting_channels": [
+      "storefront",
+      "infrastructure",
+      "statement"
+    ],
+    "second_channel_source": "the merchant's own statement",
+    "justification": "Two independent views of this merchant disagree with its declaration. The storefront presents a different business, and the the merchant's own statement channel agrees. Neither could have produced the other: a merchant cannot change its payment behaviour without changing its actual business, and cannot change its interface without changing what customers see.",
+    "notes": [
+      "The corroborating view is the merchant's own account of itself. It was asked a neutral question about what it sells and described a different business from the one it declared."
+    ],
+    "assessment": {
+      "merchant_id": "MID100035",
+      "declared": "apparel",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "apparel",
+          "confidence": 1.0,
+          "detail": "Onboarded as a apparel business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": null,
+          "confidence": 0.025,
+          "detail": "Payment behaviour scores 0.02 against the apparel baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "crypto_exchange",
+          "confidence": 0.932,
+          "detail": "The checkout surface presents a crypto exchange interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": "cluster",
+          "confidence": 0.857,
+          "detail": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": "crypto_exchange",
+          "confidence": 0.88,
+          "detail": "Merchant describes its business as crypto exchange, against a declared category of apparel.",
+          "available": true
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its website shows"
+          ],
+          "views": [
+            "declared",
+            "storefront"
+          ],
+          "severity": 1.0,
+          "statement": "Declared apparel; the live page is a crypto exchange interface. That vertical cannot be approved on this platform."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "What the merchant says"
+          ],
+          "views": [
+            "declared",
+            "statement"
+          ],
+          "severity": 0.85,
+          "statement": "Declared apparel; the merchant itself describes a crypto exchange business."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "Who it is connected to"
+          ],
+          "views": [
+            "declared",
+            "network"
+          ],
+          "severity": 0.6,
+          "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+        }
+      ],
+      "model_confidence": 0.932,
+      "evidence_agreement": 3,
+      "independent_channels": 4,
+      "contradiction_severity": "HIGH",
+      "action_confidence": "RESTRICT",
+      "summary": "3 contradictions across 3 independent views (what its website shows, who it is connected to, what the merchant says).",
+      "notes": []
+    }
+  },
+  "telemetry": {
+    "score": 0.02494587192355229,
+    "deviations": [
+      {
+        "feature": "post_peak_persistence",
+        "value": 1.39937,
+        "category_baseline": 1.04702,
+        "category_spread": 0.11501,
+        "z": 3.064,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_drift",
+        "value": 0.05028,
+        "category_baseline": -0.00315,
+        "category_spread": 0.01794,
+        "z": 2.978,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_all",
+        "value": 2.4787,
+        "category_baseline": 1.79064,
+        "category_spread": 0.26584,
+        "z": 2.588,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_recent",
+        "value": 2.47853,
+        "category_baseline": 1.78837,
+        "category_spread": 0.26774,
+        "z": 2.578,
+        "direction": "above"
+      },
+      {
+        "feature": "refund_rate",
+        "value": 0.16965,
+        "category_baseline": 0.10156,
+        "category_spread": 0.03956,
+        "z": 1.721,
+        "direction": "above"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.00478,
+        "category_baseline": 0.00196,
+        "category_spread": 0.00197,
+        "z": 1.435,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_recent",
+        "value": 0.37864,
+        "category_baseline": 0.20146,
+        "category_spread": 0.13626,
+        "z": 1.3,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_all",
+        "value": 0.34794,
+        "category_baseline": 0.20353,
+        "category_spread": 0.12326,
+        "z": 1.172,
+        "direction": "above"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 1.4353,
+        "contribution": 2.7504,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_drift",
+        "label": "Round-value share drift (vs category)",
+        "explains": "Recent minus prior window. Separates a merchant that has always priced in round numbers from one that started last month.",
+        "value": 2.9784,
+        "contribution": 1.7495,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_recent",
+        "label": "Round-value share (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 1.3003,
+        "contribution": 1.2935,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_post_peak_persistence",
+        "label": "Post-peak persistence (vs category)",
+        "explains": "Volume after the peak divided by volume before it. Near 1.0 means a spike that decayed -- a sale. Well above 1.0 means a step change that held.",
+        "value": 3.0638,
+        "contribution": -0.6749,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_all",
+        "label": "Repeat-payer velocity (full window) (vs category)",
+        "explains": "Transactions per unique payment instrument per day.",
+        "value": 2.5883,
+        "contribution": -0.4806,
+        "units": "log-odds"
+      },
+      {
+        "feature": "hour_kl_drift",
+        "label": "Hour-of-day divergence drift",
+        "explains": "",
+        "value": -0.0343,
+        "contribution": 0.3424,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100035",
+      "surface": "homepage",
+      "vertical": "apparel",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Product grid with size selector and fabric detail",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "header widget",
+          "observation": "Search, wishlist and cart icons",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Add to cart",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Cart -> Address -> Shipping -> Payment",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "de4af0844db0ffe2",
+      "cached": false
+    },
+    "checkout": {
+      "merchant_id": "MID100035",
+      "surface": "checkout",
+      "vertical": "crypto_exchange",
+      "confidence": 0.9317,
+      "findings": [
+        {
+          "element": "header widget",
+          "observation": "Connect wallet button in the header",
+          "implication": "Persistent account-balance furniture is characteristic of a funded-account product, not a retail checkout. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "grid",
+          "observation": "Order book with bid and ask columns updating live",
+          "implication": "The main grid is not a product catalogue. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "primary action",
+          "observation": "Buy / Sell pair selector",
+          "implication": "Money moving in both directions is not a retail payment shape. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "primary action",
+          "observation": "Deposit INR",
+          "implication": "Money moving in both directions is not a retail payment shape. Observed on the checkout surface, where the customer transacts."
+        }
+      ],
+      "commerce_flow_present": false,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "a7b8369f01d4aafe",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": true,
+    "score": 0.8566367594205161,
+    "size": 7,
+    "synchrony": 0.522,
+    "cohesion": 43.043,
+    "shared_kinds": [
+      "asn",
+      "beneficiary_id",
+      "device_fp",
+      "ip_block",
+      "payout_fingerprint",
+      "phone_fp",
+      "script_bundle"
+    ],
+    "members": [
+      "MID100031",
+      "MID100032",
+      "MID100033",
+      "MID100034",
+      "MID100036",
+      "MID100037"
+    ],
+    "statement": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do."
+  },
+  "voice": {
+    "merchant_id": "MID100035",
+    "status": "answered",
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Hello, this is an automated verification call from your payment provider. This call is recorded. I have three short questions about your business. You can decline and speak to a person instead at any point."
+      },
+      {
+        "speaker": "agent",
+        "text": "What products or services does your business sell today?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "crypto trading, mostly spot"
+      },
+      {
+        "speaker": "agent",
+        "text": "How do your customers usually pay you?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "they deposit rupees and trade pairs"
+      },
+      {
+        "speaker": "agent",
+        "text": "Has what you sell changed in the last three months?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "yes, we moved into something different"
+      }
+    ],
+    "claimed_business": "crypto_exchange",
+    "claimed_payment_flow": "they deposit rupees and trade pairs",
+    "changed_recently": true,
+    "consistent": false,
+    "contradiction": "Merchant describes its business as crypto exchange, against a declared category of apparel.",
+    "confidence": 0.88,
+    "provenance": "offline-simulator",
+    "constraints": [
+      "identified itself as automated",
+      "never requested credentials, OTP or card details",
+      "never disclosed why the account was reviewed",
+      "cannot change account status or hold funds",
+      "merchant could decline and ask for a human"
+    ]
+  },
+  "assessment": {
+    "merchant_id": "MID100035",
+    "declared": "apparel",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "apparel",
+        "confidence": 1.0,
+        "detail": "Onboarded as a apparel business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": null,
+        "confidence": 0.025,
+        "detail": "Payment behaviour scores 0.02 against the apparel baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "crypto_exchange",
+        "confidence": 0.932,
+        "detail": "The checkout surface presents a crypto exchange interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": "cluster",
+        "confidence": 0.857,
+        "detail": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": "crypto_exchange",
+        "confidence": 0.88,
+        "detail": "Merchant describes its business as crypto exchange, against a declared category of apparel.",
+        "available": true
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its website shows"
+        ],
+        "views": [
+          "declared",
+          "storefront"
+        ],
+        "severity": 1.0,
+        "statement": "Declared apparel; the live page is a crypto exchange interface. That vertical cannot be approved on this platform."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "What the merchant says"
+        ],
+        "views": [
+          "declared",
+          "statement"
+        ],
+        "severity": 0.85,
+        "statement": "Declared apparel; the merchant itself describes a crypto exchange business."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "Who it is connected to"
+        ],
+        "views": [
+          "declared",
+          "network"
+        ],
+        "severity": 0.6,
+        "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+      }
+    ],
+    "model_confidence": 0.932,
+    "evidence_agreement": 3,
+    "independent_channels": 4,
+    "contradiction_severity": "HIGH",
+    "action_confidence": "RESTRICT",
+    "summary": "3 contradictions across 3 independent views (what its website shows, who it is connected to, what the merchant says).",
+    "notes": []
+  },
+  "investigation": {
+    "merchant_id": "MID100035",
+    "declared_category": "apparel",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the apparel baseline: post_peak_persistence at +3.1 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as apparel (confidence 0.99), which matches the declared apparel.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.4382
+      },
+      {
+        "step": 3,
+        "rationale": "This merchant was raised by the relationship graph, not by anything about itself. Confirm the link before paying for anything: it costs nothing.",
+        "tool": "find_shared_infrastructure",
+        "args": {
+          "min_weight": 6.0
+        },
+        "ok": true,
+        "returned": "6 merchants share rare infrastructure (rarity-weighted total 144.48). Shared attributes: asn, ip_block, payout_fingerprint, script_bundle.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.7313
+      },
+      {
+        "step": 4,
+        "rationale": "Individually unremarkable, and its homepage is a shop like any other -- which is what a funnel member is built to look like. The checkout is the surface that has to carry the product the ring is actually selling.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "checkout classifies as crypto_exchange (confidence 0.93), which does not match the declared apparel.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.9645
+      }
+    ],
+    "steps_used": 4,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9645,
+    "total_cost_inr": 4.4,
+    "evidence": [
+      "Telemetry: post_peak_persistence sits +3.1 sigma from the apparel baseline.",
+      "Storefront (homepage): classified apparel at 0.99 confidence, consistent with the declaration.",
+      "6 other merchants share rare infrastructure (rarity-weighted total 144.48).",
+      "Storefront (checkout): classified crypto_exchange at 0.93 confidence, inconsistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100035 declared apparel at onboarding 201 days ago. Telemetry agrees: the largest deviations from the apparel baseline are post_peak_persistence at +3.1 sigma (observed 1.4 against a category baseline of 1.05), round_share_drift at +3.0 sigma (observed 0.0503 against a category baseline of -0.00315), velocity_all at +2.6 sigma (observed 2.48 against a category baseline of 1.79). The checkout surface presents a crypto_exchange interface at 0.93 confidence, against a declared category of apparel. This vertical cannot be approved on this platform. Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do. It is linked to 6 other merchant accounts by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle, and those accounts are moving in step (synchrony 0.52). Asked directly, the merchant described a crypto exchange business, which is not what it declared. In total 3 independent views of this merchant contradict its declaration. The investigation used 4 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier restricts settlements, corroborated by the the merchant's own statement channel; the storefront alone would not have been sufficient.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "funnel_ring",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

@@ -1,0 +1,454 @@
+{
+  "merchant_id": "MID100138",
+  "declared_category": "home_furnishing",
+  "onboarded_days_ago": 654,
+  "decision": {
+    "merchant_id": "MID100138",
+    "declared_category": "home_furnishing",
+    "tier": 2,
+    "tier_name": "Analyst review",
+    "action": "Enters the analyst queue with a full evidence card. Settlements continue normally while the case is worked.",
+    "settlements_held": false,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "DISSENT",
+        "confidence": 0.9998,
+        "statement": "Payment behaviour is atypical for a home_furnishing merchant (score 1.00 against the category baseline)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "AGREES",
+        "confidence": 0.05,
+        "statement": "The homepage surface is consistent with the declared home_furnishing category (0.05 confidence)."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "Not linked to any other merchant by a rare shared identity."
+      },
+      {
+        "channel": "statement",
+        "verdict": "BLIND",
+        "confidence": 0.0,
+        "statement": "No verification call placed."
+      }
+    ],
+    "dissenting_channels": [
+      "telemetry"
+    ],
+    "second_channel_source": null,
+    "justification": "Payment behaviour has drifted but the storefront agrees with the declaration. Settlements continue and will not be held on this evidence. A legitimate business whose payment shape resembles an illicit one is common; one whose storefront is a different business is not.",
+    "notes": [
+      "Payment-only dissent never reaches a settlement hold. This is the rule that protects merchants whose honest behaviour looks anomalous.",
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ],
+    "assessment": {
+      "merchant_id": "MID100138",
+      "declared": "home_furnishing",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "home_furnishing",
+          "confidence": 1.0,
+          "detail": "Onboarded as a home furnishing business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": "not_home_furnishing",
+          "confidence": 1.0,
+          "detail": "Payment behaviour scores 1.00 against the home_furnishing baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "crypto_exchange",
+          "confidence": 0.05,
+          "detail": "The homepage surface presents a crypto exchange interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Not linked to any other merchant by a rare shared identity.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "No verification call placed.",
+          "available": false
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its website shows"
+          ],
+          "views": [
+            "declared",
+            "storefront"
+          ],
+          "severity": 1.0,
+          "statement": "Declared home furnishing; the live page is a crypto exchange interface. That vertical cannot be approved on this platform."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its payments do"
+          ],
+          "views": [
+            "declared",
+            "payments"
+          ],
+          "severity": 0.45,
+          "statement": "Declared home furnishing; the payment behaviour is not typical of that category."
+        }
+      ],
+      "model_confidence": 1.0,
+      "evidence_agreement": 2,
+      "independent_channels": 3,
+      "contradiction_severity": "HIGH",
+      "action_confidence": "RESTRICT",
+      "summary": "2 contradictions across 2 independent views (what its payments do, what its website shows).",
+      "notes": [
+        "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+      ]
+    }
+  },
+  "telemetry": {
+    "score": 0.9998328467980377,
+    "deviations": [
+      {
+        "feature": "round_share_drift",
+        "value": 0.35364,
+        "category_baseline": 0.00022,
+        "category_spread": 0.02019,
+        "z": 12.0,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_drift",
+        "value": 1.15281,
+        "category_baseline": -0.00183,
+        "category_spread": 0.07435,
+        "z": 12.0,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_recent",
+        "value": 2.75883,
+        "category_baseline": 1.65393,
+        "category_spread": 0.16988,
+        "z": 6.504,
+        "direction": "above"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.00727,
+        "category_baseline": 0.00176,
+        "category_spread": 0.00229,
+        "z": 2.403,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_drift",
+        "value": 0.00542,
+        "category_baseline": 0.0,
+        "category_spread": 0.00256,
+        "z": 2.113,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_all",
+        "value": 1.98542,
+        "category_baseline": 1.65709,
+        "category_spread": 0.16695,
+        "z": 1.967,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_recent",
+        "value": 0.36552,
+        "category_baseline": 0.13913,
+        "category_spread": 0.11726,
+        "z": 1.931,
+        "direction": "above"
+      },
+      {
+        "feature": "refund_rate",
+        "value": 0.0205,
+        "category_baseline": 0.04566,
+        "category_spread": 0.01891,
+        "z": -1.331,
+        "direction": "below"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_velocity_drift",
+        "label": "Repeat-payer velocity drift (vs category)",
+        "explains": "Change in repeat-payer velocity between windows.",
+        "value": 12.0,
+        "contribution": 4.3629,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_drift",
+        "label": "Round-value share drift (vs category)",
+        "explains": "Recent minus prior window. Separates a merchant that has always priced in round numbers from one that started last month.",
+        "value": 12.0,
+        "contribution": 3.6096,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 2.4032,
+        "contribution": 3.5339,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_recent",
+        "label": "Round-value share (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 1.9307,
+        "contribution": 1.1885,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_drift",
+        "label": "Chargeback rate drift (vs category)",
+        "explains": "Change in chargeback rate between windows.",
+        "value": 2.1134,
+        "contribution": 0.787,
+        "units": "log-odds"
+      },
+      {
+        "feature": "hour_kl_drift",
+        "label": "Hour-of-day divergence drift",
+        "explains": "",
+        "value": 0.0826,
+        "contribution": 0.7202,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100138",
+      "surface": "homepage",
+      "vertical": "crypto_exchange",
+      "confidence": 0.05,
+      "findings": [
+        {
+          "element": "header widget",
+          "observation": "Connect wallet button in the header",
+          "implication": "Persistent account-balance furniture is characteristic of a funded-account product, not a retail checkout."
+        },
+        {
+          "element": "grid",
+          "observation": "Order book with bid and ask columns updating live",
+          "implication": "The main grid is not a product catalogue."
+        },
+        {
+          "element": "primary action",
+          "observation": "Buy / Sell pair selector",
+          "implication": "Money moving in both directions is not a retail payment shape."
+        },
+        {
+          "element": "primary action",
+          "observation": "Deposit INR",
+          "implication": "Money moving in both directions is not a retail payment shape."
+        }
+      ],
+      "commerce_flow_present": false,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "20cb08196d0a4d12",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": false,
+    "score": 0.0,
+    "size": 0,
+    "synchrony": 0.0,
+    "cohesion": 0.0,
+    "shared_kinds": [],
+    "members": [],
+    "statement": "Not linked to any other merchant by a rare shared identity."
+  },
+  "voice": null,
+  "assessment": {
+    "merchant_id": "MID100138",
+    "declared": "home_furnishing",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "home_furnishing",
+        "confidence": 1.0,
+        "detail": "Onboarded as a home furnishing business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": "not_home_furnishing",
+        "confidence": 1.0,
+        "detail": "Payment behaviour scores 1.00 against the home_furnishing baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "crypto_exchange",
+        "confidence": 0.05,
+        "detail": "The homepage surface presents a crypto exchange interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Not linked to any other merchant by a rare shared identity.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "No verification call placed.",
+        "available": false
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its website shows"
+        ],
+        "views": [
+          "declared",
+          "storefront"
+        ],
+        "severity": 1.0,
+        "statement": "Declared home furnishing; the live page is a crypto exchange interface. That vertical cannot be approved on this platform."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its payments do"
+        ],
+        "views": [
+          "declared",
+          "payments"
+        ],
+        "severity": 0.45,
+        "statement": "Declared home furnishing; the payment behaviour is not typical of that category."
+      }
+    ],
+    "model_confidence": 1.0,
+    "evidence_agreement": 2,
+    "independent_channels": 3,
+    "contradiction_severity": "HIGH",
+    "action_confidence": "RESTRICT",
+    "summary": "2 contradictions across 2 independent views (what its payments do, what its website shows).",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ]
+  },
+  "investigation": {
+    "merchant_id": "MID100138",
+    "declared_category": "home_furnishing",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the home_furnishing baseline: round_share_drift at +12.0 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as crypto_exchange (confidence 0.05), which does not match the declared home_furnishing.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.9048
+      }
+    ],
+    "steps_used": 2,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9048,
+    "total_cost_inr": 2.2,
+    "evidence": [
+      "Telemetry: round_share_drift sits +12.0 sigma from the home_furnishing baseline.",
+      "Storefront (homepage): classified crypto_exchange at 0.05 confidence, inconsistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100138 declared home_furnishing at onboarding 654 days ago. Telemetry dissents: the largest deviations from the home_furnishing baseline are round_share_drift at +12.0 sigma (observed 0.354 against a category baseline of 0.00022), velocity_drift at +12.0 sigma (observed 1.15 against a category baseline of -0.00183), velocity_recent at +6.5 sigma (observed 2.76 against a category baseline of 1.65). The homepage surface is consistent with the declared home_furnishing category (0.05 confidence). In total 2 independent views of this merchant contradict its declaration. The investigation used 2 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier is analyst review with settlements continuing, because only one view dissents.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "pivot_prohibited",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

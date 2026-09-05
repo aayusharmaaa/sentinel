@@ -1,0 +1,392 @@
+/* ==========================================================================
+   Sentinel design system
+
+   Ported from the VYORA system so the two products read as one family: light by
+   default, dark by choice, colours declared once per theme as semantic slots.
+
+   Sentinel's own semantics map onto those slots rather than inventing a second
+   palette — `--neg` is what a merchant ACTUALLY does when it disagrees with its
+   declaration, `--pos` is agreement, `--accent` is the declared baseline. That
+   keeps one hue doing one job across the landing page and the console.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* grounds — a soft teal-grey paper, with surfaces lighter than the page so a
+     card lifts by its own value rather than by a border and a shadow */
+  --canvas: #eaeff0;
+  --canvas-2: #e1e8e9;
+  --surface: #fafcfc;
+  --panel: #f0f4f5;
+
+  /* ink */
+  --fg: #0b1a1f;
+  --fg2: #1e343b;
+  --fg3: #3a5158;
+  --muted: #5c757d;
+  --muted2: #758d95;
+  --faint: #9bb0b6;
+
+  /* lines */
+  --line: rgba(11, 42, 51, 0.14);
+  --line-strong: rgba(11, 42, 51, 0.22);
+
+  /* brand + status */
+  --brand: #1c3f4a;
+  --brand-soft: #2f6273;
+  --brand-deep: #122c34;
+  --brand-fg: #ffffff;
+  --accent: #0d7490;
+  --accent-deep: #0a5a70;
+  --pos: #0d7a56;
+  --pos-soft: #0f8d63;
+  --neg: #b3243e;
+  --neg-soft: #c93551;
+  --warn: #8a5a0b;
+  --warn-soft: #a06c12;
+
+  /* the hero wash, top to bottom */
+  --hero-top: #eaeff0;
+  --hero-mid: #92aeb6;
+  --hero-deep: #1f424c;
+  --hero-fg: #ffffff;
+  --hero-fg-muted: rgba(255, 255, 255, 0.72);
+
+  /* canvas + SVG colours, read at draw time so charts follow the theme */
+  --c-brand: #2f6273;
+  --c-accent: #0d7490;
+  --c-pos: #0d7a56;
+  --c-neg: #b3243e;
+  --c-warn: #8a5a0b;
+  --c-grid: rgba(11, 42, 51, 0.12);
+  --c-axis: #758d95;
+
+  --shadow-panel:
+    0 1px 2px rgba(11, 42, 51, 0.06),
+    0 20px 44px -24px rgba(11, 42, 51, 0.34);
+
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    Consolas, monospace;
+  --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, "Times New Roman", serif;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas: #08161a;
+  --canvas-2: #0b1c21;
+  --surface: #0e2229;
+  --panel: #122a32;
+
+  --fg: #eaf2f3;
+  --fg2: #cadde1;
+  --fg3: #a6bfc6;
+  --muted: #8aa4ac;
+  --muted2: #6d878f;
+  --faint: #52686f;
+
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.16);
+
+  --brand: #e6f1f2;
+  --brand-soft: #8fd4e2;
+  --brand-deep: #b9dde5;
+  --brand-fg: #08161a;
+  --accent: #5fd0e4;
+  --accent-deep: #34b3cc;
+  --pos: #3ddc97;
+  --pos-soft: #5fe6ad;
+  --neg: #ff7a8f;
+  --neg-soft: #ff9aa9;
+  --warn: #ffc043;
+  --warn-soft: #ffd07a;
+
+  --hero-top: #08161a;
+  --hero-mid: #0f2a32;
+  --hero-deep: #1c4552;
+  --hero-fg: #f2f8f9;
+  --hero-fg-muted: rgba(242, 248, 249, 0.68);
+
+  --c-brand: #8fd4e2;
+  --c-accent: #5fd0e4;
+  --c-pos: #3ddc97;
+  --c-neg: #ff7a8f;
+  --c-warn: #ffc043;
+  --c-grid: rgba(255, 255, 255, 0.08);
+  --c-axis: #6d878f;
+
+  --shadow-panel:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 60px -28px rgba(0, 0, 0, 0.85);
+}
+
+* { box-sizing: border-box; border-color: var(--line); }
+
+html {
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--fg2);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01";
+  font-size: 15px;
+  line-height: 1.6;
+  /* clip, not hidden: overflow-x:hidden turns body into a scroll container and
+     breaks every position:sticky header on the page. */
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4 { margin: 0; color: var(--fg); }
+p { margin: 0 0 1em; }
+a { color: inherit; }
+
+/* Money and metrics must line up column to column. */
+.tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  color: var(--fg);
+}
+
+/* ---------- scrollbars ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted2) 40%, transparent);
+  border-radius: 99px;
+  border: 3px solid var(--canvas);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--muted2) 65%, transparent);
+}
+
+/* ---------- surfaces ---------- */
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.surface-raised {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  box-shadow: var(--shadow-panel);
+}
+.hairline { border-top: 1px solid var(--line); }
+
+/* Fine vertical pinstripes: gives a flat wash a woven quality without an image. */
+.pinstripe {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.055) 0px,
+    rgba(255, 255, 255, 0.055) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+.grid-field {
+  background-image:
+    linear-gradient(to right, var(--c-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--c-grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.55;
+}
+.radial-fade {
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 32%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 32%, #000 35%, transparent 100%);
+}
+
+/* A hairline with a tick at each end, the way a technical drawing marks a span. */
+.rule-ticked { position: relative; height: 1px; background: var(--line); }
+.rule-ticked::before, .rule-ticked::after {
+  content: ""; position: absolute; top: -3px; width: 1px; height: 7px;
+  background: var(--line-strong);
+}
+.rule-ticked::before { left: 0; }
+.rule-ticked::after { right: 0; }
+
+/* ---------- type ---------- */
+.display { font-weight: 600; letter-spacing: -0.028em; line-height: 1.04; }
+
+/* The editorial accent: a high-contrast serif italic against the grotesque.
+   One word per heading, never a whole line. */
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+.eyebrow {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted2);
+}
+.label {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted2);
+}
+.mono { font-family: var(--font-mono); }
+.lede { color: var(--muted); font-size: 16px; line-height: 1.62; }
+
+/* ---------- controls ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; height: 40px;
+  padding: 0 18px; border-radius: 999px; font-size: 14px; font-weight: 520;
+  letter-spacing: -0.01em; text-decoration: none; cursor: pointer;
+  font-family: var(--font-sans); white-space: nowrap;
+  transition: transform .14s cubic-bezier(.2,0,0,1), background .18s,
+    border-color .18s, box-shadow .18s, color .18s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-sm { height: 34px; padding: 0 14px; font-size: 13px; }
+.btn-primary {
+  background: var(--brand); color: var(--brand-fg); border: 1px solid transparent;
+  box-shadow: 0 8px 22px -12px color-mix(in srgb, var(--brand) 70%, transparent);
+}
+.btn-primary:hover { background: var(--brand-deep); }
+.btn-ghost {
+  background: color-mix(in srgb, var(--fg) 4%, transparent);
+  border: 1px solid var(--line-strong); color: var(--fg2);
+}
+.btn-ghost:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); }
+
+/* On the hero wash the buttons sit over deep teal in both themes. */
+.on-wash .btn-primary {
+  background: #fff; color: #10262d;
+  box-shadow: 0 10px 30px -14px rgba(0,0,0,.55);
+}
+.on-wash .btn-primary:hover { background: #eaf2f3; }
+.on-wash .btn-ghost {
+  background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.28); color: #fff;
+}
+.on-wash .btn-ghost:hover { background: rgba(255,255,255,.18); }
+
+/* ---------- badges ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: 6px; height: 22px;
+  padding: 0 9px; border-radius: 999px; font-size: 11px; font-weight: 540;
+  border: 1px solid transparent; white-space: nowrap;
+}
+.badge-money {
+  background: color-mix(in srgb, var(--pos) 12%, transparent); color: var(--pos);
+  border-color: color-mix(in srgb, var(--pos) 30%, transparent);
+}
+.badge-risk {
+  background: color-mix(in srgb, var(--neg) 12%, transparent); color: var(--neg);
+  border-color: color-mix(in srgb, var(--neg) 30%, transparent);
+}
+.badge-warn {
+  background: color-mix(in srgb, var(--warn) 14%, transparent); color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 32%, transparent);
+}
+.badge-accent {
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.badge-mute {
+  background: color-mix(in srgb, var(--fg) 5%, transparent); color: var(--muted);
+  border-color: var(--line-strong);
+}
+
+/* ---------- tables ---------- */
+.data-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+.data-table thead th {
+  position: sticky; top: 0; z-index: 2; background: var(--surface);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted2);
+  text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.data-table tbody td {
+  padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: middle;
+}
+.data-table tbody tr { transition: background .12s; }
+.data-table tbody tr:hover { background: color-mix(in srgb, var(--fg) 3%, transparent); }
+.data-table tbody tr:last-child td { border-bottom: 0; }
+
+/* ---------- focus ---------- */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px;
+}
+
+/* ---------- range ---------- */
+.vy-range {
+  -webkit-appearance: none; appearance: none; height: 4px; border-radius: 99px;
+  background: var(--line-strong); outline: none;
+}
+.vy-range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 16px; height: 16px;
+  border-radius: 50%; background: var(--surface); border: 3px solid var(--accent);
+  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.25); transition: transform .12s;
+}
+.vy-range::-webkit-slider-thumb:hover { transform: scale(1.12); }
+.vy-range::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 50%; background: var(--surface);
+  border: 3px solid var(--accent); cursor: pointer;
+}
+.vy-range::-moz-range-track { height: 4px; border-radius: 99px; background: var(--line-strong); }
+
+/* ---------- motion ---------- */
+@keyframes vy-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .45; transform: scale(.82); }
+}
+.pulse-dot { animation: vy-pulse 1.8s cubic-bezier(.4,0,.6,1) infinite; }
+
+@keyframes vy-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: vy-rise .5s cubic-bezier(.16,1,.3,1) both; }
+
+@keyframes vy-slide-in {
+  from { opacity: 0; transform: translateY(-8px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.slide-in { animation: vy-slide-in .42s cubic-bezier(.16,1,.3,1) both; }
+
+/* Masked line reveal: each line sits in its own clipping frame and slides up
+   from below it, so the type arrives rather than fades. */
+.vy-line-frame {
+  display: block; overflow: clip; padding-bottom: .08em; margin-bottom: -.08em;
+}
+.vy-line { display: block; }
+.vy-lines .vy-line {
+  transform: translate3d(0, 108%, 0); opacity: 0;
+  transition: transform .9s cubic-bezier(.16,1,.3,1) var(--vy-line-delay, 0ms),
+              opacity .6s cubic-bezier(.16,1,.3,1) var(--vy-line-delay, 0ms);
+  will-change: transform;
+}
+.vy-lines.is-in .vy-line { transform: none; opacity: 1; will-change: auto; }
+
+/* Hidden state is scoped to html.js, set before first paint. Without JavaScript
+   the rule never matches and the page renders in full. */
+.js .vy-reveal {
+  opacity: 0; transform: translate3d(0, 22px, 0) scale(.988);
+  transition: opacity .75s cubic-bezier(.16,1,.3,1) var(--vy-reveal-delay, 0ms),
+              transform .85s cubic-bezier(.16,1,.3,1) var(--vy-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.js .vy-reveal.is-in { opacity: 1; transform: none; will-change: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .vy-lines .vy-line, .js .vy-reveal { transform: none; opacity: 1; }
+}
+
+/* ---------- shared layout helpers ---------- */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.stack { display: flex; flex-direction: column; }
+.rowflex { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.spacer { flex: 1; }
+.scroll-x { overflow-x: auto; }

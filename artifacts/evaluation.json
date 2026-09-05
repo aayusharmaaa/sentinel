@@ -1,0 +1,965 @@
+{
+  "headline": {
+    "test_set": {
+      "merchants": 1202,
+      "diverged": 48,
+      "prevalence": 0.0399,
+      "split": "grouped by ring, 30% held out, baselines and model fitted on the training side only"
+    },
+    "single_cycle": {
+      "settlement_hold_tier3": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 22,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.5417,
+        "f1": 0.7027,
+        "flagged": 26,
+        "false_positive_rate": 0.0
+      },
+      "any_analyst_action_tier2plus": {
+        "tp": 33,
+        "fp": 2,
+        "fn": 15,
+        "tn": 1152,
+        "precision": 0.9429,
+        "recall": 0.6875,
+        "f1": 0.7952,
+        "flagged": 35,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 31500.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 41869147.05,
+        "vision_spend_inr": 288.2,
+        "total_inr": 41900935.25
+      }
+    },
+    "one_rotation_period": {
+      "note": "Every merchant has been reached by the storefront channel at least once. This is detection within 90 days, against the single-cycle rows which are detection today.",
+      "settlement_hold_tier3": {
+        "tp": 29,
+        "fp": 0,
+        "fn": 19,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.6042,
+        "f1": 0.7532,
+        "flagged": 29,
+        "false_positive_rate": 0.0
+      },
+      "any_analyst_action_tier2plus": {
+        "tp": 45,
+        "fp": 2,
+        "fn": 3,
+        "tn": 1152,
+        "precision": 0.9574,
+        "recall": 0.9375,
+        "f1": 0.9474,
+        "flagged": 47,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 42300.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 32393919.79,
+        "vision_spend_inr": 2710.4,
+        "total_inr": 32438930.19
+      }
+    }
+  },
+  "recall_by_archetype": {
+    "funnel_ring": {
+      "n": 14,
+      "telemetry_can_see": false,
+      "reached_analyst": 14,
+      "settlement_held": 12,
+      "recall_any_action": 1.0,
+      "recall_hold": 0.8571,
+      "never_triaged": 0
+    },
+    "licensing_violation": {
+      "n": 10,
+      "telemetry_can_see": false,
+      "reached_analyst": 0,
+      "settlement_held": 0,
+      "recall_any_action": 0.0,
+      "recall_hold": 0.0,
+      "never_triaged": 10
+    },
+    "pivot_prohibited": {
+      "n": 15,
+      "telemetry_can_see": true,
+      "reached_analyst": 13,
+      "settlement_held": 10,
+      "recall_any_action": 0.8667,
+      "recall_hold": 0.6667,
+      "never_triaged": 2
+    },
+    "rented_account": {
+      "n": 9,
+      "telemetry_can_see": true,
+      "reached_analyst": 6,
+      "settlement_held": 4,
+      "recall_any_action": 0.6667,
+      "recall_hold": 0.4444,
+      "never_triaged": 3
+    },
+    "_telemetry_blind_cases": {
+      "n": 24,
+      "reached_analyst": 14,
+      "note": "Recall on these comes from the storefront channel and the rotation trigger. Telemetry contributes nothing by construction."
+    }
+  },
+  "recall_by_archetype_one_rotation": {
+    "funnel_ring": {
+      "n": 14,
+      "telemetry_can_see": false,
+      "reached_analyst": 14,
+      "settlement_held": 12,
+      "recall_any_action": 1.0,
+      "recall_hold": 0.8571,
+      "never_triaged": 0
+    },
+    "licensing_violation": {
+      "n": 10,
+      "telemetry_can_see": false,
+      "reached_analyst": 10,
+      "settlement_held": 2,
+      "recall_any_action": 1.0,
+      "recall_hold": 0.2,
+      "never_triaged": 0
+    },
+    "pivot_prohibited": {
+      "n": 15,
+      "telemetry_can_see": true,
+      "reached_analyst": 15,
+      "settlement_held": 11,
+      "recall_any_action": 1.0,
+      "recall_hold": 0.7333,
+      "never_triaged": 0
+    },
+    "rented_account": {
+      "n": 9,
+      "telemetry_can_see": true,
+      "reached_analyst": 6,
+      "settlement_held": 4,
+      "recall_any_action": 0.6667,
+      "recall_hold": 0.4444,
+      "never_triaged": 0
+    },
+    "_telemetry_blind_cases": {
+      "n": 24,
+      "reached_analyst": 24,
+      "note": "Recall on these comes from the storefront channel and the rotation trigger. Telemetry contributes nothing by construction."
+    }
+  },
+  "false_positive_analysis": {
+    "wrongly_queued_for_review": {
+      "count": 2,
+      "rate_of_legitimate_population": 0.0017,
+      "by_declared_category": {
+        "home_furnishing": 1,
+        "subscription_box": 1
+      },
+      "by_hard_negative": {
+        "none": 2
+      },
+      "cost_inr": 1800.0,
+      "merchant_impact": "None. Settlements continue and the merchant is never contacted."
+    },
+    "wrongly_held": {
+      "count": 0,
+      "rate_of_legitimate_population": 0.0,
+      "by_declared_category": {},
+      "by_hard_negative": {},
+      "cost_inr": 0.0,
+      "median_daily_gmv_frozen_inr": 0.0,
+      "merchant_impact": "Settlements frozen for a median of 4.0 working days. This is the number that has to stay near zero."
+    }
+  },
+  "policy_ablations": {
+    "telemetry_only": {
+      "description": "Hold settlements whenever the telemetry channel dissents. One loud channel, no corroboration.",
+      "settlement_hold": {
+        "tp": 20,
+        "fp": 2,
+        "fn": 28,
+        "tn": 1152,
+        "precision": 0.9091,
+        "recall": 0.4167,
+        "f1": 0.5714,
+        "flagged": 22,
+        "false_positive_rate": 0.0017
+      },
+      "any_action": {
+        "tp": 20,
+        "fp": 2,
+        "fn": 28,
+        "tn": 1152,
+        "precision": 0.9091,
+        "recall": 0.4167,
+        "f1": 0.5714,
+        "flagged": 22,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 19800.0,
+        "false_settlement_hold_inr": 321999.7,
+        "missed_abuse_inr": 125585385.26,
+        "vision_spend_inr": 288.2,
+        "total_inr": 125927473.16
+      }
+    },
+    "storefront_only": {
+      "description": "Hold settlements whenever the storefront channel dissents from the declaration.",
+      "settlement_hold": {
+        "tp": 29,
+        "fp": 0,
+        "fn": 19,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.6042,
+        "f1": 0.7532,
+        "flagged": 29,
+        "false_positive_rate": 0.0
+      },
+      "any_action": {
+        "tp": 29,
+        "fp": 0,
+        "fn": 19,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.6042,
+        "f1": 0.7532,
+        "flagged": 29,
+        "false_positive_rate": 0.0
+      },
+      "cost": {
+        "analyst_review_inr": 26100.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 90423593.28,
+        "vision_spend_inr": 288.2,
+        "total_inr": 90449981.48
+      }
+    },
+    "gate_removed": {
+      "description": "Sentinel's ladder and triage, with the two-channel requirement deleted: a hold on any single dissent. Isolates the gate itself from everything else the system does.",
+      "settlement_hold": {
+        "tp": 33,
+        "fp": 2,
+        "fn": 15,
+        "tn": 1152,
+        "precision": 0.9429,
+        "recall": 0.6875,
+        "f1": 0.7952,
+        "flagged": 35,
+        "false_positive_rate": 0.0017
+      },
+      "any_action": {
+        "tp": 33,
+        "fp": 2,
+        "fn": 15,
+        "tn": 1152,
+        "precision": 0.9429,
+        "recall": 0.6875,
+        "f1": 0.7952,
+        "flagged": 35,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 31500.0,
+        "false_settlement_hold_inr": 321999.7,
+        "missed_abuse_inr": 73604496.02,
+        "vision_spend_inr": 288.2,
+        "total_inr": 73958283.92
+      }
+    },
+    "two_channel_gate": {
+      "description": "Sentinel. A hold requires storefront dissent plus a second independent channel; single-channel dissent produces review with settlements running.",
+      "settlement_hold": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 22,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.5417,
+        "f1": 0.7027,
+        "flagged": 26,
+        "false_positive_rate": 0.0
+      },
+      "any_action": {
+        "tp": 33,
+        "fp": 2,
+        "fn": 15,
+        "tn": 1152,
+        "precision": 0.9429,
+        "recall": 0.6875,
+        "f1": 0.7952,
+        "flagged": 35,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 31500.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 73604496.02,
+        "vision_spend_inr": 288.2,
+        "total_inr": 73636284.22
+      }
+    },
+    "no_monitoring": {
+      "description": "Do nothing after onboarding. The counterfactual the whole system is measured against.",
+      "settlement_hold": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 48,
+        "tn": 1154,
+        "precision": NaN,
+        "recall": 0.0,
+        "f1": NaN,
+        "flagged": 0,
+        "false_positive_rate": 0.0
+      },
+      "any_action": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 48,
+        "tn": 1154,
+        "precision": NaN,
+        "recall": 0.0,
+        "f1": NaN,
+        "flagged": 0,
+        "false_positive_rate": 0.0
+      },
+      "cost": {
+        "analyst_review_inr": 0.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 207559982.92,
+        "vision_spend_inr": 288.2,
+        "total_inr": 207560271.12
+      }
+    }
+  },
+  "modality_ablation": {
+    "steps": [
+      {
+        "config": "payments only",
+        "restrict": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 48,
+          "tn": 1154,
+          "precision": NaN,
+          "recall": 0.0,
+          "f1": NaN,
+          "flagged": 0,
+          "false_positive_rate": 0.0
+        },
+        "any_action": {
+          "tp": 20,
+          "fp": 2,
+          "fn": 28,
+          "tn": 1152,
+          "precision": 0.9091,
+          "recall": 0.4167,
+          "f1": 0.5714,
+          "flagged": 22,
+          "false_positive_rate": 0.0017
+        },
+        "cost": {
+          "analyst_review_inr": 19800.0,
+          "false_settlement_hold_inr": 0.0,
+          "missed_abuse_inr": 69123463.08,
+          "vision_spend_inr": 0.0,
+          "total_inr": 69143263.08
+        },
+        "spend_per_merchant_inr": 0.0,
+        "voice_calls": 0,
+        "ring_recall": 0.3571,
+        "rented_recall": 0.4444,
+        "corroborated": 0
+      },
+      {
+        "config": "+ storefront",
+        "restrict": {
+          "tp": 18,
+          "fp": 0,
+          "fn": 30,
+          "tn": 1154,
+          "precision": 1.0,
+          "recall": 0.375,
+          "f1": 0.5455,
+          "flagged": 18,
+          "false_positive_rate": 0.0
+        },
+        "any_action": {
+          "tp": 25,
+          "fp": 2,
+          "fn": 23,
+          "tn": 1152,
+          "precision": 0.9259,
+          "recall": 0.5208,
+          "f1": 0.6667,
+          "flagged": 27,
+          "false_positive_rate": 0.0017
+        },
+        "cost": {
+          "analyst_review_inr": 24300.0,
+          "false_settlement_hold_inr": 0.0,
+          "missed_abuse_inr": 64363196.71,
+          "vision_spend_inr": 253.0,
+          "total_inr": 64387749.71
+        },
+        "spend_per_merchant_inr": 0.2272,
+        "voice_calls": 0,
+        "ring_recall": 0.4286,
+        "rented_recall": 0.6667,
+        "corroborated": 17
+      },
+      {
+        "config": "+ network graph",
+        "restrict": {
+          "tp": 26,
+          "fp": 0,
+          "fn": 22,
+          "tn": 1154,
+          "precision": 1.0,
+          "recall": 0.5417,
+          "f1": 0.7027,
+          "flagged": 26,
+          "false_positive_rate": 0.0
+        },
+        "any_action": {
+          "tp": 33,
+          "fp": 2,
+          "fn": 15,
+          "tn": 1152,
+          "precision": 0.9429,
+          "recall": 0.6875,
+          "f1": 0.7952,
+          "flagged": 35,
+          "false_positive_rate": 0.0017
+        },
+        "cost": {
+          "analyst_review_inr": 31500.0,
+          "false_settlement_hold_inr": 0.0,
+          "missed_abuse_inr": 41869147.05,
+          "vision_spend_inr": 288.2,
+          "total_inr": 41900935.25
+        },
+        "spend_per_merchant_inr": 0.236,
+        "voice_calls": 0,
+        "ring_recall": 1.0,
+        "rented_recall": 0.6667,
+        "corroborated": 28
+      },
+      {
+        "config": "+ voice verification",
+        "restrict": {
+          "tp": 26,
+          "fp": 0,
+          "fn": 22,
+          "tn": 1154,
+          "precision": 1.0,
+          "recall": 0.5417,
+          "f1": 0.7027,
+          "flagged": 26,
+          "false_positive_rate": 0.0
+        },
+        "any_action": {
+          "tp": 33,
+          "fp": 2,
+          "fn": 15,
+          "tn": 1152,
+          "precision": 0.9429,
+          "recall": 0.6875,
+          "f1": 0.7952,
+          "flagged": 35,
+          "false_positive_rate": 0.0017
+        },
+        "cost": {
+          "analyst_review_inr": 31500.0,
+          "false_settlement_hold_inr": 0.0,
+          "missed_abuse_inr": 41869147.05,
+          "vision_spend_inr": 288.2,
+          "total_inr": 41900935.25
+        },
+        "spend_per_merchant_inr": 0.628,
+        "voice_calls": 112,
+        "ring_recall": 1.0,
+        "rented_recall": 0.6667,
+        "corroborated": 29
+      }
+    ],
+    "finding": "Recall at analyst review moves from 0.42 to 0.69 while wrong settlement holds stay at 0. The graph carries the funnel archetype specifically: ring recall goes 0.43 -> 1.00, because a funnel member is unremarkable alone by construction and nothing about the merchant itself will ever select it.",
+    "voice_note": "Voice does not move recall and is not measured on that axis. It is only placed on merchants already heading for action, so by construction it cannot surface a new case. What it changes is corroboration: merchants with two or more independent dissenting views go from 28 to 29. That is the axis a verification call belongs on."
+  },
+  "contradiction_quality": {
+    "mean_contradictions_diverged": 1.5417,
+    "mean_contradictions_legitimate": 0.0095,
+    "legitimate_with_two_or_more": 0,
+    "diverged_with_two_or_more": 29,
+    "action_confidence_by_label": {
+      "NONE": {
+        "0": 1140,
+        "1": 15
+      },
+      "RESTRICT": {
+        "0": 0,
+        "1": 27
+      },
+      "REVIEW": {
+        "0": 9,
+        "1": 1
+      },
+      "VERIFY": {
+        "0": 2,
+        "1": 5
+      },
+      "WATCH": {
+        "0": 3,
+        "1": 0
+      }
+    },
+    "note": "Two independent views contradicting the declaration is the bar for restricting settlements. The count of legitimate merchants that reach it is the number that has to stay near zero."
+  },
+  "voice_channel": {
+    "calls_placed": 29,
+    "by_outcome": {
+      "answered": 16,
+      "no_answer": 11,
+      "declined": 2
+    },
+    "answered_with_a_usable_claim": 9,
+    "diverged_merchants_who_answered": 16,
+    "diverged_who_restated_the_declaration": 6,
+    "diverged_who_contradicted_it": 3,
+    "legitimate_who_contradicted_it": 0,
+    "note": "Most calls yield nothing, and a diverged merchant that answers more often restates its declared business than admits the change. The channel is worth having because a contradiction is strong when it happens, not because it happens often."
+  },
+  "churn_sensitivity": {
+    "sweep": [
+      {
+        "churn_probability": 0.0,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 73674135.98,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.02,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 73699941.42,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.05,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 73738649.55,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.08,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 73777357.7,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.1,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 73803163.13,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.11,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 73816065.85,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.15,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 73867676.7,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.22,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 73957995.72,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.35,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 74125731.01,
+        "gate_cheaper": true
+      },
+      {
+        "churn_probability": 0.5,
+        "two_channel_gate_inr": 73635996.02,
+        "gate_removed_inr": 74319271.74,
+        "gate_cheaper": true
+      }
+    ],
+    "crossover_churn_probability": null,
+    "assumed_in_headline": 0.22,
+    "margin_at_headline_assumption_pct": 0.437,
+    "margin_at_zero_churn_pct": 0.052,
+    "finding": "On this corpus the gate is the cheaper policy at every churn level swept, including zero -- but at zero the margin is a fraction of a percent, which is a tie, and an earlier generation of this corpus reversed the ordering below ~0.11. The cost ranking is therefore sensitive to both the churn assumption and to which merchants a given corpus happens to flag. What does NOT move between runs is the wrong-hold count: the gate produces zero, and deleting the two-channel requirement produces two or three. That is the robust result. The cost ordering follows from it, but with a margin small enough that it should be quoted with the assumption attached, never on its own."
+  },
+  "baseline_ablation": {
+    "relative": {
+      "auc": 0.856,
+      "average_precision": 0.5938,
+      "at_matched_recall": {
+        "tp": 27,
+        "fp": 30,
+        "fn": 21,
+        "tn": 1124,
+        "precision": 0.4737,
+        "recall": 0.5625,
+        "f1": 0.5143,
+        "flagged": 57,
+        "false_positive_rate": 0.026,
+        "threshold_at_matched_recall": 0.066381
+      },
+      "false_positives_by_category": {
+        "home_furnishing": 8,
+        "apparel": 7,
+        "electronics_retail": 5,
+        "subscription_box": 3,
+        "travel_agency": 3,
+        "pharmacy": 3,
+        "skill_gaming": 1
+      },
+      "false_positives_by_hard_negative": {
+        "none": 19,
+        "festival_season": 9,
+        "viral_spike": 2
+      }
+    },
+    "absolute": {
+      "auc": 0.918,
+      "average_precision": 0.6684,
+      "at_matched_recall": {
+        "tp": 27,
+        "fp": 7,
+        "fn": 21,
+        "tn": 1147,
+        "precision": 0.7941,
+        "recall": 0.5625,
+        "f1": 0.6585,
+        "flagged": 34,
+        "false_positive_rate": 0.0061,
+        "threshold_at_matched_recall": 0.152604
+      },
+      "false_positives_by_category": {
+        "travel_agency": 3,
+        "home_furnishing": 2,
+        "electronics_retail": 1,
+        "skill_gaming": 1
+      },
+      "false_positives_by_hard_negative": {
+        "none": 4,
+        "festival_season": 3
+      }
+    },
+    "absolute_threshold_rule": {
+      "description": "round-value share >= 0.60 OR repeat velocity >= 4.0 OR night-hours share >= 0.30, applied to every merchant regardless of declared category",
+      "metrics": {
+        "tp": 13,
+        "fp": 177,
+        "fn": 35,
+        "tn": 977,
+        "precision": 0.0684,
+        "recall": 0.2708,
+        "f1": 0.1092,
+        "flagged": 190,
+        "false_positive_rate": 0.1534
+      },
+      "false_positives_by_category": {
+        "skill_gaming": 107,
+        "subscription_box": 52,
+        "electronics_retail": 9,
+        "apparel": 5,
+        "digital_services": 2,
+        "pharmacy": 2
+      },
+      "note": "The categories in this list are the argument for per-category baselines: legitimate merchants whose honest behaviour is unusual for the population and ordinary for themselves."
+    },
+    "verdict": "The absolute-threshold rule loses on both axes at once, so no matching is needed: it catches 27% of diverged merchants against the category-relative model's 56%, while flagging 177 legitimate merchants against 30. Against the same gradient-boosted model handed raw uncontextualised features, the result is different and less flattering: 30 against 7 false positives at matched recall, AUC 0.856 against 0.918.",
+    "_finding": "Reported as measured rather than as expected. A boosted tree given raw features can partially reconstruct category structure by itself, from correlations between features, so explicit per-category baselines buy less against a model than the design assumed. They buy a great deal against a threshold rule, which is what the design claim was actually about and what most production systems start life as. The independent reason to keep them is the evidence card: 'round-value share sits 4.1 sigma above the baseline for home furnishing' is something an analyst can act on and a merchant can contest. 'The model scored 0.83' is neither, whatever its AUC."
+  },
+  "vision_sensitivity": [
+    {
+      "temperature": 0.08,
+      "vision_channel_accuracy": 0.9658,
+      "settlement_hold": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 22,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.5417,
+        "f1": 0.7027,
+        "flagged": 26,
+        "false_positive_rate": 0.0
+      },
+      "any_action": {
+        "tp": 33,
+        "fp": 2,
+        "fn": 15,
+        "tn": 1152,
+        "precision": 0.9429,
+        "recall": 0.6875,
+        "f1": 0.7952,
+        "flagged": 35,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 31500.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 41869147.05,
+        "vision_spend_inr": 288.2,
+        "total_inr": 41900935.25
+      }
+    },
+    {
+      "temperature": 0.135,
+      "vision_channel_accuracy": 0.9487,
+      "settlement_hold": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 22,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.5417,
+        "f1": 0.7027,
+        "flagged": 26,
+        "false_positive_rate": 0.0
+      },
+      "any_action": {
+        "tp": 33,
+        "fp": 2,
+        "fn": 15,
+        "tn": 1152,
+        "precision": 0.9429,
+        "recall": 0.6875,
+        "f1": 0.7952,
+        "flagged": 35,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 31500.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 41869147.05,
+        "vision_spend_inr": 288.2,
+        "total_inr": 41900935.25
+      }
+    },
+    {
+      "temperature": 0.22,
+      "vision_channel_accuracy": 0.8504,
+      "settlement_hold": {
+        "tp": 16,
+        "fp": 0,
+        "fn": 32,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.3333,
+        "f1": 0.5,
+        "flagged": 16,
+        "false_positive_rate": 0.0
+      },
+      "any_action": {
+        "tp": 27,
+        "fp": 2,
+        "fn": 21,
+        "tn": 1152,
+        "precision": 0.931,
+        "recall": 0.5625,
+        "f1": 0.7013,
+        "flagged": 29,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 26100.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 49911916.3,
+        "vision_spend_inr": 277.2,
+        "total_inr": 49938293.5
+      }
+    },
+    {
+      "temperature": 0.35,
+      "vision_channel_accuracy": 0.594,
+      "settlement_hold": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 46,
+        "tn": 1154,
+        "precision": 1.0,
+        "recall": 0.0417,
+        "f1": 0.08,
+        "flagged": 2,
+        "false_positive_rate": 0.0
+      },
+      "any_action": {
+        "tp": 22,
+        "fp": 2,
+        "fn": 26,
+        "tn": 1152,
+        "precision": 0.9167,
+        "recall": 0.4583,
+        "f1": 0.6111,
+        "flagged": 24,
+        "false_positive_rate": 0.0017
+      },
+      "cost": {
+        "analyst_review_inr": 21600.0,
+        "false_settlement_hold_inr": 0.0,
+        "missed_abuse_inr": 66713793.49,
+        "vision_spend_inr": 264.0,
+        "total_inr": 66735657.49
+      }
+    }
+  ],
+  "injection_robustness": {
+    "detector": {
+      "adversarial_variants_detected": "5/5",
+      "clean_pages_falsely_flagged": "0/26",
+      "note": "A page carrying text addressed to an automated classifier is recorded as its own suspicion signal. No legitimate merchant has any reason to instruct a reviewing model."
+    },
+    "verdict_robustness": {
+      "hardened_prompt": {
+        "merchants_with_injected_pages": 9,
+        "still_actioned": 9
+      },
+      "unhardened_prompt": {
+        "merchants_with_injected_pages": 9,
+        "still_actioned": 9
+      },
+      "attack_success_rate_unhardened": 0.0,
+      "note": "The unhardened run is the counterfactual: page copy is allowed to steer the classifier. The difference is what the data-not-instruction framing buys, and it is separate from the cross-channel check, which would still catch these because telemetry cannot be edited from a web page."
+    }
+  },
+  "triage_contribution": {
+    "telemetry_drift": {
+      "merchants_selected": 30,
+      "of_which_diverged": 25,
+      "yield": 0.8333,
+      "reached_analyst": 27,
+      "unique_catches": 13
+    },
+    "volume_shape_change": {
+      "merchants_selected": 4,
+      "of_which_diverged": 1,
+      "yield": 0.25,
+      "reached_analyst": 1,
+      "unique_catches": 0
+    },
+    "high_volume_rotation": {
+      "merchants_selected": 40,
+      "of_which_diverged": 0,
+      "yield": 0.0,
+      "reached_analyst": 0,
+      "unique_catches": 0
+    },
+    "external_signal": {
+      "merchants_selected": 31,
+      "of_which_diverged": 5,
+      "yield": 0.1613,
+      "reached_analyst": 5,
+      "unique_catches": 0
+    },
+    "_not_triaged": {
+      "merchants": 1096,
+      "diverged_and_missed": 15,
+      "note": "These never reach the storefront channel this cycle. Over one full rotation period every merchant is reached at least once; the horizon row in the headline reports that case."
+    }
+  },
+  "determinism": {
+    "telemetry_bitwise_identical": true,
+    "bitwise_identical": true,
+    "max_abs_delta": 0.0,
+    "storefront_seed_process_stable": true,
+    "storefront_seed_reference": {
+      "sports_betting/MID100001": 722674269,
+      "skill_gaming/MID100002": 708765534,
+      "pharmacy/MID100003": 985566339
+    },
+    "note": "storefront_seed_reference values are fixed constants. If they differ between runs or machines, seeding has regressed to a process-local hash and no verdict is reproducible."
+  },
+  "cache_economics": {
+    "cold_cycle": {
+      "vision_calls": 429,
+      "spend_inr": 943.8,
+      "spend_per_merchant_inr": 0.628
+    },
+    "warm_cycle": {
+      "vision_calls": 0,
+      "cache_hit_rate": 1.0,
+      "spend_inr": 0.0,
+      "spend_per_merchant_inr": 0.392
+    },
+    "note": "Content-addressed by rendered page, so a merchant that has not touched its checkout costs nothing to re-examine. The cold number is the one to plan capacity against; the warm number is what a steady-state day costs.",
+    "projected_at_one_million_merchants_inr": 628000.0,
+    "projected_warm_at_one_million_merchants_inr": 392000.0
+  },
+  "throughput": {
+    "merchants_scored_cheap_channel": 4000,
+    "cleared_triage": 363,
+    "triage_rate": 0.0907,
+    "triage_by_trigger": {
+      "telemetry_drift": 118,
+      "volume_shape_change": 15,
+      "high_volume_rotation": 130,
+      "external_signal": 116,
+      "network_cluster": 37,
+      "union": 363
+    },
+    "full_investigations": 363,
+    "investigation_rate": 0.0907,
+    "vision_calls_made": 429,
+    "vision_cache": {
+      "hits": 0,
+      "misses": 429,
+      "writes": 429,
+      "hit_rate": 0.0
+    },
+    "vision_spend_inr": 943.8,
+    "voice_calls": 112,
+    "voice_spend_inr": 1568.0,
+    "graph": {
+      "merchants_with_edges": 2087,
+      "clusters": 18,
+      "clustered_merchants": 152,
+      "largest_cluster": 16,
+      "median_cluster": 8,
+      "mean_synchrony": 0.368
+    },
+    "spend_per_merchant_inr": 0.628,
+    "wall_clock_seconds": 13.75
+  },
+  "economics_assumptions": {
+    "hold_days": 4.0,
+    "hold_harm_rate": 0.06,
+    "hold_fixed_cost_inr": 12000.0,
+    "churn_probability_after_hold": 0.22,
+    "take_rate": 0.02,
+    "merchant_remaining_lifetime_days": 1095.0,
+    "analyst_review_cost_inr": 900.0,
+    "network_fine_inr": 120000.0,
+    "chargeback_liability_rate": 0.11,
+    "enforcement_freeze_rate": 0.18,
+    "vision_call_cost_inr": 2.2,
+    "voice_call_cost_inr": 14.0
+  },
+  "thresholds": {
+    "telemetry_dissent": 0.62,
+    "vision_dissent_confidence": 0.55,
+    "triage_gate": 0.35,
+    "agent_confidence_stop": 0.9
+  }
+}

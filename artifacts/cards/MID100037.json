@@ -1,0 +1,599 @@
+{
+  "merchant_id": "MID100037",
+  "declared_category": "subscription_box",
+  "onboarded_days_ago": 605,
+  "decision": {
+    "merchant_id": "MID100037",
+    "declared_category": "subscription_box",
+    "tier": 4,
+    "tier_name": "Restricted pending review",
+    "action": "Analyst review with settlements held pending outcome. Requires the storefront to dissent plus at least one other independent view.",
+    "settlements_held": true,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "AGREES",
+        "confidence": 0.0049,
+        "statement": "Payment behaviour is within the normal range for a subscription_box merchant (score 0.00)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "DISSENT",
+        "confidence": 0.99,
+        "statement": "The checkout surface presents a crypto_exchange interface at 0.99 confidence, against a declared category of subscription_box. This vertical cannot be approved on this platform."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "DISSENT",
+        "confidence": 0.8566,
+        "statement": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do."
+      },
+      {
+        "channel": "statement",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "The merchant restated its declared business, which is what an honest merchant and a dishonest one both do."
+      }
+    ],
+    "dissenting_channels": [
+      "storefront",
+      "infrastructure"
+    ],
+    "second_channel_source": "infrastructure",
+    "justification": "Two independent views of this merchant disagree with its declaration. The storefront presents a different business, and the infrastructure channel agrees. Neither could have produced the other: a merchant cannot change its payment behaviour without changing its actual business, and cannot change its interface without changing what customers see.",
+    "notes": [
+      "The corroborating view is infrastructure rather than telemetry. This is the rented-account shape: the genuine store keeps trading, so the payment mixture stays near the category baseline and telemetry alone never crosses its threshold."
+    ],
+    "assessment": {
+      "merchant_id": "MID100037",
+      "declared": "subscription_box",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "subscription_box",
+          "confidence": 1.0,
+          "detail": "Onboarded as a subscription box business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": null,
+          "confidence": 0.005,
+          "detail": "Payment behaviour scores 0.00 against the subscription_box baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "crypto_exchange",
+          "confidence": 0.99,
+          "detail": "The checkout surface presents a crypto exchange interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": "cluster",
+          "confidence": 0.857,
+          "detail": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": "subscription_box",
+          "confidence": 0.82,
+          "detail": "Merchant describes itself as subscription box, consistent with its declaration.",
+          "available": true
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its website shows"
+          ],
+          "views": [
+            "declared",
+            "storefront"
+          ],
+          "severity": 1.0,
+          "statement": "Declared subscription box; the live page is a crypto exchange interface. That vertical cannot be approved on this platform."
+        },
+        {
+          "between": [
+            "What its website shows",
+            "What the merchant says"
+          ],
+          "views": [
+            "storefront",
+            "statement"
+          ],
+          "severity": 0.7,
+          "statement": "The merchant restated its declared subscription box business on the call, while its live page presents crypto exchange."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "Who it is connected to"
+          ],
+          "views": [
+            "declared",
+            "network"
+          ],
+          "severity": 0.6,
+          "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+        }
+      ],
+      "model_confidence": 0.99,
+      "evidence_agreement": 3,
+      "independent_channels": 4,
+      "contradiction_severity": "HIGH",
+      "action_confidence": "RESTRICT",
+      "summary": "3 contradictions across 3 independent views (what its website shows, who it is connected to, what the merchant says).",
+      "notes": []
+    }
+  },
+  "telemetry": {
+    "score": 0.004909864592309341,
+    "deviations": [
+      {
+        "feature": "post_peak_persistence",
+        "value": 1.39687,
+        "category_baseline": 1.06161,
+        "category_spread": 0.10115,
+        "z": 3.315,
+        "direction": "above"
+      },
+      {
+        "feature": "ticket_entropy",
+        "value": 1.64387,
+        "category_baseline": 1.99166,
+        "category_spread": 0.15484,
+        "z": -2.246,
+        "direction": "below"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.0061,
+        "category_baseline": 0.00262,
+        "category_spread": 0.00168,
+        "z": 2.075,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_all",
+        "value": 0.18681,
+        "category_baseline": 0.40622,
+        "category_spread": 0.1347,
+        "z": -1.629,
+        "direction": "below"
+      },
+      {
+        "feature": "round_share_recent",
+        "value": 0.18495,
+        "category_baseline": 0.4097,
+        "category_spread": 0.1439,
+        "z": -1.562,
+        "direction": "below"
+      },
+      {
+        "feature": "peak_ratio",
+        "value": 1.69841,
+        "category_baseline": 1.48804,
+        "category_spread": 0.1788,
+        "z": 1.177,
+        "direction": "above"
+      },
+      {
+        "feature": "night_share",
+        "value": 0.26105,
+        "category_baseline": 0.18863,
+        "category_spread": 0.06231,
+        "z": 1.162,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_drift",
+        "value": 0.03907,
+        "category_baseline": -0.00499,
+        "category_spread": 0.05379,
+        "z": 0.819,
+        "direction": "above"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 2.0754,
+        "contribution": 1.8847,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_post_peak_persistence",
+        "label": "Post-peak persistence (vs category)",
+        "explains": "Volume after the peak divided by volume before it. Near 1.0 means a spike that decayed -- a sale. Well above 1.0 means a step change that held.",
+        "value": 3.3146,
+        "contribution": -0.9534,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_peak_ratio",
+        "label": "Peak-to-median volume ratio (vs category)",
+        "explains": "Largest single day relative to the median day.",
+        "value": 1.1766,
+        "contribution": -0.7803,
+        "units": "log-odds"
+      },
+      {
+        "feature": "hour_kl_recent",
+        "label": "Hour-of-day divergence, last 30d",
+        "explains": "",
+        "value": 0.0411,
+        "contribution": -0.6445,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_night_share",
+        "label": "Night-hours share (00:00-05:00) (vs category)",
+        "explains": "Share of payments between midnight and 05:00.",
+        "value": 1.1622,
+        "contribution": 0.3786,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_all",
+        "label": "Round-value share (full window) (vs category)",
+        "explains": "Proportion of payments at an exact multiple of Rs 100.",
+        "value": -1.6289,
+        "contribution": -0.248,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100037",
+      "surface": "homepage",
+      "vertical": "subscription_box",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Three plan tiers with monthly price and roast profile",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Start subscription",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Plan -> Address -> Payment -> Delivery schedule",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "disclosure",
+          "observation": "Pause or cancel any time from account settings",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "49c76f290d0b0aa5",
+      "cached": false
+    },
+    "checkout": {
+      "merchant_id": "MID100037",
+      "surface": "checkout",
+      "vertical": "crypto_exchange",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "header widget",
+          "observation": "Connect wallet button in the header",
+          "implication": "Persistent account-balance furniture is characteristic of a funded-account product, not a retail checkout. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "grid",
+          "observation": "Order book with bid and ask columns updating live",
+          "implication": "The main grid is not a product catalogue. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "primary action",
+          "observation": "Buy / Sell pair selector",
+          "implication": "Money moving in both directions is not a retail payment shape. Observed on the checkout surface, where the customer transacts."
+        },
+        {
+          "element": "primary action",
+          "observation": "Deposit INR",
+          "implication": "Money moving in both directions is not a retail payment shape. Observed on the checkout surface, where the customer transacts."
+        }
+      ],
+      "commerce_flow_present": false,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "e2f3b14a16e6a34e",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": true,
+    "score": 0.8566367594205161,
+    "size": 7,
+    "synchrony": 0.522,
+    "cohesion": 43.043,
+    "shared_kinds": [
+      "asn",
+      "beneficiary_id",
+      "device_fp",
+      "ip_block",
+      "payout_fingerprint",
+      "phone_fp",
+      "script_bundle"
+    ],
+    "members": [
+      "MID100031",
+      "MID100032",
+      "MID100033",
+      "MID100034",
+      "MID100035",
+      "MID100036"
+    ],
+    "statement": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do."
+  },
+  "voice": {
+    "merchant_id": "MID100037",
+    "status": "answered",
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Hello, this is an automated verification call from your payment provider. This call is recorded. I have three short questions about your business. You can decline and speak to a person instead at any point."
+      },
+      {
+        "speaker": "agent",
+        "text": "What products or services does your business sell today?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "a monthly coffee subscription"
+      },
+      {
+        "speaker": "agent",
+        "text": "How do your customers usually pay you?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "a recurring mandate on card or UPI"
+      },
+      {
+        "speaker": "agent",
+        "text": "Has what you sell changed in the last three months?"
+      },
+      {
+        "speaker": "merchant",
+        "text": "no, same as always"
+      }
+    ],
+    "claimed_business": "subscription_box",
+    "claimed_payment_flow": "a recurring mandate on card or UPI",
+    "changed_recently": false,
+    "consistent": true,
+    "contradiction": null,
+    "confidence": 0.82,
+    "provenance": "offline-simulator",
+    "constraints": [
+      "identified itself as automated",
+      "never requested credentials, OTP or card details",
+      "never disclosed why the account was reviewed",
+      "cannot change account status or hold funds",
+      "merchant could decline and ask for a human"
+    ]
+  },
+  "assessment": {
+    "merchant_id": "MID100037",
+    "declared": "subscription_box",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "subscription_box",
+        "confidence": 1.0,
+        "detail": "Onboarded as a subscription box business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": null,
+        "confidence": 0.005,
+        "detail": "Payment behaviour scores 0.00 against the subscription_box baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "crypto_exchange",
+        "confidence": 0.99,
+        "detail": "The checkout surface presents a crypto exchange interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": "cluster",
+        "confidence": 0.857,
+        "detail": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": "subscription_box",
+        "confidence": 0.82,
+        "detail": "Merchant describes itself as subscription box, consistent with its declaration.",
+        "available": true
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its website shows"
+        ],
+        "views": [
+          "declared",
+          "storefront"
+        ],
+        "severity": 1.0,
+        "statement": "Declared subscription box; the live page is a crypto exchange interface. That vertical cannot be approved on this platform."
+      },
+      {
+        "between": [
+          "What its website shows",
+          "What the merchant says"
+        ],
+        "views": [
+          "storefront",
+          "statement"
+        ],
+        "severity": 0.7,
+        "statement": "The merchant restated its declared subscription box business on the call, while its live page presents crypto exchange."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "Who it is connected to"
+        ],
+        "views": [
+          "declared",
+          "network"
+        ],
+        "severity": 0.6,
+        "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+      }
+    ],
+    "model_confidence": 0.99,
+    "evidence_agreement": 3,
+    "independent_channels": 4,
+    "contradiction_severity": "HIGH",
+    "action_confidence": "RESTRICT",
+    "summary": "3 contradictions across 3 independent views (what its website shows, who it is connected to, what the merchant says).",
+    "notes": []
+  },
+  "investigation": {
+    "merchant_id": "MID100037",
+    "declared_category": "subscription_box",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the subscription_box baseline: post_peak_persistence at +3.3 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as subscription_box (confidence 0.99), which matches the declared subscription_box.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.4382
+      },
+      {
+        "step": 3,
+        "rationale": "This merchant was raised by the relationship graph, not by anything about itself. Confirm the link before paying for anything: it costs nothing.",
+        "tool": "find_shared_infrastructure",
+        "args": {
+          "min_weight": 6.0
+        },
+        "ok": true,
+        "returned": "6 merchants share rare infrastructure (rarity-weighted total 144.48). Shared attributes: asn, ip_block, payout_fingerprint, script_bundle.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.7313
+      },
+      {
+        "step": 4,
+        "rationale": "Individually unremarkable, and its homepage is a shop like any other -- which is what a funnel member is built to look like. The checkout is the surface that has to carry the product the ring is actually selling.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "checkout classifies as crypto_exchange (confidence 0.99), which does not match the declared subscription_box.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.9645
+      }
+    ],
+    "steps_used": 4,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9645,
+    "total_cost_inr": 4.4,
+    "evidence": [
+      "Telemetry: post_peak_persistence sits +3.3 sigma from the subscription_box baseline.",
+      "Storefront (homepage): classified subscription_box at 0.99 confidence, consistent with the declaration.",
+      "6 other merchants share rare infrastructure (rarity-weighted total 144.48).",
+      "Storefront (checkout): classified crypto_exchange at 0.99 confidence, inconsistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100037 declared subscription_box at onboarding 605 days ago. Telemetry agrees: the largest deviations from the subscription_box baseline are post_peak_persistence at +3.3 sigma (observed 1.4 against a category baseline of 1.06), ticket_entropy at -2.2 sigma (observed 1.64 against a category baseline of 1.99), slope_log_volume at +2.1 sigma (observed 0.0061 against a category baseline of 0.00262). The checkout surface presents a crypto_exchange interface at 0.99 confidence, against a declared category of subscription_box. This vertical cannot be approved on this platform. Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do. It is linked to 6 other merchant accounts by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle, and those accounts are moving in step (synchrony 0.52). Asked directly, the merchant restated its declared business. In total 3 independent views of this merchant contradict its declaration. The investigation used 4 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier restricts settlements, corroborated by the infrastructure channel; the storefront alone would not have been sufficient.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "funnel_ring",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

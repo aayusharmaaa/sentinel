@@ -1,0 +1,477 @@
+{
+  "merchant_id": "MID100115",
+  "declared_category": "apparel",
+  "onboarded_days_ago": 155,
+  "decision": {
+    "merchant_id": "MID100115",
+    "declared_category": "apparel",
+    "tier": 4,
+    "tier_name": "Restricted pending review",
+    "action": "Analyst review with settlements held pending outcome. Requires the storefront to dissent plus at least one other independent view.",
+    "settlements_held": true,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "DISSENT",
+        "confidence": 0.973,
+        "statement": "Payment behaviour is atypical for a apparel merchant (score 0.97 against the category baseline)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "DISSENT",
+        "confidence": 0.8956,
+        "statement": "The homepage surface presents a sports_betting interface at 0.90 confidence, against a declared category of apparel. This vertical cannot be approved on this platform."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "Not linked to any other merchant by a rare shared identity."
+      },
+      {
+        "channel": "statement",
+        "verdict": "BLIND",
+        "confidence": 0.0,
+        "statement": "A verification call was placed and not answered. That counts neither for nor against the merchant."
+      }
+    ],
+    "dissenting_channels": [
+      "telemetry",
+      "storefront"
+    ],
+    "second_channel_source": "telemetry",
+    "justification": "Two independent views of this merchant disagree with its declaration. The storefront presents a different business, and the telemetry channel agrees. Neither could have produced the other: a merchant cannot change its payment behaviour without changing its actual business, and cannot change its interface without changing what customers see.",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ],
+    "assessment": {
+      "merchant_id": "MID100115",
+      "declared": "apparel",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "apparel",
+          "confidence": 1.0,
+          "detail": "Onboarded as a apparel business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": "not_apparel",
+          "confidence": 0.973,
+          "detail": "Payment behaviour scores 0.97 against the apparel baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "sports_betting",
+          "confidence": 0.896,
+          "detail": "The homepage surface presents a sports betting interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Not linked to any other merchant by a rare shared identity.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Verification call placed; the merchant did not answer.",
+          "available": false
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its website shows"
+          ],
+          "views": [
+            "declared",
+            "storefront"
+          ],
+          "severity": 1.0,
+          "statement": "Declared apparel; the live page is a sports betting interface. That vertical cannot be approved on this platform."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its payments do"
+          ],
+          "views": [
+            "declared",
+            "payments"
+          ],
+          "severity": 0.45,
+          "statement": "Declared apparel; the payment behaviour is not typical of that category."
+        }
+      ],
+      "model_confidence": 0.973,
+      "evidence_agreement": 2,
+      "independent_channels": 3,
+      "contradiction_severity": "HIGH",
+      "action_confidence": "RESTRICT",
+      "summary": "2 contradictions across 2 independent views (what its payments do, what its website shows).",
+      "notes": [
+        "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+      ]
+    }
+  },
+  "telemetry": {
+    "score": 0.9729925077226097,
+    "deviations": [
+      {
+        "feature": "velocity_all",
+        "value": 5.56832,
+        "category_baseline": 1.79064,
+        "category_spread": 0.26584,
+        "z": 12.0,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_recent",
+        "value": 7.08445,
+        "category_baseline": 1.78837,
+        "category_spread": 0.26774,
+        "z": 12.0,
+        "direction": "above"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.01752,
+        "category_baseline": 0.00196,
+        "category_spread": 0.00197,
+        "z": 7.915,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_all",
+        "value": 0.62264,
+        "category_baseline": 0.20353,
+        "category_spread": 0.12326,
+        "z": 3.4,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_recent",
+        "value": 0.6636,
+        "category_baseline": 0.20146,
+        "category_spread": 0.13626,
+        "z": 3.392,
+        "direction": "above"
+      },
+      {
+        "feature": "post_peak_persistence",
+        "value": 1.32618,
+        "category_baseline": 1.04702,
+        "category_spread": 0.11501,
+        "z": 2.427,
+        "direction": "above"
+      },
+      {
+        "feature": "night_share",
+        "value": 0.26458,
+        "category_baseline": 0.11559,
+        "category_spread": 0.06827,
+        "z": 2.182,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_rate",
+        "value": 0.00643,
+        "category_baseline": 0.00289,
+        "category_spread": 0.00171,
+        "z": 2.073,
+        "direction": "above"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_round_share_recent",
+        "label": "Round-value share (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 3.3917,
+        "contribution": 3.9812,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 7.9152,
+        "contribution": 3.5407,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_recent",
+        "label": "Repeat-payer velocity (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 12.0,
+        "contribution": 1.953,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_rate",
+        "label": "Chargeback rate (vs category)",
+        "explains": "Share of transactions charged back.",
+        "value": 2.0726,
+        "contribution": 1.2893,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_refund_rate",
+        "label": "Refund rate (vs category)",
+        "explains": "Share of transactions refunded.",
+        "value": -1.185,
+        "contribution": 0.6988,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_night_share",
+        "label": "Night-hours share (00:00-05:00) (vs category)",
+        "explains": "Share of payments between midnight and 05:00.",
+        "value": 2.1824,
+        "contribution": 0.6032,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100115",
+      "surface": "homepage",
+      "vertical": "sports_betting",
+      "confidence": 0.8956,
+      "findings": [
+        {
+          "element": "header widget",
+          "observation": "Wallet balance pinned to the header",
+          "implication": "Persistent account-balance furniture is characteristic of a funded-account product, not a retail checkout."
+        },
+        {
+          "element": "primary action",
+          "observation": "Deposit",
+          "implication": "Money moving in both directions is not a retail payment shape."
+        },
+        {
+          "element": "primary action",
+          "observation": "Withdraw",
+          "implication": "Money moving in both directions is not a retail payment shape."
+        },
+        {
+          "element": "grid",
+          "observation": "Grid of numeric tiles keyed to live fixture names and updating in place",
+          "implication": "The main grid is not a product catalogue."
+        }
+      ],
+      "commerce_flow_present": false,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "3f9ef0ef4e368c3e",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": false,
+    "score": 0.0,
+    "size": 0,
+    "synchrony": 0.0,
+    "cohesion": 0.0,
+    "shared_kinds": [],
+    "members": [],
+    "statement": "Not linked to any other merchant by a rare shared identity."
+  },
+  "voice": {
+    "merchant_id": "MID100115",
+    "status": "no_answer",
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Hello, this is an automated verification call from your payment provider. This call is recorded. I have three short questions about your business. You can decline and speak to a person instead at any point."
+      }
+    ],
+    "claimed_business": null,
+    "claimed_payment_flow": null,
+    "changed_recently": null,
+    "consistent": null,
+    "contradiction": null,
+    "confidence": 0.0,
+    "provenance": "offline-simulator",
+    "constraints": [
+      "identified itself as automated",
+      "never requested credentials, OTP or card details",
+      "never disclosed why the account was reviewed",
+      "cannot change account status or hold funds",
+      "merchant could decline and ask for a human"
+    ]
+  },
+  "assessment": {
+    "merchant_id": "MID100115",
+    "declared": "apparel",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "apparel",
+        "confidence": 1.0,
+        "detail": "Onboarded as a apparel business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": "not_apparel",
+        "confidence": 0.973,
+        "detail": "Payment behaviour scores 0.97 against the apparel baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "sports_betting",
+        "confidence": 0.896,
+        "detail": "The homepage surface presents a sports betting interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Not linked to any other merchant by a rare shared identity.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Verification call placed; the merchant did not answer.",
+        "available": false
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its website shows"
+        ],
+        "views": [
+          "declared",
+          "storefront"
+        ],
+        "severity": 1.0,
+        "statement": "Declared apparel; the live page is a sports betting interface. That vertical cannot be approved on this platform."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its payments do"
+        ],
+        "views": [
+          "declared",
+          "payments"
+        ],
+        "severity": 0.45,
+        "statement": "Declared apparel; the payment behaviour is not typical of that category."
+      }
+    ],
+    "model_confidence": 0.973,
+    "evidence_agreement": 2,
+    "independent_channels": 3,
+    "contradiction_severity": "HIGH",
+    "action_confidence": "RESTRICT",
+    "summary": "2 contradictions across 2 independent views (what its payments do, what its website shows).",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ]
+  },
+  "investigation": {
+    "merchant_id": "MID100115",
+    "declared_category": "apparel",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the apparel baseline: velocity_all at +12.0 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as sports_betting (confidence 0.90), which does not match the declared apparel.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.9048
+      }
+    ],
+    "steps_used": 2,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9048,
+    "total_cost_inr": 2.2,
+    "evidence": [
+      "Telemetry: velocity_all sits +12.0 sigma from the apparel baseline.",
+      "Storefront (homepage): classified sports_betting at 0.90 confidence, inconsistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100115 declared apparel at onboarding 155 days ago. Telemetry dissents: the largest deviations from the apparel baseline are velocity_all at +12.0 sigma (observed 5.57 against a category baseline of 1.79), velocity_recent at +12.0 sigma (observed 7.08 against a category baseline of 1.79), slope_log_volume at +7.9 sigma (observed 0.0175 against a category baseline of 0.00196). The homepage surface presents a sports_betting interface at 0.90 confidence, against a declared category of apparel. This vertical cannot be approved on this platform. A verification call was placed and produced no usable statement, which counts neither for nor against the merchant. In total 2 independent views of this merchant contradict its declaration. The investigation used 2 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier restricts settlements, corroborated by the telemetry channel; the storefront alone would not have been sufficient.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "pivot_prohibited",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

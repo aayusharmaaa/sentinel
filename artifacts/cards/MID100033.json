@@ -1,0 +1,518 @@
+{
+  "merchant_id": "MID100033",
+  "declared_category": "electronics_retail",
+  "onboarded_days_ago": 137,
+  "decision": {
+    "merchant_id": "MID100033",
+    "declared_category": "electronics_retail",
+    "tier": 2,
+    "tier_name": "Analyst review",
+    "action": "Enters the analyst queue with a full evidence card. Settlements continue normally while the case is worked.",
+    "settlements_held": false,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "DISSENT",
+        "confidence": 0.8544,
+        "statement": "Payment behaviour is atypical for a electronics_retail merchant (score 0.85 against the category baseline)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "AGREES",
+        "confidence": 0.1741,
+        "statement": "The checkout surface is consistent with the declared electronics_retail category (0.17 confidence)."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "DISSENT",
+        "confidence": 0.8566,
+        "statement": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do."
+      },
+      {
+        "channel": "statement",
+        "verdict": "BLIND",
+        "confidence": 0.0,
+        "statement": "No verification call placed."
+      }
+    ],
+    "dissenting_channels": [
+      "telemetry",
+      "infrastructure"
+    ],
+    "second_channel_source": null,
+    "justification": "Payment behaviour has drifted but the storefront agrees with the declaration. Settlements continue and will not be held on this evidence. A legitimate business whose payment shape resembles an illicit one is common; one whose storefront is a different business is not.",
+    "notes": [
+      "Payment-only dissent never reaches a settlement hold. This is the rule that protects merchants whose honest behaviour looks anomalous.",
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ],
+    "assessment": {
+      "merchant_id": "MID100033",
+      "declared": "electronics_retail",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "electronics_retail",
+          "confidence": 1.0,
+          "detail": "Onboarded as a electronics retail business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": "not_electronics_retail",
+          "confidence": 0.854,
+          "detail": "Payment behaviour scores 0.85 against the electronics_retail baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "unknown",
+          "confidence": 0.174,
+          "detail": "The checkout surface presents a unknown interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": "cluster",
+          "confidence": 0.857,
+          "detail": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "No verification call placed.",
+          "available": false
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "Who it is connected to"
+          ],
+          "views": [
+            "declared",
+            "network"
+          ],
+          "severity": 0.6,
+          "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+        },
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its payments do"
+          ],
+          "views": [
+            "declared",
+            "payments"
+          ],
+          "severity": 0.45,
+          "statement": "Declared electronics retail; the payment behaviour is not typical of that category."
+        }
+      ],
+      "model_confidence": 0.854,
+      "evidence_agreement": 2,
+      "independent_channels": 3,
+      "contradiction_severity": "MEDIUM",
+      "action_confidence": "VERIFY",
+      "summary": "2 contradictions across 2 independent views (what its payments do, who it is connected to).",
+      "notes": [
+        "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+      ]
+    }
+  },
+  "telemetry": {
+    "score": 0.8543646455481972,
+    "deviations": [
+      {
+        "feature": "round_share_drift",
+        "value": 0.20178,
+        "category_baseline": 0.00056,
+        "category_spread": 0.02138,
+        "z": 9.412,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_drift",
+        "value": 0.00574,
+        "category_baseline": 3e-05,
+        "category_spread": 0.00281,
+        "z": 2.029,
+        "direction": "above"
+      },
+      {
+        "feature": "post_peak_persistence",
+        "value": 1.52607,
+        "category_baseline": 1.08579,
+        "category_spread": 0.22845,
+        "z": 1.927,
+        "direction": "above"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": 0.00519,
+        "category_baseline": 0.00247,
+        "category_spread": 0.00296,
+        "z": 0.918,
+        "direction": "above"
+      },
+      {
+        "feature": "refund_rate",
+        "value": 0.07677,
+        "category_baseline": 0.05976,
+        "category_spread": 0.02507,
+        "z": 0.679,
+        "direction": "above"
+      },
+      {
+        "feature": "chargeback_rate",
+        "value": 0.00463,
+        "category_baseline": 0.00332,
+        "category_spread": 0.00211,
+        "z": 0.625,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_all",
+        "value": 0.1231,
+        "category_baseline": 0.18428,
+        "category_spread": 0.11224,
+        "z": -0.545,
+        "direction": "below"
+      },
+      {
+        "feature": "velocity_drift",
+        "value": 0.02485,
+        "category_baseline": -0.00285,
+        "category_spread": 0.05169,
+        "z": 0.536,
+        "direction": "above"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_round_share_drift",
+        "label": "Round-value share drift (vs category)",
+        "explains": "Recent minus prior window. Separates a merchant that has always priced in round numbers from one that started last month.",
+        "value": 9.4118,
+        "contribution": 5.6489,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": 0.9183,
+        "contribution": 3.3683,
+        "units": "log-odds"
+      },
+      {
+        "feature": "hour_kl_drift",
+        "label": "Hour-of-day divergence drift",
+        "explains": "",
+        "value": 0.0096,
+        "contribution": 0.6734,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_velocity_drift",
+        "label": "Repeat-payer velocity drift (vs category)",
+        "explains": "Change in repeat-payer velocity between windows.",
+        "value": 0.536,
+        "contribution": 0.3382,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_drift",
+        "label": "Chargeback rate drift (vs category)",
+        "explains": "Change in chargeback rate between windows.",
+        "value": 2.0291,
+        "contribution": 0.3223,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_round_share_recent",
+        "label": "Round-value share (last 30d) (vs category)",
+        "explains": "The same measure over the last 30 days only.",
+        "value": 0.4707,
+        "contribution": 0.2854,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID100033",
+      "surface": "homepage",
+      "vertical": "electronics_retail",
+      "confidence": 0.9416,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Product grid with model numbers, specs and warranty badges",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "header widget",
+          "observation": "Search, compare and cart icons",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Add to cart",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Cart -> Address -> Shipping -> Payment",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "f022282e12b77d39",
+      "cached": false
+    },
+    "checkout": {
+      "merchant_id": "MID100033",
+      "surface": "checkout",
+      "vertical": "unknown",
+      "confidence": 0.1741,
+      "findings": [
+        {
+          "element": "page",
+          "observation": "Page did not render enough structure to classify.",
+          "implication": "No verdict. Requeued for a later rotation."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "532e4c89aa4a5650",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": true,
+    "score": 0.8566367594205161,
+    "size": 7,
+    "synchrony": 0.522,
+    "cohesion": 43.043,
+    "shared_kinds": [
+      "asn",
+      "beneficiary_id",
+      "device_fp",
+      "ip_block",
+      "payout_fingerprint",
+      "phone_fp",
+      "script_bundle"
+    ],
+    "members": [
+      "MID100031",
+      "MID100032",
+      "MID100034",
+      "MID100035",
+      "MID100036",
+      "MID100037"
+    ],
+    "statement": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do."
+  },
+  "voice": null,
+  "assessment": {
+    "merchant_id": "MID100033",
+    "declared": "electronics_retail",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "electronics_retail",
+        "confidence": 1.0,
+        "detail": "Onboarded as a electronics retail business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": "not_electronics_retail",
+        "confidence": 0.854,
+        "detail": "Payment behaviour scores 0.85 against the electronics_retail baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "unknown",
+        "confidence": 0.174,
+        "detail": "The checkout surface presents a unknown interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": "cluster",
+        "confidence": 0.857,
+        "detail": "Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "No verification call placed.",
+        "available": false
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "Who it is connected to"
+        ],
+        "views": [
+          "declared",
+          "network"
+        ],
+        "severity": 0.6,
+        "statement": "Declared an independent business; it is linked to other merchant accounts by rare shared identities and moves with them."
+      },
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its payments do"
+        ],
+        "views": [
+          "declared",
+          "payments"
+        ],
+        "severity": 0.45,
+        "statement": "Declared electronics retail; the payment behaviour is not typical of that category."
+      }
+    ],
+    "model_confidence": 0.854,
+    "evidence_agreement": 2,
+    "independent_channels": 3,
+    "contradiction_severity": "MEDIUM",
+    "action_confidence": "VERIFY",
+    "summary": "2 contradictions across 2 independent views (what its payments do, who it is connected to).",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ]
+  },
+  "investigation": {
+    "merchant_id": "MID100033",
+    "declared_category": "electronics_retail",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the electronics_retail baseline: round_share_drift at +9.4 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.5502
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as electronics_retail (confidence 0.94), which matches the declared electronics_retail.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.4382
+      },
+      {
+        "step": 3,
+        "rationale": "This merchant was raised by the relationship graph, not by anything about itself. Confirm the link before paying for anything: it costs nothing.",
+        "tool": "find_shared_infrastructure",
+        "args": {
+          "min_weight": 6.0
+        },
+        "ok": true,
+        "returned": "6 merchants share rare infrastructure (rarity-weighted total 144.48). Shared attributes: asn, ip_block, payout_fingerprint, script_bundle.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.7313
+      },
+      {
+        "step": 4,
+        "rationale": "Individually unremarkable, and its homepage is a shop like any other -- which is what a funnel member is built to look like. The checkout is the surface that has to carry the product the ring is actually selling.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "checkout classifies as unknown (confidence 0.17), which does not match the declared electronics_retail.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.9645
+      }
+    ],
+    "steps_used": 4,
+    "step_budget": 8,
+    "stop_reason": "confidence_threshold_met",
+    "final_confidence": 0.9645,
+    "total_cost_inr": 4.4,
+    "evidence": [
+      "Telemetry: round_share_drift sits +9.4 sigma from the electronics_retail baseline.",
+      "Storefront (homepage): classified electronics_retail at 0.94 confidence, consistent with the declaration.",
+      "6 other merchants share rare infrastructure (rarity-weighted total 144.48).",
+      "Storefront (checkout): classified unknown at 0.17 confidence, inconsistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID100033 declared electronics_retail at onboarding 137 days ago. Telemetry dissents: the largest deviations from the electronics_retail baseline are round_share_drift at +9.4 sigma (observed 0.202 against a category baseline of 0.00056), chargeback_drift at +2.0 sigma (observed 0.00574 against a category baseline of 3e-05), post_peak_persistence at +1.9 sigma (observed 1.53 against a category baseline of 1.09). The checkout surface is consistent with the declared electronics_retail category (0.17 confidence). Linked to 6 other merchants by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle. Their payment behaviour is also moving in step (synchrony 0.52), which independent businesses do not do. It is linked to 6 other merchant accounts by rare shared asn, beneficiary id, device fp, ip block, payout fingerprint, phone fp, script bundle, and those accounts are moving in step (synchrony 0.52). In total 2 independent views of this merchant contradict its declaration. The investigation used 4 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier is analyst review with settlements continuing, because only one view dissents.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 1,
+    "archetype": "funnel_ring",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}

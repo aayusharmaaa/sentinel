@@ -1,0 +1,491 @@
+{
+  "merchant_id": "MID101884",
+  "declared_category": "subscription_box",
+  "onboarded_days_ago": 103,
+  "decision": {
+    "merchant_id": "MID101884",
+    "declared_category": "subscription_box",
+    "tier": 2,
+    "tier_name": "Analyst review",
+    "action": "Enters the analyst queue with a full evidence card. Settlements continue normally while the case is worked.",
+    "settlements_held": false,
+    "channels": [
+      {
+        "channel": "telemetry",
+        "verdict": "DISSENT",
+        "confidence": 0.7499,
+        "statement": "Payment behaviour is atypical for a subscription_box merchant (score 0.75 against the category baseline)."
+      },
+      {
+        "channel": "storefront",
+        "verdict": "AGREES",
+        "confidence": 0.8978,
+        "statement": "The checkout surface is consistent with the declared subscription_box category (0.90 confidence)."
+      },
+      {
+        "channel": "scripts",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "No third-party scripts specific to another vertical."
+      },
+      {
+        "channel": "infrastructure",
+        "verdict": "AGREES",
+        "confidence": 0.0,
+        "statement": "Not linked to any other merchant by a rare shared identity."
+      },
+      {
+        "channel": "statement",
+        "verdict": "BLIND",
+        "confidence": 0.0,
+        "statement": "No verification call placed."
+      }
+    ],
+    "dissenting_channels": [
+      "telemetry"
+    ],
+    "second_channel_source": null,
+    "justification": "Payment behaviour has drifted but the storefront agrees with the declaration. Settlements continue and will not be held on this evidence. A legitimate business whose payment shape resembles an illicit one is common; one whose storefront is a different business is not.",
+    "notes": [
+      "Payment-only dissent never reaches a settlement hold. This is the rule that protects merchants whose honest behaviour looks anomalous.",
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ],
+    "assessment": {
+      "merchant_id": "MID101884",
+      "declared": "subscription_box",
+      "views": [
+        {
+          "view": "declared",
+          "label": "Declared at onboarding",
+          "value": "subscription_box",
+          "confidence": 1.0,
+          "detail": "Onboarded as a subscription box business.",
+          "available": true
+        },
+        {
+          "view": "payments",
+          "label": "What its payments do",
+          "value": "not_subscription_box",
+          "confidence": 0.75,
+          "detail": "Payment behaviour scores 0.75 against the subscription_box baseline.",
+          "available": true
+        },
+        {
+          "view": "storefront",
+          "label": "What its website shows",
+          "value": "subscription_box",
+          "confidence": 0.898,
+          "detail": "The checkout surface presents a subscription box interface.",
+          "available": true
+        },
+        {
+          "view": "network",
+          "label": "Who it is connected to",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "Not linked to any other merchant by a rare shared identity.",
+          "available": true
+        },
+        {
+          "view": "statement",
+          "label": "What the merchant says",
+          "value": null,
+          "confidence": 0.0,
+          "detail": "No verification call placed.",
+          "available": false
+        }
+      ],
+      "contradictions": [
+        {
+          "between": [
+            "Declared at onboarding",
+            "What its payments do"
+          ],
+          "views": [
+            "declared",
+            "payments"
+          ],
+          "severity": 0.45,
+          "statement": "Declared subscription box; the payment behaviour is not typical of that category."
+        }
+      ],
+      "model_confidence": 0.75,
+      "evidence_agreement": 1,
+      "independent_channels": 3,
+      "contradiction_severity": "LOW",
+      "action_confidence": "REVIEW",
+      "summary": "1 contradiction across 1 independent view (what its payments do).",
+      "notes": [
+        "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+      ]
+    }
+  },
+  "telemetry": {
+    "score": 0.7499335756103872,
+    "deviations": [
+      {
+        "feature": "chargeback_rate",
+        "value": 0.01043,
+        "category_baseline": 0.00425,
+        "category_spread": 0.00218,
+        "z": 2.839,
+        "direction": "above"
+      },
+      {
+        "feature": "slope_log_volume",
+        "value": -0.00213,
+        "category_baseline": 0.00262,
+        "category_spread": 0.00168,
+        "z": -2.83,
+        "direction": "below"
+      },
+      {
+        "feature": "chargeback_drift",
+        "value": 0.00551,
+        "category_baseline": -8e-05,
+        "category_spread": 0.00199,
+        "z": 2.816,
+        "direction": "above"
+      },
+      {
+        "feature": "round_share_drift",
+        "value": 0.02161,
+        "category_baseline": -0.00296,
+        "category_spread": 0.0224,
+        "z": 1.097,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_drift",
+        "value": -0.06151,
+        "category_baseline": -0.00499,
+        "category_spread": 0.05379,
+        "z": -1.051,
+        "direction": "below"
+      },
+      {
+        "feature": "refund_rate",
+        "value": 0.0224,
+        "category_baseline": 0.03501,
+        "category_spread": 0.01601,
+        "z": -0.788,
+        "direction": "below"
+      },
+      {
+        "feature": "night_share",
+        "value": 0.236,
+        "category_baseline": 0.18863,
+        "category_spread": 0.06231,
+        "z": 0.76,
+        "direction": "above"
+      },
+      {
+        "feature": "velocity_all",
+        "value": 5.03096,
+        "category_baseline": 4.20192,
+        "category_spread": 1.26176,
+        "z": 0.657,
+        "direction": "above"
+      }
+    ],
+    "attribution": [
+      {
+        "feature": "z_slope_log_volume",
+        "label": "Volume trend slope (vs category)",
+        "explains": "Fitted daily growth rate of transaction count.",
+        "value": -2.8301,
+        "contribution": 3.2834,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_rate",
+        "label": "Chargeback rate (vs category)",
+        "explains": "Share of transactions charged back.",
+        "value": 2.8392,
+        "contribution": 2.4906,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_night_share",
+        "label": "Night-hours share (00:00-05:00) (vs category)",
+        "explains": "Share of payments between midnight and 05:00.",
+        "value": 0.7602,
+        "contribution": 1.458,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_post_peak_persistence",
+        "label": "Post-peak persistence (vs category)",
+        "explains": "Volume after the peak divided by volume before it. Near 1.0 means a spike that decayed -- a sale. Well above 1.0 means a step change that held.",
+        "value": -0.6091,
+        "contribution": -1.4492,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_refund_rate",
+        "label": "Refund rate (vs category)",
+        "explains": "Share of transactions refunded.",
+        "value": -0.7875,
+        "contribution": 1.135,
+        "units": "log-odds"
+      },
+      {
+        "feature": "z_chargeback_drift",
+        "label": "Chargeback rate drift (vs category)",
+        "explains": "Change in chargeback rate between windows.",
+        "value": 2.8158,
+        "contribution": 1.0673,
+        "units": "log-odds"
+      }
+    ]
+  },
+  "vision": {
+    "homepage": {
+      "merchant_id": "MID101884",
+      "surface": "homepage",
+      "vertical": "subscription_box",
+      "confidence": 0.99,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Three plan tiers with monthly price and roast profile",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Start subscription",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Plan -> Address -> Payment -> Delivery schedule",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "disclosure",
+          "observation": "Pause or cancel any time from account settings",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "5f4d2760063c0736",
+      "cached": false
+    },
+    "checkout": {
+      "merchant_id": "MID101884",
+      "surface": "checkout",
+      "vertical": "subscription_box",
+      "confidence": 0.8978,
+      "findings": [
+        {
+          "element": "grid",
+          "observation": "Three plan tiers with monthly price and roast profile",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "primary action",
+          "observation": "Start subscription",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "flow step",
+          "observation": "Plan -> Address -> Payment -> Delivery schedule",
+          "implication": "Consistent with the declared category."
+        },
+        {
+          "element": "disclosure",
+          "observation": "Pause or cancel any time from account settings",
+          "implication": "Consistent with the declared category."
+        }
+      ],
+      "commerce_flow_present": true,
+      "injection": {
+        "present": false,
+        "headline": "No content addressed to an automated reviewer.",
+        "detail": []
+      },
+      "provenance": "offline-simulator",
+      "image_sha256": "4abb7ab1196f53cb",
+      "cached": false
+    }
+  },
+  "network": {
+    "in_cluster": false,
+    "score": 0.0,
+    "size": 0,
+    "synchrony": 0.0,
+    "cohesion": 0.0,
+    "shared_kinds": [],
+    "members": [],
+    "statement": "Not linked to any other merchant by a rare shared identity."
+  },
+  "voice": null,
+  "assessment": {
+    "merchant_id": "MID101884",
+    "declared": "subscription_box",
+    "views": [
+      {
+        "view": "declared",
+        "label": "Declared at onboarding",
+        "value": "subscription_box",
+        "confidence": 1.0,
+        "detail": "Onboarded as a subscription box business.",
+        "available": true
+      },
+      {
+        "view": "payments",
+        "label": "What its payments do",
+        "value": "not_subscription_box",
+        "confidence": 0.75,
+        "detail": "Payment behaviour scores 0.75 against the subscription_box baseline.",
+        "available": true
+      },
+      {
+        "view": "storefront",
+        "label": "What its website shows",
+        "value": "subscription_box",
+        "confidence": 0.898,
+        "detail": "The checkout surface presents a subscription box interface.",
+        "available": true
+      },
+      {
+        "view": "network",
+        "label": "Who it is connected to",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "Not linked to any other merchant by a rare shared identity.",
+        "available": true
+      },
+      {
+        "view": "statement",
+        "label": "What the merchant says",
+        "value": null,
+        "confidence": 0.0,
+        "detail": "No verification call placed.",
+        "available": false
+      }
+    ],
+    "contradictions": [
+      {
+        "between": [
+          "Declared at onboarding",
+          "What its payments do"
+        ],
+        "views": [
+          "declared",
+          "payments"
+        ],
+        "severity": 0.45,
+        "statement": "Declared subscription box; the payment behaviour is not typical of that category."
+      }
+    ],
+    "model_confidence": 0.75,
+    "evidence_agreement": 1,
+    "independent_channels": 3,
+    "contradiction_severity": "LOW",
+    "action_confidence": "REVIEW",
+    "summary": "1 contradiction across 1 independent view (what its payments do).",
+    "notes": [
+      "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
+    ]
+  },
+  "investigation": {
+    "merchant_id": "MID101884",
+    "declared_category": "subscription_box",
+    "planner": "heuristic",
+    "steps": [
+      {
+        "step": 1,
+        "rationale": "Pull the free channel first. It costs nothing and it decides whether anything else is worth paying for.",
+        "tool": "query_transaction_features",
+        "args": {
+          "top_k": 5
+        },
+        "ok": true,
+        "returned": "Largest deviation from the subscription_box baseline: chargeback_rate at +2.8 sigma.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.25
+      },
+      {
+        "step": 2,
+        "rationale": "No storefront verdict yet. Start with the cheapest surface to reach and the one most merchants keep honest.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "homepage"
+        },
+        "ok": true,
+        "returned": "homepage classifies as subscription_box (confidence 0.99), which matches the declared subscription_box.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.1753
+      },
+      {
+        "step": 3,
+        "rationale": "Homepage matches the declaration but telemetry dissents. The obvious move is to close. Escalating instead: pull the surface the customer actually pays on.",
+        "tool": "classify_storefront",
+        "args": {
+          "surface": "checkout"
+        },
+        "ok": true,
+        "returned": "checkout classifies as subscription_box (confidence 0.90), which matches the declared subscription_box.",
+        "cost_inr": 2.2,
+        "confidence_after": 0.0498
+      },
+      {
+        "step": 4,
+        "rationale": "Check whether this account is one of several. A merchant that is unremarkable alone can be a member of a ring that is not.",
+        "tool": "find_shared_infrastructure",
+        "args": {
+          "min_weight": 6.0
+        },
+        "ok": true,
+        "returned": "No rare infrastructure shared with any other merchant. Attributes shared with many merchants (asn, script_bundle) were discounted as common-platform noise.",
+        "cost_inr": 0.0,
+        "confidence_after": 0.0498
+      }
+    ],
+    "steps_used": 4,
+    "step_budget": 8,
+    "stop_reason": "evidence_exhausted",
+    "final_confidence": 0.0498,
+    "total_cost_inr": 4.4,
+    "evidence": [
+      "Storefront (homepage): classified subscription_box at 0.99 confidence, consistent with the declaration.",
+      "Storefront (checkout): classified subscription_box at 0.90 confidence, consistent with the declaration."
+    ]
+  },
+  "narrative": {
+    "text": "Merchant MID101884 declared subscription_box at onboarding 103 days ago. Telemetry dissents: the largest deviations from the subscription_box baseline are chargeback_rate at +2.8 sigma (observed 0.0104 against a category baseline of 0.00425), slope_log_volume at -2.8 sigma (observed -0.00213 against a category baseline of 0.00262), chargeback_drift at +2.8 sigma (observed 0.00551 against a category baseline of -8e-05). The checkout surface is consistent with the declared subscription_box category (0.90 confidence). In total 1 independent view of this merchant contradict its declaration. The investigation used 4 of a permitted 8 steps and stopped because evidence exhausted. Recommended tier is analyst review with settlements continuing, because only one view dissents.",
+    "provenance": "structured-features-only (deterministic, no model credential present)",
+    "inputs_used": [
+      "merchant_id",
+      "declared_category",
+      "onboarded_days_ago",
+      "tier",
+      "tier_name",
+      "channel_verdicts",
+      "top_feature_deviations",
+      "investigation_steps",
+      "stop_reason",
+      "injection_flagged",
+      "second_channel_source",
+      "contradictions",
+      "evidence_agreement",
+      "model_confidence",
+      "action_confidence",
+      "network",
+      "statement"
+    ]
+  },
+  "ground_truth": {
+    "label": 0,
+    "archetype": "legit",
+    "hard_negative": "none",
+    "note": "Present because this is a synthetic evaluation corpus. Never available at decision time."
+  }
+}
