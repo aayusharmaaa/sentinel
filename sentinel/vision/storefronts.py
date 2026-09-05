@@ -471,8 +471,8 @@ def _render_crypto_html(
     parts.append("</section><section><h2>Account</h2>")
     parts.append(
         "<p style='margin:0 0 10px;color:var(--mut);font-size:13px'>"
-        "Funded-account product. Balance furniture stays in the chrome. "
-        "No SKU grid, no shipping address, no cart.</p>"
+        "Funded trading account. Wallet balance stays in the header. "
+        "No product catalogue, no shipping address, no cart.</p>"
     )
     if disc:
         parts.append(
