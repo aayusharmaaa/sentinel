@@ -182,7 +182,7 @@ STOREFRONTS: dict[str, Storefront] = {
         ],
     ),
     "crypto_exchange": Storefront(
-        "crypto_exchange", "TokenGate", "Trade instantly",
+        "crypto_exchange", "TokenGate", "Spot · INR pairs · instant settlement",
         [
             Element("header_widget", "Connect wallet button in the header",
                     ("crypto_exchange",)),
@@ -280,6 +280,49 @@ footer{color:var(--mut);font-size:12px;padding:22px 28px;border-top:1px solid va
 .injected{color:#8a8a8a;font-size:11px}
 """
 
+CRYPTO_PAGE_CSS = """
+:root{--ink:#e8edf5;--mut:#8b95a8;--line:#243044;--bg:#0b1220;--panel:#121a2b;
+  --accent:#3dd6c6;--bid:#3dd68c;--ask:#ff6b7a;--chip:#1a2438}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.45 "Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px 22px;border-bottom:1px solid var(--line);background:#0e1626}
+.brand{font-weight:700;font-size:17px;letter-spacing:.02em}
+.brand span{color:var(--accent);font-weight:600;margin-left:8px;font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase}
+.widgets{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--chip);
+  color:var(--ink);font-size:12px}
+main{max-width:1040px;margin:0 auto;padding:28px 22px 56px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.02em}
+.tagline{color:var(--mut);margin:0 0 18px}
+.pairs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.pair{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--panel);
+  min-width:118px}
+.pair b{display:block;font-size:16px}
+.pair .d{font-size:11px;color:var(--bid)}
+.pair .d.down{color:var(--ask)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px}
+.btn{background:var(--accent);color:#06241f;border:0;border-radius:8px;padding:11px 18px;
+  font-size:13px;font-weight:700}
+.btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.desk{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+@media (max-width:720px){.desk{grid-template-columns:1fr}}
+section{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px 18px}
+section h2{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);margin:0 0 12px}
+.book{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13px}
+.book th{text-align:left;color:var(--mut);font-weight:500;padding:0 0 8px;font-size:11px;
+  text-transform:uppercase;letter-spacing:.06em}
+.book td{padding:5px 0;border-top:1px solid rgba(36,48,68,.7)}
+.book .bid{color:var(--bid)}
+.book .ask{color:var(--ask)}
+.flow{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:12px}
+.flow span{border:1px dashed var(--line);border-radius:6px;padding:6px 10px}
+.notices{margin:14px 0 0;padding:0 0 0 18px;color:var(--mut);font-size:13px}
+footer{color:var(--mut);font-size:12px;padding:18px 22px;border-top:1px solid var(--line)}
+.injected{color:#6b7280;font-size:11px}
+"""
+
 
 def render_html(
     sf: Storefront,
@@ -297,6 +340,9 @@ def render_html(
     rate measures how few fixtures exist rather than how rarely pages
     change.
     """
+    if sf.vertical == "crypto_exchange":
+        return _render_crypto_html(sf, surface, injection, merchant_ref)
+
     esc = html.escape
     widgets = [e for e in sf.elements if e.kind == "header_widget"]
     actions = [e for e in sf.elements if e.kind == "primary_action"]
@@ -356,6 +402,95 @@ def render_html(
         + "</footer>"
     )
     return f"<!doctype html><meta charset='utf-8'><title>{esc(sf.brand)}</title>" + "".join(parts)
+
+
+def _render_crypto_html(
+    sf: Storefront,
+    surface: str,
+    injection: str | None = None,
+    merchant_ref: str | None = None,
+) -> str:
+    """Trading-desk layout — unmistakably not retail furniture."""
+    esc = html.escape
+    widgets = [e for e in sf.elements if e.kind == "header_widget"]
+    actions = [e for e in sf.elements if e.kind == "primary_action"]
+    flows = [e for e in sf.elements if e.kind == "flow_step"]
+    disc = [e for e in sf.elements if e.kind in ("disclosure", "copy")]
+    pairs = [
+        ("BTC/INR", "64,210", "+1.4%", False),
+        ("ETH/INR", "3,480", "-0.6%", True),
+        ("SOL/INR", "88.40", "+2.1%", False),
+        ("USDT/INR", "1.00", "0.0%", False),
+    ]
+    pair_html = "".join(
+        f'<div class="pair"><b>{esc(px)}</b>{esc(sym)}'
+        f'<div class="d{" down" if down else ""}">{esc(chg)}</div></div>'
+        for sym, px, chg, down in pairs
+    )
+    book_rows = "".join(
+        f'<tr><td class="ask">{esc(a)}</td><td>{esc(sz)}</td>'
+        f'<td class="bid">{esc(b)}</td></tr>'
+        for a, sz, b in [
+            ("64,218", "0.42", "64,204"),
+            ("64,224", "1.10", "64,198"),
+            ("64,231", "0.18", "64,190"),
+            ("64,240", "2.05", "64,182"),
+            ("64,255", "0.67", "64,171"),
+        ]
+    )
+    label = "Spot desk" if surface == "homepage" else "Fund & trade"
+    parts = [
+        f"<style>{CRYPTO_PAGE_CSS}</style>",
+        "<header>",
+        f'<div class="brand">{esc(sf.brand)}<span>{esc(label)}</span></div>',
+        '<div class="widgets">'
+        + "".join(f'<span class="pill">{esc(w.text)}</span>' for w in widgets)
+        + '<span class="pill">INR wallet · ₹2,40,000</span></div>',
+        "</header><main>",
+        f"<h1>{esc(sf.brand)}</h1>",
+        f'<p class="tagline">{esc(sf.tagline)}'
+        + (f" · {esc(surface)}" if surface == "checkout" else "")
+        + "</p>",
+        f'<div class="pairs">{pair_html}</div>',
+        '<div class="actions">'
+        + "".join(
+            f'<button class="btn{"" if i == 0 else " sec"}">{esc(a.text)}</button>'
+            for i, a in enumerate(actions)
+        )
+        + "</div>",
+        '<div class="desk"><section><h2>Order book with bid and ask columns updating live</h2>',
+        '<table class="book"><thead><tr><th>Ask</th><th>Size</th><th>Bid</th></tr></thead>',
+        f"<tbody>{book_rows}</tbody></table>",
+    ]
+    if flows:
+        parts.append(
+            '<div class="flow">'
+            + "".join(f"<span>{esc(f.text)}</span>" for f in flows)
+            + "</div>"
+        )
+    parts.append("</section><section><h2>Account</h2>")
+    parts.append(
+        "<p style='margin:0 0 10px;color:var(--mut);font-size:13px'>"
+        "Funded-account product. Balance furniture stays in the chrome. "
+        "No SKU grid, no shipping address, no cart.</p>"
+    )
+    if disc:
+        parts.append(
+            '<ul class="notices">'
+            + "".join(f"<li>{esc(d.text)}</li>" for d in disc)
+            + "</ul>"
+        )
+    parts.append("</section></div></main><footer>")
+    if injection:
+        parts.append(f'<div class="injected">{esc(injection)}</div>')
+    parts.append(f"<div>{esc(sf.brand)} · crypto exchange fixture · prices in INR</div>")
+    if merchant_ref:
+        parts.append(f"<div>Merchant reference {esc(merchant_ref)}</div>")
+    parts.append("</footer>")
+    return (
+        f"<!doctype html><meta charset='utf-8'><title>{esc(sf.brand)}</title>"
+        + "".join(parts)
+    )
 
 
 def _tile_data(vertical: str) -> list[tuple[str, str]]:

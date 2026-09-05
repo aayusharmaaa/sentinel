@@ -208,21 +208,43 @@ def build_channels(
             and vision_confidence >= thresholds.vision_dissent_confidence
         )
         prohibited = vision_vertical in PROHIBITED_VERTICALS
-        storefront = ChannelVerdict(
-            channel="storefront",
-            dissents=vis_dissent,
-            confidence=vision_confidence,
-            statement=(
+        if vis_dissent:
+            statement = (
                 f"The {vision_surface} surface presents a {vision_vertical} "
                 f"interface at {vision_confidence:.2f} confidence, against a "
                 f"declared category of {declared_category}."
                 + (" This vertical cannot be approved on this platform."
                    if prohibited else "")
-                if vis_dissent
-                else f"The {vision_surface} surface is consistent with the "
-                     f"declared {declared_category} category "
-                     f"({vision_confidence:.2f} confidence)."
-            ),
+            )
+        elif (
+            vision_vertical != declared_category
+            and vision_vertical != "unknown"
+        ):
+            # Classified as something else, but below the dissent threshold.
+            # Never claim the page "matches" the declaration — that lied in
+            # the console when a weak crypto reading still said furniture.
+            statement = (
+                f"The {vision_surface} surface reads as {vision_vertical} at "
+                f"only {vision_confidence:.2f} confidence - below the "
+                f"{thresholds.vision_dissent_confidence:.2f} bar to count as "
+                f"storefront dissent against declared {declared_category}."
+            )
+        elif vision_vertical == "unknown":
+            statement = (
+                f"The {vision_surface} surface could not be classified with "
+                f"usable confidence ({vision_confidence:.2f})."
+            )
+        else:
+            statement = (
+                f"The {vision_surface} surface is consistent with the "
+                f"declared {declared_category} category "
+                f"({vision_confidence:.2f} confidence)."
+            )
+        storefront = ChannelVerdict(
+            channel="storefront",
+            dissents=vis_dissent,
+            confidence=vision_confidence,
+            statement=statement,
         )
 
     # The infrastructure channel now speaks for the relationship graph. A

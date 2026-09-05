@@ -5,10 +5,10 @@
   "decision": {
     "merchant_id": "MID100138",
     "declared_category": "home_furnishing",
-    "tier": 2,
-    "tier_name": "Analyst review",
-    "action": "Enters the analyst queue with a full evidence card. Settlements continue normally while the case is worked.",
-    "settlements_held": false,
+    "tier": 4,
+    "tier_name": "Restricted pending review",
+    "action": "Analyst review with settlements held pending outcome. Requires the storefront to dissent plus at least one other independent view.",
+    "settlements_held": true,
     "channels": [
       {
         "channel": "telemetry",
@@ -18,9 +18,9 @@
       },
       {
         "channel": "storefront",
-        "verdict": "AGREES",
-        "confidence": 0.05,
-        "statement": "The homepage surface is consistent with the declared home_furnishing category (0.05 confidence)."
+        "verdict": "DISSENT",
+        "confidence": 0.94,
+        "statement": "The homepage surface presents a crypto_exchange interface at 0.94 confidence, against a declared category of home_furnishing. This vertical cannot be approved on this platform."
       },
       {
         "channel": "scripts",
@@ -42,12 +42,13 @@
       }
     ],
     "dissenting_channels": [
-      "telemetry"
+      "telemetry",
+      "storefront"
     ],
-    "second_channel_source": null,
-    "justification": "Payment behaviour has drifted but the storefront agrees with the declaration. Settlements continue and will not be held on this evidence. A legitimate business whose payment shape resembles an illicit one is common; one whose storefront is a different business is not.",
+    "second_channel_source": "telemetry",
+    "justification": "Two independent views of this merchant disagree with its declaration. The storefront presents a different business, and the telemetry channel agrees. Neither could have produced the other: a merchant cannot change its payment behaviour without changing its actual business, and cannot change its interface without changing what customers see.",
     "notes": [
-      "Payment-only dissent never reaches a settlement hold. This is the rule that protects merchants whose honest behaviour looks anomalous.",
+      "Settlement hold requires storefront dissent plus one independent corroborator.",
       "No usable merchant statement. A call was either not placed, not answered, or gave no clear account of the business."
     ],
     "assessment": {
@@ -74,7 +75,7 @@
           "view": "storefront",
           "label": "What its website shows",
           "value": "crypto_exchange",
-          "confidence": 0.05,
+          "confidence": 0.94,
           "detail": "The homepage surface presents a crypto exchange interface.",
           "available": true
         },
@@ -256,7 +257,7 @@
       "merchant_id": "MID100138",
       "surface": "homepage",
       "vertical": "crypto_exchange",
-      "confidence": 0.05,
+      "confidence": 0.94,
       "findings": [
         {
           "element": "header widget",
@@ -325,7 +326,7 @@
         "view": "storefront",
         "label": "What its website shows",
         "value": "crypto_exchange",
-        "confidence": 0.05,
+        "confidence": 0.94,
         "detail": "The homepage surface presents a crypto exchange interface.",
         "available": true
       },
@@ -407,23 +408,23 @@
           "surface": "homepage"
         },
         "ok": true,
-        "returned": "homepage classifies as crypto_exchange (confidence 0.05), which does not match the declared home_furnishing.",
+        "returned": "homepage classifies as crypto_exchange (confidence 0.94), which does not match the declared home_furnishing.",
         "cost_inr": 2.2,
-        "confidence_after": 0.9048
+        "confidence_after": 0.96
       }
     ],
     "steps_used": 2,
     "step_budget": 8,
     "stop_reason": "confidence_threshold_met",
-    "final_confidence": 0.9048,
+    "final_confidence": 0.96,
     "total_cost_inr": 2.2,
     "evidence": [
       "Telemetry: round_share_drift sits +12.0 sigma from the home_furnishing baseline.",
-      "Storefront (homepage): classified crypto_exchange at 0.05 confidence, inconsistent with the declaration."
+      "Storefront (homepage): classified crypto_exchange at 0.94 confidence, inconsistent with the declaration."
     ]
   },
   "narrative": {
-    "text": "Merchant MID100138 declared home_furnishing at onboarding 654 days ago. Telemetry dissents: the largest deviations from the home_furnishing baseline are round_share_drift at +12.0 sigma (observed 0.354 against a category baseline of 0.00022), velocity_drift at +12.0 sigma (observed 1.15 against a category baseline of -0.00183), velocity_recent at +6.5 sigma (observed 2.76 against a category baseline of 1.65). The homepage surface is consistent with the declared home_furnishing category (0.05 confidence). In total 2 independent views of this merchant contradict its declaration. The investigation used 2 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier is analyst review with settlements continuing, because only one view dissents.",
+    "text": "Merchant MID100138 declared home_furnishing at onboarding 654 days ago. Telemetry dissents: the largest deviations from the home_furnishing baseline are round_share_drift at +12.0 sigma (observed 0.354 against a category baseline of 0.00022), velocity_drift at +12.0 sigma (observed 1.15 against a category baseline of -0.00183), velocity_recent at +6.5 sigma (observed 2.76 against a category baseline of 1.65). The homepage surface presents a crypto_exchange interface at 0.94 confidence, against a declared category of home_furnishing. This vertical cannot be approved on this platform. In total 2 independent views of this merchant contradict its declaration. The investigation used 2 of a permitted 8 steps and stopped because confidence threshold met. Recommended tier is Restricted pending review with settlements held, because the storefront dissents and telemetry corroborates.",
     "provenance": "structured-features-only (deterministic, no model credential present)",
     "inputs_used": [
       "merchant_id",
