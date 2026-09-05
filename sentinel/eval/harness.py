@@ -873,6 +873,12 @@ def run_evaluation(out_dir: Path = ARTIFACTS) -> dict:
         "thresholds": {k: v for k, v in SETTINGS.thresholds.__dict__.items()},
     }
     (out_dir / "evaluation.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+    try:
+        from sentinel.api.landing import write_landing_payload
+
+        write_landing_payload(out_dir)
+    except Exception as exc:  # noqa: BLE001 — landing cache is best-effort
+        print(f"(landing_payload.json not refreshed: {exc})")
     _print_report(report)
     return report
 

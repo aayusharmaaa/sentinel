@@ -45,6 +45,54 @@ def _round(xs, n=4):
     return [round(float(x), n) for x in xs]
 
 
+def load_landing_payload(artifacts: Path = ARTIFACTS) -> dict:
+    """Prefer the precomputed payload shipped for deploy hosts.
+
+    `build_landing_payload` needs `merchants.csv` / `features_raw.csv` for the
+    collision panel. Those files are gitignored (multi‑MB), so Vercel cannot
+    rebuild the payload from scratch. The committed `landing_payload.json` is
+    the deploy path; local rebuilds overwrite it after a pipeline run.
+    """
+    cached = artifacts / "landing_payload.json"
+    if cached.exists():
+        return json.loads(cached.read_text(encoding="utf-8"))
+    return build_landing_payload(artifacts)
+
+
+def write_landing_payload(artifacts: Path = ARTIFACTS) -> Path:
+    """Materialise `landing_payload.json` for hosts that cannot rebuild it."""
+    payload = build_landing_payload(artifacts)
+    path = artifacts / "landing_payload.json"
+    path.write_text(json.dumps(payload, allow_nan=False), encoding="utf-8")
+    return path
+
+
+def _collision_from_raw(artifacts: Path) -> dict | None:
+    merchants_path = artifacts / "merchants.csv"
+    feats_path = artifacts / "features_raw.csv"
+    if not (merchants_path.exists() and feats_path.exists()):
+        return None
+    merchants = pd.read_csv(merchants_path)
+    feats = pd.read_csv(feats_path).drop(columns=["declared_category"])
+    full = merchants.merge(feats, on="merchant_id")
+    ccols = ["round_share_all", "velocity_all", "night_share", "chargeback_rate"]
+    return {
+        "skill_gaming": _round(
+            full[(full.label == 0) & (full.declared_category == "skill_gaming")][ccols].median()
+        ),
+        "betting": _round(full[full.archetype == "pivot_prohibited"][ccols].median()),
+        "furnishing": _round(
+            full[(full.label == 0) & (full.declared_category == "home_furnishing")][ccols].median()
+        ),
+        "labels": [
+            "Round-value share",
+            "Repeat-payer velocity",
+            "Night-hours share",
+            "Chargeback rate",
+        ],
+    }
+
+
 def build_landing_payload(artifacts: Path = ARTIFACTS) -> dict:
     decisions = pd.read_csv(artifacts / "decisions.csv")
     ev = json.loads((artifacts / "evaluation.json").read_text(encoding="utf-8"))
@@ -116,17 +164,26 @@ def build_landing_payload(artifacts: Path = ARTIFACTS) -> dict:
                 }
                 break
 
-    merchants = pd.read_csv(artifacts / "merchants.csv")
-    feats = pd.read_csv(artifacts / "features_raw.csv").drop(columns=["declared_category"])
-    full = merchants.merge(feats, on="merchant_id")
-    ccols = ["round_share_all", "velocity_all", "night_share", "chargeback_rate"]
-    collision = {
-        "skill_gaming": _round(full[(full.label == 0) & (full.declared_category == "skill_gaming")][ccols].median()),
-        "betting": _round(full[full.archetype == "pivot_prohibited"][ccols].median()),
-        "furnishing": _round(full[(full.label == 0) & (full.declared_category == "home_furnishing")][ccols].median()),
-        "labels": ["Round-value share", "Repeat-payer velocity",
-                   "Night-hours share", "Chargeback rate"],
-    }
+    # Collision medians need the full feature book. That CSV is too large to
+    # ship with the demo deploy, so prefer a precomputed block written into
+    # landing_payload.json; recompute only when the raw files are present.
+    collision = _collision_from_raw(artifacts)
+    if collision is None:
+        cached = artifacts / "landing_payload.json"
+        if cached.exists():
+            collision = json.loads(cached.read_text(encoding="utf-8")).get("collision")
+        if collision is None:
+            collision = {
+                "skill_gaming": [],
+                "betting": [],
+                "furnishing": [],
+                "labels": [
+                    "Round-value share",
+                    "Repeat-payer velocity",
+                    "Night-hours share",
+                    "Chargeback rate",
+                ],
+            }
 
     payload = {
         "categories": cats,

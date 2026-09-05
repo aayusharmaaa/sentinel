@@ -1014,8 +1014,15 @@ function makeCost(E, DAYS){
 
 async function boot(){
   let D;
-  try{ D = window.__SENTINEL__ || await (await fetch('/api/landing')).json(); }
-  catch(e){
+  try{
+    if(window.__SENTINEL__){ D = window.__SENTINEL__; }
+    else {
+      const r = await fetch('/api/landing');
+      if(!r.ok) throw new Error('landing ' + r.status);
+      D = await r.json();
+      if(!D || !D.population) throw new Error('landing payload missing population');
+    }
+  } catch(e){
     $('app').innerHTML = `<div class="loading">Could not load the evaluation. Run
       <span class="mono">python -m sentinel.pipeline</span> then
       <span class="mono">python -m sentinel.eval.harness</span>.</div>`;

@@ -66,14 +66,25 @@ def console() -> FileResponse:
 @app.get("/api/landing")
 def landing_data() -> JSONResponse:
     """Real held-out population behind the landing page's interactive panels."""
-    from sentinel.api.landing import build_landing_payload
+    from sentinel.api.landing import load_landing_payload
 
-    if not (ARTIFACTS / "evaluation.json").exists():
-        raise HTTPException(
-            503,
-            "Run `python -m sentinel.pipeline` and `python -m sentinel.eval.harness` first.",
-        )
-    return JSONResponse(build_landing_payload())
+    # Prefer the committed payload so Vercel (and other hosts) do not need the
+    # gitignored merchants/features CSVs required to rebuild the collision panel.
+    if (ARTIFACTS / "landing_payload.json").exists() or (
+        ARTIFACTS / "evaluation.json"
+    ).exists():
+        try:
+            return JSONResponse(load_landing_payload())
+        except FileNotFoundError as exc:
+            raise HTTPException(
+                503,
+                "Landing data incomplete. Run `python -m sentinel.pipeline` then "
+                "`python -m sentinel.eval.harness`, or ship artifacts/landing_payload.json.",
+            ) from exc
+    raise HTTPException(
+        503,
+        "Run `python -m sentinel.pipeline` and `python -m sentinel.eval.harness` first.",
+    )
 
 
 @app.get("/standalone")
